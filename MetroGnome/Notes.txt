@@ -2,9 +2,9 @@ Hello world! If this pushes then GitHub is working.
 
 To-do: de-spaghettify
 
-0.3.4 will play a Concert A3 major/minor scale with sometimes A2 chords,
-0.3.4 no longer has a TonePlayer that plays multiple pitches since that was causing runtime problems/crashes. I also made a new Xcode app called MetroGnome. Will push to Git.
+0.4.0 will play a Concert A3 major/minor scale with sometimes A2 chords. The minor chords sound kind of wrong and out of tune, but it's fine since this isn't the final audio it will play. It also makes some clicky sounds sometimes but it isn't crashing..? It's a feature, not a bug. You get some percussion!
 
+0.3.4 no longer has a TonePlayer that plays multiple pitches since that was causing runtime problems/crashes. I also made a new Xcode app called MetroGnome. Will push to Git.
 0.3.3 has a TonePlayer that plays multiple pitches, up to 7 since that’s how many I’ll need for the scale.
 0.3.2 tries to fix the bug where it hiccups extra strides in a stride. Code is getting spaghettified…
 0.3.2 tries to calculate tempo. It doesn’t work. I don’t have time to write a good commit message.

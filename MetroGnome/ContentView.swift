@@ -136,7 +136,7 @@ struct ContentView: View {
             tonePlayer6.start()
             tonePlayer6.setFrequency(0)
             tonePlayer7.start()
-            tonePlayer7.setFrequency(825)
+            tonePlayer7.setFrequency(0)
 
 
 
@@ -155,62 +155,61 @@ struct ContentView: View {
         }
         .onChange(of: motionManager.accelerometerData.total) { newValue in
         // Change the note
-            
-        chordNote += 1
-        if (chordNote > 16) {
-            chordNote = 1
-        }
-
-            /*switch chordNote {
+        
+            switch chordNote {
             case 1:
-                tonePlayer.shutUp()
-                tonePlayer.setNote(1, frequency: 220, volume: 1)
+                shutUp()
+                tonePlayer2.setFrequency(275)
+                tonePlayer3.setFrequency(330)
+                tonePlayer4.setFrequency(440)
             case 2:
-                tonePlayer.shutUp()
-                tonePlayer.setNote(1, frequency: 220, volume: 1)
+                shutUp()
+                tonePlayer7.setFrequency(495) // Wholestep
             case 3:
-                tonePlayer.shutUp()
-                tonePlayer.setNote(1, frequency: 220, volume: 1)
+                tonePlayer4.setFrequency(440) // A3. This will stay on for a while.
+                tonePlayer7.setFrequency(550) // Major third
             case 4:
-                tonePlayer.shutUp()
-                tonePlayer.setNote(1, frequency: 220, volume: 1)
+                tonePlayer7.setFrequency((1760/3))//Fourth
             case 5:
-                tonePlayer.shutUp()
-                tonePlayer.setNote(1, frequency: 220, volume: 1)
+                tonePlayer7.setFrequency(660) // Fifth
             case 6:
-                tonePlayer.shutUp()
-                tonePlayer.setNote(1, frequency: 220, volume: 1)
+                tonePlayer7.setFrequency((2200/3)) // Major Sixth
            case 7:
-                tonePlayer.shutUp()
-                tonePlayer.setNote(1, frequency: 220, volume: 1)
+                tonePlayer7.setFrequency(825) // Major Seventh
             case 8:
-                tonePlayer.shutUp()
-                tonePlayer.setNote(1, frequency: 220, volume: 1)
+                tonePlayer2.setFrequency(275)
+                tonePlayer3.setFrequency(330)
+                tonePlayer5.setFrequency(550)
+                tonePlayer6.setFrequency(660)
+                
+                tonePlayer7.setFrequency(880) // Octave
             case 9:
-                tonePlayer.shutUp()
-                tonePlayer.setNote(1, frequency: 220, volume: 1)
+                tonePlayer2.setFrequency(264) //Minor
+                tonePlayer5.setFrequency(528)
             case 10:
-                tonePlayer.shutUp()
-                tonePlayer.setNote(1, frequency: 220, volume: 1)
+                shutUp()
+                tonePlayer4.setFrequency(440)
+                tonePlayer7.setFrequency((7040/9)) //Minor Seventh, try 9/5 or 16/9 or 7/4
             case 11:
-                tonePlayer.shutUp()
-                tonePlayer.setNote(1, frequency: 220, volume: 1)
+                tonePlayer7.setFrequency(704)
             case 12:
-                tonePlayer.shutUp()
-                tonePlayer.setNote(1, frequency: 220, volume: 1)
+                tonePlayer7.setFrequency(660)
             case 13:
-                tonePlayer.shutUp()
-                tonePlayer.setNote(1, frequency: 220, volume: 1)
+                tonePlayer7.setFrequency((1760/3))
             case 14:
-                tonePlayer.shutUp()
-                tonePlayer.setNote(1, frequency: 220, volume: 1)
+                tonePlayer7.setFrequency(528)
             case 15:
-                tonePlayer.shutUp()
-                tonePlayer.setNote(1, frequency: 220, volume: 1)
-            default:
-                tonePlayer.shutUp()
-                tonePlayer.setNote(1, frequency: 220, volume: 1)
-            }*/
+                tonePlayer4.setFrequency(0)
+                tonePlayer7.setFrequency(495)
+            default: // case 16:
+                tonePlayer1.setFrequency(220)
+                tonePlayer2.setFrequency(264) //Minor
+                tonePlayer3.setFrequency(330)
+                tonePlayer4.setFrequency(440)
+                tonePlayer7.setFrequency(0)
+                
+                // Something is wrong with this chord, it sounds out of tune somehow. Not sure what the problem is, all the notes are correct.
+            }
 
         } // Major third is 5:4, minor third is 6:5, fifth is 3:2 or 6:4
         
@@ -235,7 +234,11 @@ struct ContentView: View {
                         
                         averageLastStrideTime = (fourthLastStrideTime + thirdLastStrideTime + secondLastStrideTime + lastStrideTime)/4.0 // Find a new average BPM
 
-                        major = !major // Make a noticable change in the pitch for the user.
+                        chordNote += 1
+                        if (chordNote > 16) {
+                            chordNote = 1
+                        }
+ // Make a noticable change in the pitch for the user.
 
                     }
                     
@@ -250,6 +253,16 @@ struct ContentView: View {
             }
         }
 
+    }
+    
+    func shutUp() {
+        //tonePlayer1.setFrequency(0) //This should always be 220 Hz.
+        tonePlayer2.setFrequency(0)
+        tonePlayer3.setFrequency(0)
+        tonePlayer4.setFrequency(0)
+        tonePlayer5.setFrequency(0)
+        tonePlayer6.setFrequency(0)
+        tonePlayer7.setFrequency(0)
     }
 }
 
