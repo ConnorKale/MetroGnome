@@ -1,0 +1,71 @@
+To-do: de-spaghettify
+
+0.3.4 will play a Concert A3 major/minor scale with sometimes A2 chords,
+0.3.4 no longer has a TonePlayer that plays multiple pitches since that was causing runtime problems/crashes. I also made a new Xcode app called MetroGnome. Will push to Git.
+
+0.3.3 has a TonePlayer that plays multiple pitches, up to 7 since that’s how many I’ll need for the scale.
+0.3.2 tries to fix the bug where it hiccups extra strides in a stride. Code is getting spaghettified…
+0.3.2 tries to calculate tempo. It doesn’t work. I don’t have time to write a good commit message.
+0.3.1 changes the watermarks to -5.0 and 5.0. I also fixed a bug caused by trying to made it only toggle every other stride.
+0.3.0 toggles the chord and makes it go up and down an octave with stride. Watermarks are 5.0 and 15.0.
+
+0.2.2 is also sideways and rounds Absolute Jerk to an integer. It also has a MotionManager update interval of .033 seconds instead of .008.
+0.2.1 is sideways and just displays the Absolute Jerk value, really big. It also has a MotionManager update interval of .033 seconds instead of .008.
+0.2.0 calculates absolute and rotational jerk. I printed it on the screen.
+
+0.1.4 is not even temperament, "Just" tuning I think..? Not entirely sure what it's called.
+0.1.3 will be cleaned-up 0.1.2 if CrapGPT can de-spaghetti it without breaking stuff.
+0.1.2 was 440 * sqrt(g's), updates more..? Might crash phone, hopefully not...
+0.1.1 was 440 * sqrt(g's).
+0.1.0 was 128 * g's Hz.
+
+Hello world!
+
+
+Old MotionManager {
+//
+//  MotionManager.swift
+//  Gnome
+//
+//  Created by Connor Kale on 4/24/25.
+//
+
+import CoreMotion
+
+class MotionManager: ObservableObject {
+    private let motionManager = CMMotionManager()
+    private let updateInterval = 0.0002 // This might be too low and make it crash...
+    
+    @Published var accelerometerData: (x: Double, y: Double, z: Double, total: Double) = (0, 0, 0, 0)
+    
+    init() {
+        startAccelerometerUpdates()
+    }
+    
+    private func startAccelerometerUpdates() {
+        guard motionManager.isAccelerometerAvailable else {
+            print("Accelerometer is not available.")
+            return
+        }
+
+        motionManager.accelerometerUpdateInterval = updateInterval
+        motionManager.startAccelerometerUpdates(to: .main) { [weak self] data, error in
+            guard let data = data else {
+                if let error = error {
+                    print("Accelerometer error: \(error.localizedDescription)")
+                }
+                return
+            }
+
+            let x = data.acceleration.x
+            let y = data.acceleration.y
+            let z = data.acceleration.z
+            let total = sqrt(x * x + y * y + z * z)
+            self?.accelerometerData = (x, y, z, total)
+        }
+    }
+    deinit {
+        motionManager.stopAccelerometerUpdates()
+    }
+}
+}
