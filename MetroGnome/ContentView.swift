@@ -95,7 +95,7 @@ struct ContentView: View {
                 .font(.system(size: 80))
                 .padding(.bottom, 20)*/
 
-            Text("Absolute dx/dt:")
+            Text("Absolute da/dt:")
                 .font(.system(size: 20))
             Text("\(motionManager.accelerometerData.absoluteJerk, specifier: "%.2f")")
             //.padding()
@@ -165,95 +165,108 @@ struct ContentView: View {
                 }
                 
                 if let elapsed = elapsedTime {
-                    if ((elapsed >= (averageLastStrideTime/2.0)) || elapsed > 0.3) { // "or" in Swift is ||
+                    //if ((elapsed >= (averageLastStrideTime/2.0)) || elapsed > 0.3) { // "or" in Swift is ||
                         // Old forthStride's data gets forgotten
                         fourthLastStrideTime = thirdLastStrideTime
                         thirdLastStrideTime = secondLastStrideTime
                         secondLastStrideTime = lastStrideTime
                         lastStrideTime = elapsed
                         
-                        averageLastStrideTime = (fourthLastStrideTime + thirdLastStrideTime + secondLastStrideTime + lastStrideTime)/4.0 // Find a new average BPM
-
-                        chordNote += 1
-                        if (chordNote > 16) {
-                            chordNote = 1
-                        } // Make a noticable change in the pitch for the user.
-                        
-                        // Change the note
-                            switch chordNote {  // Major third is 5:4, minor third is 6:5, fifth is 3:2 or 6:4
-                            case 1:
-                                tonePlayer2.setFrequency(275)
-                            case 2:
-                                tonePlayer2.setFrequency(0)
-                                tonePlayer3.setFrequency(0)
-                                tonePlayer4.setFrequency(0)
-                                tonePlayer7.setFrequency(495) // Wholestep
-                            case 3:
-                                tonePlayer4.setFrequency(440) // A3. This will stay on for a while.
-                                tonePlayer7.setFrequency(550) // Major third
-                            case 4:
-                                tonePlayer7.setFrequency((1760/3))//Fourth
-                            case 5:
-                                tonePlayer7.setFrequency(660) // Fifth
-                            case 6:
-                                tonePlayer7.setFrequency((2200/3)) // Major Sixth
-                           case 7:
-                                tonePlayer7.setFrequency(825) // Major Seventh
-                            case 8:
-                                tonePlayer2.setFrequency(275)
-                                tonePlayer3.setFrequency(330)
-                                tonePlayer5.setFrequency(550)
-                                tonePlayer6.setFrequency(660)
-                                
-                                tonePlayer7.setFrequency(880) // Octave
-                            case 9:
-                                tonePlayer2.setFrequency(264) //Minor
-                                tonePlayer5.setFrequency(528)
-                            case 10:
-                                tonePlayer2.setFrequency(0)
-                                tonePlayer3.setFrequency(0)
-                                tonePlayer5.setFrequency(0)
-                                tonePlayer6.setFrequency(0)
-                                tonePlayer4.setFrequency(440)
-                                tonePlayer7.setFrequency((7040/9)) //Minor Seventh, try 9/5 or 16/9 or 7/4
-                            case 11:
-                                tonePlayer7.setFrequency(704)
-                            case 12:
-                                tonePlayer7.setFrequency(660)
-                            case 13:
-                                tonePlayer7.setFrequency((1760/3))
-                            case 14:
-                                tonePlayer7.setFrequency(528)
-                            case 15:
-                                tonePlayer4.setFrequency(0)
-                                tonePlayer7.setFrequency(495)
-                            default: // case 16:
-                                //tonePlayer1.setFrequency(220)
-                                tonePlayer2.setFrequency(264) //Minor
-                                tonePlayer3.setFrequency(330)
-                                tonePlayer4.setFrequency(440)
-                                tonePlayer7.setFrequency(0)
-                                
-                                // Something is wrong with this chord, it sounds out of tune somehow. Not sure what the problem is, all the notes are correct.
-                            }
+                    averageLastStrideTime = min(0.5, (max(0.25, ((fourthLastStrideTime + thirdLastStrideTime + secondLastStrideTime + lastStrideTime)/4.0)))) // Find a new average BPM. Forces the tempo to be between 120 and 240 BPM. Sometime might make this a user-adjustable parameter.
 
 
+                        changeNote() // This changes the chord note.
 
-                    }
+                    //}
                     
                     
                 }
 
-                startTime = Date()
-            }
-            
-            if ((!lookingForAboveHigh) && (newValue <= lowJerkWaterMark)) {// If looking for below lowmark and it's below lowmark {
-                lookingForAboveHigh = true
+                startTime = Date() // Is the time when the last stride happened.
+            } else if ((!lookingForAboveHigh) && (newValue <= lowJerkWaterMark)) {// If looking for below lowmark and it's below lowmark {
+                if let start = startTime {
+                    endTime = Date()
+                    elapsedTime = endTime?.timeIntervalSince(start)
+                } else {
+                    elapsedTime = nil
+                }
+
+                if let elapsed = elapsedTime {
+                    if (elapsed > averageLastStrideTime * 0.75)
+                    {
+                        lookingForAboveHigh = true
+                    }
+                }
             }
         }
 
     }
     
+    func changeNote() {
+        chordNote += 1
+        if (chordNote > 16) {
+            chordNote = 1
+        } // Make a noticable change in the pitch for the user.
+        
+        // Change the note
+            switch chordNote {  // Major third is 5:4, minor third is 6:5, fifth is 3:2 or 6:4
+            case 1:
+                tonePlayer2.setFrequency(275)
+            case 2:
+                tonePlayer2.setFrequency(0)
+                tonePlayer3.setFrequency(0)
+                tonePlayer4.setFrequency(0)
+                tonePlayer7.setFrequency(495) // Wholestep
+            case 3:
+                tonePlayer4.setFrequency(440) // A3. This will stay on for a while.
+                tonePlayer7.setFrequency(550) // Major third
+            case 4:
+                tonePlayer7.setFrequency((1760/3))//Fourth
+            case 5:
+                tonePlayer7.setFrequency(660) // Fifth
+            case 6:
+                tonePlayer7.setFrequency((2200/3)) // Major Sixth
+           case 7:
+                tonePlayer7.setFrequency(825) // Major Seventh
+            case 8:
+                tonePlayer2.setFrequency(275)
+                tonePlayer3.setFrequency(330)
+                tonePlayer5.setFrequency(550)
+                tonePlayer6.setFrequency(660)
+                
+                tonePlayer7.setFrequency(880) // Octave
+            case 9:
+                tonePlayer2.setFrequency(264) //Minor
+                tonePlayer5.setFrequency(528)
+            case 10:
+                tonePlayer2.setFrequency(0)
+                tonePlayer3.setFrequency(0)
+                tonePlayer5.setFrequency(0)
+                tonePlayer6.setFrequency(0)
+                tonePlayer4.setFrequency(440)
+                tonePlayer7.setFrequency((7040/9)) //Minor Seventh, try 9/5 or 16/9 or 7/4
+            case 11:
+                tonePlayer7.setFrequency(704)
+            case 12:
+                tonePlayer7.setFrequency(660)
+            case 13:
+                tonePlayer7.setFrequency((1760/3))
+            case 14:
+                tonePlayer7.setFrequency(528)
+            case 15:
+                tonePlayer4.setFrequency(0)
+                tonePlayer7.setFrequency(495)
+            default: // case 16:
+                //tonePlayer1.setFrequency(220)
+                tonePlayer2.setFrequency(264) //Minor
+                tonePlayer3.setFrequency(330)
+                tonePlayer4.setFrequency(440)
+                tonePlayer7.setFrequency(0)
+                
+                // Something is wrong with this chord, it sounds out of tune somehow. Not sure what the problem is, all the notes are correct.
+            }
+
+    }
     /*func shutUp() {
         //tonePlayer1.setFrequency(0) //This should always be 220 Hz.
         tonePlayer2.setFrequency(0)
