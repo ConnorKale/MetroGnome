@@ -2,6 +2,8 @@ Hello world! If this pushes then GitHub is working.
 
 To-do: de-spaghettify
 
+0.5.0 It plays audio now!!! I'm glad this was doable and I didn't have to code in audio processing. I made it correlated to the person running's tempo somehow. It changes when I run with the phone. I'm not sure how well it works, but I'm tired so I'm going to push and run with it tomorrow. I'll see how well it works then!
+
 0.4.3 I changed some of the watermarks in the algorithm. I also changed the tempo of the test audio files to 180 BPM so the files are smaller. GitHub didn't like individual files being 181 megabytes...
 I created three test audio .wav files and added them to this Swift file. One plays a test video for 16 beats/4 measures, one plays for 64 beats/16 measures, and one plays for 1024 beats/256 measures. The files are at 60 BPM since I think that will be an easy number to work with but it doesn't really matter. I'm not counting this as an app version since there haven't been any code changes. I am pushing it to GitHub though. Now I will go on a code-de-spaghettifying project and a .wav file playing project. I'm not sure which will come first.
 0.4.2 I modified the algorithm, so instead of not counting highWaterMarks before half a stride passes, it won't count lowWaterMarks until 3/4 of a stride passes. This should fix the algorithm enough for me to work on playing audio files. I also made two other minor changes: it  moves the chord note incrementation into a function called changeNote() for readability, and forces the tempo to be between 120 and 240 BPM to avoid getting into a bad state. Next I will create a test .wav file!

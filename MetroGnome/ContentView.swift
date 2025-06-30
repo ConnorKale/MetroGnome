@@ -20,6 +20,10 @@ struct ContentView: View {
     let tonePlayer7 = TonePlayer() //A5
     @State private var chordNote: Int = 1
 
+    @StateObject private var audioPlayer = VariableSpeedAudioPlayer()
+    @State private var sliderValue: Double = 1.0
+    private var fileTempo: Float = 180.0
+    
     private let lowAccelermomerWaterMark: Double = 1.5
     private let highAcceleromerWaterMark: Double = 3.0
 
@@ -29,11 +33,12 @@ struct ContentView: View {
     @State private var startTime: Date?
     @State private var endTime: Date?
     @State private var elapsedTime: TimeInterval?
-    @State private var lastStrideTime: Double = 0.0
-    @State private var secondLastStrideTime: Double = 0.0
-    @State private var thirdLastStrideTime: Double = 0.0
-    @State private var fourthLastStrideTime: Double = 0.0
-    @State private var averageLastStrideTime: Double = 0.0
+    @State private var lastStrideTime: Double = 0.0 // In seconds
+    @State private var secondLastStrideTime: Double = (1.0/3.0) // In seconds
+    @State private var thirdLastStrideTime: Double = (1.0/3.0) // In seconds
+    @State private var fourthLastStrideTime: Double = (1.0/3.0) // In seconds
+    @State private var averageLastStrideTime: Double = (1.0/3.0) // In seconds
+    @State private var tempo: Float = 180.0 // In seconds
 
     @State private var lookingForAboveHigh: Bool = true
     @State private var major: Bool = true
@@ -64,14 +69,7 @@ struct ContentView: View {
     var body: some View {
         
         VStack {
-            
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-                .padding(.bottom, 30)
-            
-            Text("Accelerometer Data:")
+            /*Text("Accelerometer Data:")
                 .font(.headline)
             Text("X: \(motionManager.accelerometerData.x, specifier: "%.2f")")
             Text("Y: \(motionManager.accelerometerData.y, specifier: "%.2f")")
@@ -94,11 +92,33 @@ struct ContentView: View {
             //.padding()
                 .font(.system(size: 80))
                 .padding(.bottom, 20)*/
+             */
+            VStack(spacing: 20) {
+                Button(audioPlayer.isPlaying ? "Stop" : "Play") {
+                    if audioPlayer.isPlaying {
+                        audioPlayer.stop()
+                    } else {
+                        audioPlayer.loadAndPlay(filename: "MetroGnomeTestAudio_256Measures") // your .wav file name
+                    }
+                }
+                .font(.system(size: 80))
 
-            Text("Absolute da/dt:")
+                VStack {
+                    Text("Playback Speed: \(String(format: "%.2f", audioPlayer.rate))x")
+                    Slider(value: $sliderValue, in: 0.5...2.0, step: 0.05)
+                        .padding(.horizontal)
+                }
+
+            }
+            /*Text("Absolute da/dt:")
                 .font(.system(size: 20))
             Text("\(motionManager.accelerometerData.absoluteJerk, specifier: "%.2f")")
             //.padding()
+                .font(.system(size: 80))
+            */
+            Text("Tempo:")
+                .font(.system(size: 20))
+            Text("\(tempo, specifier: "%.2f")")
                 .font(.system(size: 80))
             
             Text("Last stride (s):")
@@ -113,9 +133,10 @@ struct ContentView: View {
             //.padding()
                 .font(.system(size: 80))
 
-            Image(systemName: "waveform")
+            /*Image(systemName: "waveform")
                 .font(.system(size: 50))
                 .foregroundStyle(.tint)
+             */
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(backgroundColor) // Set background color based on accelerometer data
@@ -124,13 +145,13 @@ struct ContentView: View {
             
             
             tonePlayer1.start()
-            tonePlayer1.setFrequency(220)
+            tonePlayer1.setFrequency(0)
             tonePlayer2.start()
-            tonePlayer2.setFrequency(275)
+            tonePlayer2.setFrequency(0)
             tonePlayer3.start()
-            tonePlayer3.setFrequency(330)
+            tonePlayer3.setFrequency(0)
             tonePlayer4.start()
-            tonePlayer4.setFrequency(440)
+            tonePlayer4.setFrequency(0)
             tonePlayer5.start()
             tonePlayer5.setFrequency(0)
             tonePlayer6.start()
@@ -173,9 +194,11 @@ struct ContentView: View {
                         lastStrideTime = elapsed
                         
                     averageLastStrideTime = min(0.5, (max(0.25, ((fourthLastStrideTime + thirdLastStrideTime + secondLastStrideTime + lastStrideTime)/4.0)))) // Find a new average BPM. Forces the tempo to be between 120 and 240 BPM. Sometime might make this a user-adjustable parameter.
+                    
+                    tempo = 60.0/Float(averageLastStrideTime)
+                    audioPlayer.rate = tempo/fileTempo
 
-
-                        changeNote() // This changes the chord note.
+                        //changeNote() // This changes the chord note.
 
                     //}
                     
