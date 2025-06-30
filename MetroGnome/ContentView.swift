@@ -23,8 +23,8 @@ struct ContentView: View {
     private let lowAccelermomerWaterMark: Double = 1.5
     private let highAcceleromerWaterMark: Double = 3.0
 
-    private let lowJerkWaterMark: Double = -5.0
-    private let highJerkWaterMark: Double = 10.0
+    private let lowJerkWaterMark: Double = -4.0
+    private let highJerkWaterMark: Double = 4.0
     
     @State private var startTime: Date?
     @State private var endTime: Date?
