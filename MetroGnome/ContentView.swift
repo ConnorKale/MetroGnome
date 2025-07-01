@@ -21,7 +21,7 @@ struct ContentView: View {
     @State private var chordNote: Int = 1
 
     @StateObject private var audioPlayer = VariableSpeedAudioPlayer()
-    @State private var sliderValue: Double = 1.0
+    //@State private var sliderValue: Double = 1.0
     private var fileTempo: Float = 180.0
     
     private let lowAccelermomerWaterMark: Double = 1.5
@@ -101,13 +101,13 @@ struct ContentView: View {
                         audioPlayer.loadAndPlay(filename: "MetroGnomeTestAudio_256Measures") // your .wav file name
                     }
                 }
-                .font(.system(size: 80))
+                .font(.system(size: 160))
 
-                VStack {
+                /*VStack {
                     Text("Playback Speed: \(String(format: "%.2f", audioPlayer.rate))x")
                     Slider(value: $sliderValue, in: 0.5...2.0, step: 0.05)
                         .padding(.horizontal)
-                }
+                }*/
 
             }
             /*Text("Absolute da/dt:")
@@ -191,9 +191,9 @@ struct ContentView: View {
                         fourthLastStrideTime = thirdLastStrideTime
                         thirdLastStrideTime = secondLastStrideTime
                         secondLastStrideTime = lastStrideTime
-                        lastStrideTime = elapsed
+                        lastStrideTime = min(0.5, (max(0.25, elapsed)))
                         
-                    averageLastStrideTime = min(0.5, (max(0.25, ((fourthLastStrideTime + thirdLastStrideTime + secondLastStrideTime + lastStrideTime)/4.0)))) // Find a new average BPM. Forces the tempo to be between 120 and 240 BPM. Sometime might make this a user-adjustable parameter.
+                    averageLastStrideTime = ((fourthLastStrideTime + thirdLastStrideTime + secondLastStrideTime + lastStrideTime)/4.0) // Find a new average BPM. Forces the tempo to be between 120 and 240 BPM. Sometime might make this a user-adjustable parameter.
                     
                     tempo = 60.0/Float(averageLastStrideTime)
                     audioPlayer.rate = tempo/fileTempo

@@ -2,6 +2,7 @@ Hello world! If this pushes then GitHub is working.
 
 To-do: de-spaghettify
 
+0.5.1 Removed slider, moved min/max code, made button bigger. I have to go now bye!
 0.5.0 It plays audio now!!! I'm glad this was doable and I didn't have to code in audio processing. I made it correlated to the person running's tempo somehow. It changes when I run with the phone. I'm not sure how well it works, but I'm tired so I'm going to push and run with it tomorrow. I'll see how well it works then!
 
 0.4.3 I changed some of the watermarks in the algorithm. I also changed the tempo of the test audio files to 180 BPM so the files are smaller. GitHub didn't like individual files being 181 megabytes...
