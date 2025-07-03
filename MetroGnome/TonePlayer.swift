@@ -1,10 +1,10 @@
 //
 //  TonePlayer.swift
-//  Gnome
+//  MetroGnome
 //
 //  Created by Connor Kale on 4/27/25.
-//  Actually created by ChatGPT on 5/06/25.
 
+// This is an archived script since the current app doesn't play tones anymore.
 import AVFoundation
 
 class TonePlayer {
@@ -41,7 +41,7 @@ class TonePlayer {
 
         engine.attach(sourceNode)
         engine.connect(sourceNode, to: engine.mainMixerNode, format: format)
-        engine.mainMixerNode.outputVolume = 2.0 // max is 1.0, default is 1.0
+        engine.mainMixerNode.outputVolume = 1.0 // max is 1.0, default is 1.0
 
     }
 
@@ -62,12 +62,7 @@ class TonePlayer {
             amplitude = 0
         } else {
             amplitude = 1
-            frequency = max(1.0, min(freq, 2000.0)) // clamp to safe range. Max is like 15 gs, were probably not running that fast.
+            frequency = max(1.0, min(freq, 2000.0)) // Clamp to safe range. Max is like 15 gs, were probably not running that fast.
         }
     }
-}//
-//  ContentView.swift
-//  Gnome
-//
-//  Created by Connor Kale on 4/24/25.
-//
+}

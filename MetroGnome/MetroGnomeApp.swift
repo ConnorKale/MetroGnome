@@ -2,7 +2,7 @@
 //  MetroGnomeApp.swift
 //  MetroGnome
 //
-//  Created by Connor Kale on 6/20/25.
+//  Created by Connor Kale on 6/20/25. //Almost τ day!
 //
 
 import SwiftUI
