@@ -2,6 +2,8 @@ Hello world! If this pushes then GitHub is working.
 
 To-do: de-spaghettify, maybe change accelerometer update interval for battery reasons.
 
+0.6.0 I added a new algorithm that assumes each beat starts at the lowest acceleration part of the stride. I think it works pretty well. I then forgot to push added an option to attempt error correction, so this is still 0.6.0. It's really bad, but in theory works..? I'm taking it to Long Run tommorrow. I might not work on MetroGnome more until after Team Camp in late July, in which case this is the best error correction algorithm I'll have. It also works pretty well if its not trying to do error correction.
+
 0.5.2 I de-spaghettified some of the code. I also made a button to change the minimum tempo between 120 and 150 BPM. I also changed the "App Category" in the .xcodeproj file to be "Music" since it was listed as books for some reason.
 0.5.1 Removed slider, moved min/max code, made button bigger. I have to go now bye!
 0.5.0 It plays audio now!!! I'm glad this was doable and I didn't have to code in audio processing. I made it correlated to the person running's tempo somehow. It changes when I run with the phone. I'm not sure how well it works, but I'm tired so I'm going to push and run with it tomorrow. I'll see how well it works then!
