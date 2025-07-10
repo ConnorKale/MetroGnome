@@ -39,15 +39,18 @@ struct ContentView: View {
     @State private var thirdLastStrideTime: Double = (1.0/3.0) // In seconds
     @State private var fourthLastStrideTime: Double = (1.0/3.0) // In seconds
     @State private var averageLastStrideTime: Double = (1.0/3.0) // In seconds
+    @State private var oldAverageLastStrideTime: Double = (1.0/3.0) // In seconds
+
     @State private var tempo: Float = 180.0 // In seconds
     
     @State private var attemptingOffsetCorrection: Bool = false // If a file is not just a constant chord, this might sound weirder than it does otherwise.
     @State private var offsetAheadBy: Float = 0.0 // This is how far ahead we are, so if it's negative we're behind. This is in seconds, in units of the music file's seconds. If the file is a second ahead, this is equal to 1, no matter how fast you're running.
     @State private var nextStrideProjectedLength: Float = 0.0
     
-    @State private var maxTempo: Double = 210.0 // Maybe change this back to 240? Or not, 210 is a really fast pace to run at but in theory it's possible.
-    @State private var minTempo: Double = 120.0
+    @State private var maxTempo: Double = 190.0 // Maybe change this back to 240? Or not, 210 is a really fast pace to run at but in theory it's possible.
+    @State private var minTempo: Double = 120
     @State private var minTempoIs120: Bool = true
+    @State private var maxTempoIs210: Bool = false
     
     private var backgroundColor: Color {
         switch motionManager.accelerometerData.jerk {
@@ -104,17 +107,31 @@ struct ContentView: View {
             //.padding()
                 .font(.system(size: 80))
 
-            
-            Button(minTempoIs120 ? "Min tempo to 150" : "Min tempo to 120") {
-                if minTempoIs120 {
-                    minTempo = 150
-                    minTempoIs120 = false
-                } else {
-                    minTempo = 120
-                    minTempoIs120 = true
+            HStack{
+                Button(minTempoIs120 ? "Min's 120" : "Min's 150") {
+                    if minTempoIs120 {
+                        minTempo = 150
+                        minTempoIs120 = false
+                    } else {
+                        minTempo = 120
+                        minTempoIs120 = true
+                    }
                 }
+                .font(.system(size: 40))
+                
+                Button(maxTempoIs210 ? "Max's 210" : "Max's 190") {
+                    if maxTempoIs210 {
+                        maxTempo = 190
+                        maxTempoIs210 = false
+                    } else {
+                        maxTempo = 210
+                        maxTempoIs210 = true
+                    }
+                }
+                .font(.system(size: 40))
+
             }
-            .font(.system(size: 40))
+            
             Button(attemptingOffsetCorrection ? "Stop Error Correction" : "Start Error Correction") {
                 attemptingOffsetCorrection = !attemptingOffsetCorrection
             }
@@ -201,13 +218,21 @@ struct ContentView: View {
                     
                     if let lastStride = timeOfPreviousStride {
                         let lastStrideDuration = (timeOfLastAccelerationRecord?.timeIntervalSince(lastStride)) ?? 0.0 // This is a double!!! :)
+
+                        // It's been oldAverageLastStrideTime/2 realSeconds since the record was set and the stride happened. We want to finish a beat in newAverageLastStrideTime - oldAverageLastStrideTime/2 realSeconds.
+                        // We assume they will keep running at newAverageLastStrideTime. In that case, the next time the tempo is recalculated is (time until end of the stride we're halfway through) + (halfway through the next stride) or newAverageLastStrideTime - oldAverageLastStrideTime/2 + newAverageLastStrideTime/2 or 1.5*newAverageLastStrideTime + oldAverageLastStrideTime/2.
+                        //
+                        
+                        
+                        
+
                         // Find how much error we created.
                         // if lastStrideDuration is smaller than nextStrideProjectedLength, it was to short and the file got behind, since it didn't get through the full beat before the next stride happened. That means offsetAheadBy should become more negative, so we should say new offsetAheadBy is proportional to (lastStrideDuraton - nextStrideProjectedLength)
                         //(lastStrideDuraton - nextStrideProjectedLength) is the number of realseconds we got ahead by.
                         // Say our step took half an extra realsecond. Say the file is playing at 3x rate. Then we would have gotten ahead by 1/6 fileseconds. (lastStrideDuraton - nextStrideProjectedLength)/audioPlayer.rate would be what gets added to offsetAheadBy.
-                        offsetAheadBy += ((Float(lastStrideDuration) - nextStrideProjectedLength)*audioPlayer.rate) // Autocorrect is creepy.
+                        offsetAheadBy += ((Float(lastStrideDuration) - nextStrideProjectedLength)*audioPlayer.rate) // In units of fileSeconds. // Autocorrect is creepy.
                         
-                        //audioPlayer.rate is equal to 1, or some number of fileseconds/realsecond.
+                        //audioPlayer.rate is equal to 1, or some number of fileseconds/realsecond. Like how c=1, or a number (299792458) meters/second.
                         
                         // Old forthStride's data gets forgotten
                         fourthLastStrideTime = thirdLastStrideTime
@@ -235,12 +260,14 @@ struct ContentView: View {
                         
                         if (attemptingOffsetCorrection)
                         {
-                            
                             // audioPlayer.rate = 60/(projected next stride time) * fileTempo
                             // audioPlayer.rate * projected = 60/fileTempo
                             // projected = 60/fileTempo * audioPlayer.rate
-                            let beatsLeftInCurrentBeat = (1-(offsetAheadBy/(60.0/fileTempo))) // This should be smaller than one. One/this is greater than one.
-                            let beatsLeftUntilNextBeat = (2-(offsetAheadBy/(60.0/fileTempo))) // This should be greater than one.
+                            let beatsAheadBy = (offsetAheadBy/60.0)*fileTempo // Number of fileMinutes we're ahead by times the number of beats per fileMinute is the number of beats we're ahead by.
+                            let progressThroughCurrentBeat = beatsAheadBy - floor(beatsAheadBy) // This forces it to be between 0 and 1.
+
+                            let beatsLeftInCurrentBeat = 1 - progressThroughCurrentBeat // This should be smaller than one. One/this is greater than one.
+                            let beatsLeftUntilNextBeat = 2 - progressThroughCurrentBeat // This should be greater than one.
                             
                             if ((1/beatsLeftInCurrentBeat) > beatsLeftUntilNextBeat)  // If you use an < instead of an >, and flip the if statement, you get some fun results :)
                             {
@@ -251,7 +278,7 @@ struct ContentView: View {
                                 audioPlayer.rate = beatsLeftInCurrentBeat * tempo/fileTempo
                             }
                             
-                            nextStrideProjectedLength = 60/(fileTempo*audioPlayer.rate)
+                            nextStrideProjectedLength = 60.0/(fileTempo*audioPlayer.rate) // This is in units of realSeconds/beat.
                             
                         }
                         
@@ -265,6 +292,7 @@ struct ContentView: View {
                     }
                     
                     timeOfPreviousStride = timeOfLastAccelerationRecord
+                    oldAverageLastStrideTime = averageLastStrideTime
                     
                     //We're setting a record, since it's a new beat and this is the first recorded acceleration of that beat.
                     lowestAccelerationRecordInCurrentStep = motionManager.accelerometerData.total

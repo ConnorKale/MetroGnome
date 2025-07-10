@@ -2,6 +2,7 @@ Hello world! If this pushes then GitHub is working.
 
 To-do: de-spaghettify, maybe change accelerometer update interval for battery reasons.
 
+0.6.1 I despaghettified the algorithm without making any changes. There is a bug that it counts the strides after a record goes unbroken for half a beat, and not when the stride actually happened. More bugs may exist. I also fixed some bugs with maxTempo.
 0.6.0 I added a new algorithm that assumes each beat starts at the lowest acceleration part of the stride. I think it works pretty well. I then forgot to push added an option to attempt error correction, so this is still 0.6.0. It's really bad, but in theory works..? I'm taking it to Long Run tommorrow. I might not work on MetroGnome more until after Team Camp in late July, in which case this is the best error correction algorithm I'll have. It also works pretty well if its not trying to do error correction.
 
 0.5.2 I de-spaghettified some of the code. I also made a button to change the minimum tempo between 120 and 150 BPM. I also changed the "App Category" in the .xcodeproj file to be "Music" since it was listed as books for some reason.
