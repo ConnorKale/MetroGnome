@@ -2,6 +2,7 @@ Hello world! If this pushes then GitHub is working.
 
 To-do: de-spaghettify, maybe change accelerometer update interval for battery reasons.
 
+0.6.2 This is a big spaghetti mess right now. Future me can deal with it after Steens and XC Team Camp. I'm going to push and then make 0.5.3 for the camps, which will be like 0.5.2 but with some maxTempo button features.
 0.6.1 I despaghettified the algorithm without making any changes. There is a bug that it counts the strides after a record goes unbroken for half a beat, and not when the stride actually happened. More bugs may exist. I also fixed some bugs with maxTempo.
 0.6.0 I added a new algorithm that assumes each beat starts at the lowest acceleration part of the stride. I think it works pretty well. I then forgot to push added an option to attempt error correction, so this is still 0.6.0. It's really bad, but in theory works..? I'm taking it to Long Run tommorrow. I might not work on MetroGnome more until after Team Camp in late July, in which case this is the best error correction algorithm I'll have. It also works pretty well if its not trying to do error correction.
 
@@ -33,6 +34,26 @@ I created three test audio .wav files and added them to this Swift file. One pla
 0.1.0 was 128 * g's Hz.
 
 Hello world!
+
+This could run every frame if I don't want to use .onChangeOf. {
+class FrameUpdater: ObservableObject {
+    private var displayLink: CADisplayLink?
+    var onFrame: (() -> Void)?
+
+    init() {
+        displayLink = CADisplayLink(target: self, selector: #selector(frame))
+        displayLink?.add(to: .main, forMode: .default)
+    }
+
+    @objc func frame() {
+        onFrame?()
+    }
+
+    deinit {
+        displayLink?.invalidate()
+    }
+}
+}
 
 
 Old MotionManager {

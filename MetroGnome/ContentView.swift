@@ -205,14 +205,17 @@ struct ContentView: View {
             
             if let elapsed = elapsedTime { // elapsed is the number of seconds since the last record was set.
                 
-                if (motionManager.accelerometerData.total < lowestAccelerationRecordInCurrentStep && elapsed < averageLastStrideTime * 0.5) // Below the record && it's been less than half a stride since the last record being set, so it's the same stride
+                let lastStrideDate = timeOfPreviousStride ?? Date() // This is a Date().
+                let lastStrideTimeInterval = currentTime?.timeIntervalSince(lastStrideDate)
+                let lastStrideDouble = lastStrideTimeInterval ?? 0.0
+                if (motionManager.accelerometerData.total < lowestAccelerationRecordInCurrentStep && (averageLastStrideTime / 2) < lastStrideDouble && elapsed < (averageLastStrideTime / 4)) // Below the record && it's been more than half an averageLastStrideTime since the last record was regestered and it's been less than a third of an averageLastStrideTime since this record was last set.
                 {
                     // We're setting a record now, since we broke the previous one.
                     lowestAccelerationRecordInCurrentStep = motionManager.accelerometerData.total
                     timeOfLastAccelerationRecord = Date()
                 }
                 
-                if (elapsed > averageLastStrideTime * 0.5) // It's been more than half a stride, record was unbroken
+                if (elapsed > averageLastStrideTime / 4) // It's been more than a third of a stride, record was unbroken
                 {
                     // That was a beat, do stuffs
                     
@@ -242,8 +245,12 @@ struct ContentView: View {
                         
                         averageLastStrideTime = ((fourthLastStrideTime + thirdLastStrideTime + secondLastStrideTime + lastStrideTime)/4.0) // Find a new average BPM.
                         
-                        tempo = 60.0/Float(averageLastStrideTime) // This is the tempo the user is running at.
+                        if (averageLastStrideTime == 60/maxTempo) // This feels like a bad solution but is probably a good idea? If people don't like it they can set maxTempo to 210.
+                        {
+                            averageLastStrideTime = (averageLastStrideTime / 2.0)
+                        }
                         
+                        tempo = 60.0/Float(averageLastStrideTime) // This is the tempo the user is running at.
                          
                          // Let's assume the next stride will happen in averageLastStrideTime realseconds. We have two choices: either the file will play such that the current beat will finish in averageLastStrideTime realseconds, or the next beat will finish in averageLastStrideTime realseconds. We should find what correctingOffsetTempo is required for both options, and then use whichever one is closer to the actual tempo.
                         // The tempo of the file, in fileHz, is fileTempo/60. Each beat takes 60/fileTempo fileseconds. Say each beat takes 2 fileseconds and we're ahead by 1/3 fileseconds. Then we're ahead by 1/6 beats. We're ahead by ((# of filesecond's we're ahead by)/(beat length in fileseconds)) beats. Were ahead by (offsetAheadBy/(60/fileTempo)) beats.
