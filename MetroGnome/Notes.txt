@@ -2,6 +2,12 @@ Hello world! If this pushes then GitHub is working.
 
 To-do: de-spaghettify, maybe change accelerometer update interval for battery reasons.
 
+0.5.3 I'm going back to my code from 0.5.2 for the algorithm but going to add some maxTempo button features from the later versions. I'm also adding buttons for the watermarks.
+
+0.6.2 This is a big spaghetti mess right now. Future me can deal with it after Steens and XC Team Camp. I'm going to push and then make 0.5.3 for the camps, which will be like 0.5.2 but with some maxTempo button features.
+0.6.1 I despaghettified the algorithm without making any changes. There is a bug that it counts the strides after a record goes unbroken for half a beat, and not when the stride actually happened. More bugs may exist. I also fixed some bugs with maxTempo.
+0.6.0 I added a new algorithm that assumes each beat starts at the lowest acceleration part of the stride. I think it works pretty well. I then forgot to push added an option to attempt error correction, so this is still 0.6.0. It's really bad, but in theory works..? I'm taking it to Long Run tommorrow. I might not work on MetroGnome more until after Team Camp in late July, in which case this is the best error correction algorithm I'll have. It also works pretty well if its not trying to do error correction.
+
 0.5.2 I de-spaghettified some of the code. I also made a button to change the minimum tempo between 120 and 150 BPM. I also changed the "App Category" in the .xcodeproj file to be "Music" since it was listed as books for some reason.
 0.5.1 Removed slider, moved min/max code, made button bigger. I have to go now bye!
 0.5.0 It plays audio now!!! I'm glad this was doable and I didn't have to code in audio processing. I made it correlated to the person running's tempo somehow. It changes when I run with the phone. I'm not sure how well it works, but I'm tired so I'm going to push and run with it tomorrow. I'll see how well it works then!
@@ -13,9 +19,9 @@ I created three test audio .wav files and added them to this Swift file. One pla
 0.4.0 plays a Concert A3 major/minor scale with sometimes A2 chords. The minor chords sound kind of wrong and out of tune, but it's fine since this isn't the final audio it will play. It also makes some clicky sounds sometimes but it isn't crashing..? It's a feature, not a bug. You get some percussion!
 
 0.3.4 no longer has a TonePlayer that plays multiple pitches since that was causing runtime problems/crashes. I also made a new Xcode app called MetroGnome. Will push to Git.
-0.3.3 has a TonePlayer that plays multiple pitches, up to 7 since thatÕs how many IÕll need for the scale.
-0.3.2 tries to fix the bug where it hiccups extra strides in a stride. Code is getting spaghettifiedÉ
-0.3.2 tries to calculate tempo. It doesnÕt work. I donÕt have time to write a good commit message.
+0.3.3 has a TonePlayer that plays multiple pitches, up to 7 since thatÍs how many IÍll need for the scale.
+0.3.2 tries to fix the bug where it hiccups extra strides in a stride. Code is getting spaghettifiedƒ
+0.3.2 tries to calculate tempo. It doesnÍt work. I donÍt have time to write a good commit message.
 0.3.1 changes the watermarks to -5.0 and 5.0. I also fixed a bug caused by trying to made it only toggle every other stride.
 0.3.0 toggles the chord and makes it go up and down an octave with stride. Watermarks are 5.0 and 15.0.
 
@@ -31,6 +37,26 @@ I created three test audio .wav files and added them to this Swift file. One pla
 
 Hello world!
 
+This could run every frame if I don't want to use .onChangeOf. {
+class FrameUpdater: ObservableObject {
+    private var displayLink: CADisplayLink?
+    var onFrame: (() -> Void)?
+
+    init() {
+        displayLink = CADisplayLink(target: self, selector: #selector(frame))
+        displayLink?.add(to: .main, forMode: .default)
+    }
+
+    @objc func frame() {
+        onFrame?()
+    }
+
+    deinit {
+        displayLink?.invalidate()
+    }
+}
+}
+
 
 Old MotionManager {
 //
@@ -45,13 +71,13 @@ import CoreMotion
 class MotionManager: ObservableObject {
     private let motionManager = CMMotionManager()
     private let updateInterval = 0.0002 // This might be too low and make it crash...
-    
+
     @Published var accelerometerData: (x: Double, y: Double, z: Double, total: Double) = (0, 0, 0, 0)
-    
+
     init() {
         startAccelerometerUpdates()
     }
-    
+
     private func startAccelerometerUpdates() {
         guard motionManager.isAccelerometerAvailable else {
             print("Accelerometer is not available.")

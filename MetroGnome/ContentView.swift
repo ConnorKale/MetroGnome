@@ -20,8 +20,10 @@ struct ContentView: View {
     private let lowAccelermomerWaterMark: Double = 1.5
     private let highAcceleromerWaterMark: Double = 3.0
 
-    private let lowJerkWaterMark: Double = -4.0
-    private let highJerkWaterMark: Double = 4.0
+    @State private var lowJerkWaterMark: Double = -4.0
+    @State private var lowJerkWaterMarkIsNegative4: Bool = true
+    @State private var highJerkWaterMark: Double = 4.0
+    @State private var highJerkWaterMarkIs4: Bool = true
     @State private var lookingForAboveHigh: Bool = true
 
     @State private var startTime: Date?
@@ -35,9 +37,10 @@ struct ContentView: View {
     @State private var averageLastStrideTime: Double = (1.0/3.0) // In seconds
     @State private var tempo: Float = 180.0 // In seconds
 
-    @State private var maxTempo: Double = 240.0
-    @State private var minTempo: Double = 120.0
+    @State private var maxTempo: Double = 190.0 // Maybe change this back to 240? Or not, 210 is a really fast pace to run at but in theory it's possible.
+    @State private var minTempo: Double = 120
     @State private var minTempoIs120: Bool = true
+    @State private var maxTempoIs210: Bool = false
 
     private var backgroundColor: Color {
         switch motionManager.accelerometerData.jerk {
@@ -87,16 +90,55 @@ struct ContentView: View {
             //.padding()
                 .font(.system(size: 80))
 
-            Button(minTempoIs120 ? "Min tempo to 150" : "Min tempo to 120") {
-                if minTempoIs120 {
-                    minTempo = 150
-                    minTempoIs120 = false
-                } else {
-                    minTempo = 120
-                    minTempoIs120 = true
+            HStack{
+                Button(minTempoIs120 ? "Min's 120" : "Min's 150") {
+                    if minTempoIs120 {
+                        minTempo = 150
+                        minTempoIs120 = false
+                    } else {
+                        minTempo = 120
+                        minTempoIs120 = true
+                    }
                 }
+                .font(.system(size: 40))
+
+                Button(maxTempoIs210 ? "Max's 210" : "Max's 190") {
+                    if maxTempoIs210 {
+                        maxTempo = 190
+                        maxTempoIs210 = false
+                    } else {
+                        maxTempo = 210
+                        maxTempoIs210 = true
+                    }
+                }
+                .font(.system(size: 40))
+
             }
-            .font(.system(size: 40))
+            
+            HStack{
+                Button(lowJerkWaterMarkIsNegative4 ? "LWM's -4" : "LWM's -10") {
+                    if lowJerkWaterMarkIsNegative4 {
+                        lowJerkWaterMark = -10
+                        lowJerkWaterMarkIsNegative4 = false
+                    } else {
+                        lowJerkWaterMark = -4
+                        lowJerkWaterMarkIsNegative4 = true
+                    }
+                }
+                .font(.system(size: 40))
+
+                Button(highJerkWaterMarkIs4 ? "HWM's 4" : "HWM's 10") {
+                    if highJerkWaterMarkIs4 {
+                        highJerkWaterMark = 10
+                        highJerkWaterMarkIs4 = false
+                    } else {
+                        highJerkWaterMark = 4
+                        highJerkWaterMarkIs4 = true
+                    }
+                }
+                .font(.system(size: 40))
+
+            }
 
             /*Image(systemName: "waveform")
                 .font(.system(size: 50))
