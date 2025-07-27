@@ -17,18 +17,22 @@ struct ContentView: View {
 
     private var fileTempo: Float = 180.0 // This needs to be manually changed when a new file is added.
     
-    private let lowAccelermomerWaterMark: Double = 1.5
-    private let highAcceleromerWaterMark: Double = 3.0
+    //private let lowAccelermomerWaterMark: Double = 1.5
+    //private let highAcceleromerWaterMark: Double = 3.0
 
     @State private var lowJerkWaterMark: Double = -4.0
-    @State private var lowJerkWaterMarkIsNegative4: Bool = true
+    //@State private var lowJerkWaterMarkIsNegative4: Bool = true
     @State private var highJerkWaterMark: Double = 4.0
-    @State private var highJerkWaterMarkIs4: Bool = true
-    @State private var lookingForAboveHigh: Bool = true
+    //@State private var highJerkWaterMarkIs4: Bool = true
+    //@State private var lookingForAboveHigh: Bool = true
 
-    @State private var startTime: Date?
-    @State private var endTime: Date?
-    @State private var elapsedTime: TimeInterval?
+    //@State private var startTime: Date?
+    //@State private var endTime: Date?
+    //@State private var elapsedTime: TimeInterval?
+    
+    @State private var currentAccelerationRecord: Double = 0.0
+    @State private var timeOfLastAccelerationRecord: Date? = Date()
+    @State private var timeOfLastTempoCalculation: Date? = Date()
 
     @State private var lastStrideTime: Double = 0.0 // In seconds
     @State private var secondLastStrideTime: Double = (1.0/3.0) // In seconds
@@ -39,8 +43,8 @@ struct ContentView: View {
 
     @State private var maxTempo: Double = 190.0 // Maybe change this back to 240? Or not, 210 is a really fast pace to run at but in theory it's possible.
     @State private var minTempo: Double = 120
-    @State private var minTempoIs120: Bool = true
-    @State private var maxTempoIs210: Bool = false
+    //@State private var minTempoIs120: Bool = true
+    //@State private var maxTempoIs210: Bool = false
 
     private var backgroundColor: Color {
         switch motionManager.accelerometerData.jerk {
@@ -66,6 +70,7 @@ struct ContentView: View {
                     }
                 }
                 .font(.system(size: 160))
+                .padding(.bottom, 30)
 
                 /*VStack {
                     Text("Playback Speed: \(String(format: "%.2f", audioPlayer.rate))x")
@@ -77,21 +82,10 @@ struct ContentView: View {
                 .font(.system(size: 20))
             Text("\(tempo, specifier: "%.2f")")
                 .font(.system(size: 80))
-            
-            Text("Last stride (s):")
-                .font(.system(size: 20))
-            Text("\(lastStrideTime, specifier: "%.2f")")
-            //.padding()
-                .font(.system(size: 80))
-
-            Text("Average of last four (s):")
-                .font(.system(size: 20))
-            Text("\(averageLastStrideTime, specifier: "%.2f")")
-            //.padding()
-                .font(.system(size: 80))
+                .padding(.bottom, 30)
 
             HStack{
-                Button(minTempoIs120 ? "Min's 120" : "Min's 150") {
+                /*Button(minTempoIs120 ? "Min's 120" : "Min's 150") {
                     if minTempoIs120 {
                         minTempo = 150
                         minTempoIs120 = false
@@ -102,6 +96,15 @@ struct ContentView: View {
                 }
                 .font(.system(size: 40))
 
+                Text("Test text \(lastStrideTime)")
+                Button("Test String") {
+                    minTempo = 200
+                    // Some code runs
+                }
+                .font(.system(size: 40))
+
+                
+                
                 Button(maxTempoIs210 ? "Max's 210" : "Max's 190") {
                     if maxTempoIs210 {
                         maxTempo = 190
@@ -111,34 +114,69 @@ struct ContentView: View {
                         maxTempoIs210 = true
                     }
                 }
-                .font(.system(size: 40))
+                .font(.system(size: 40))*/
+                VStack { // minTempo Stuffs
+                    Text("Min's \(Int(minTempo))")
+                    
+                    Button("Min 100") {
+                        minTempo = 100
+                    }
+                    .font(.system(size: 40))
+
+                    Button("Min 120") {
+                        minTempo = 120
+                    }
+                    .font(.system(size: 40))
+
+                    Button("Min 140") {
+                        minTempo = 140
+                    }
+                    .font(.system(size: 40))
+
+                    Button("Min 160") {
+                        minTempo = 160
+                    }
+                    .font(.system(size: 40))
+
+                    Button("Min 180") {
+                        minTempo = 180
+                    }
+                    .font(.system(size: 40))
+
+                }
+                .padding(.horizontal, 20)
+                VStack { // maxTempo Stuffs
+                    Text("Max's \(Int(maxTempo))")
+
+                    Button("Max 150") {
+                        maxTempo = 150
+                    }
+                    .font(.system(size: 40))
+
+                    Button("Max 170") {
+                        maxTempo = 170
+                    }
+                    .font(.system(size: 40))
+
+                    Button("Max 190") {
+                        maxTempo = 190
+                    }
+                    .font(.system(size: 40))
+                    Button("Max 210") {
+                        maxTempo = 210
+                    }
+                    .font(.system(size: 40))
+
+                    Button("Max 240") {
+                        maxTempo = 240
+                    }
+                    .font(.system(size: 40))
+
+                }
+                .padding(.horizontal, 17)
 
             }
             
-            HStack{
-                Button(lowJerkWaterMarkIsNegative4 ? "LWM's -4" : "LWM's -10") {
-                    if lowJerkWaterMarkIsNegative4 {
-                        lowJerkWaterMark = -10
-                        lowJerkWaterMarkIsNegative4 = false
-                    } else {
-                        lowJerkWaterMark = -4
-                        lowJerkWaterMarkIsNegative4 = true
-                    }
-                }
-                .font(.system(size: 40))
-
-                Button(highJerkWaterMarkIs4 ? "HWM's 4" : "HWM's 10") {
-                    if highJerkWaterMarkIs4 {
-                        highJerkWaterMark = 10
-                        highJerkWaterMarkIs4 = false
-                    } else {
-                        highJerkWaterMark = 4
-                        highJerkWaterMarkIs4 = true
-                    }
-                }
-                .font(.system(size: 40))
-
-            }
 
             /*Image(systemName: "waveform")
                 .font(.system(size: 50))
@@ -153,50 +191,49 @@ struct ContentView: View {
         .onDisappear {
             //motionManager.stopUpdates()
         }
-        .onChange(of: motionManager.accelerometerData.jerk) { newValue in
-            if ((lookingForAboveHigh) && (newValue >= highJerkWaterMark)) { // If looking for above highmark and it's above highmark
-                lookingForAboveHigh = false // Move into if statement?
-
-                if let start = startTime {
-                    endTime = Date()
-                    elapsedTime = endTime?.timeIntervalSince(start)
-                } else {
-                    elapsedTime = nil
-                }
-                
-                if let elapsed = elapsedTime {
-                        // Old forthStride's data gets forgotten
-                        fourthLastStrideTime = thirdLastStrideTime
-                        thirdLastStrideTime = secondLastStrideTime
-                        secondLastStrideTime = lastStrideTime
-                    lastStrideTime = min((1/(minTempo/60.0)), (max((1/(maxTempo/60.0)), elapsed)))
-                        
-                    averageLastStrideTime = ((fourthLastStrideTime + thirdLastStrideTime + secondLastStrideTime + lastStrideTime)/4.0) // Find a new average BPM. Forces the tempo to be between 120 and 240 BPM. Sometime might make this a user-adjustable parameter.
-                    
-                    tempo = 60.0/Float(averageLastStrideTime)
-                    audioPlayer.rate = tempo/fileTempo
-
-                        //changeNote() // This changes the chord note.
-                }
-
-                startTime = Date() // Is the time when the last stride happened.
-            } else if ((!lookingForAboveHigh) && (newValue <= lowJerkWaterMark)) {// If looking for below lowmark and it's below lowmark {
-                if let start = startTime {
-                    endTime = Date()
-                    elapsedTime = endTime?.timeIntervalSince(start)
-                } else {
-                    elapsedTime = nil
-                }
-
-                if let elapsed = elapsedTime {
-                    if (elapsed > averageLastStrideTime * 0.75)
-                    {
-                        lookingForAboveHigh = true
-                    }
-                }
+        .onChange(of: motionManager.accelerometerData.jerk) { //newValue in
+            // I want this script to run every frame. There might be some easy way to do this, not sure. There's definitely a "correct" way to do this that I'm not doing. Whatever, it's fine. I'll fix it later.
+            
+            let lastRecord: Date = timeOfLastAccelerationRecord ?? Date() // I don't understand date-related variable types but I think this is converting timeOfLastAccelerationRecord which is a Date? into a Date or the current Date if there's an error so it doesn't crash.
+            let lastCalculation: Date = timeOfLastTempoCalculation ?? Date()
+            
+            // Lot's of date stuff involves weird question markes. Maybe a metaphor for me bing confused about it. lol
+            
+            let currentTime = Date()
+            
+            let elapsedRecordTimeInterval = currentTime.timeIntervalSince(lastRecord)
+            let elapsedCalculationTimeInterval = currentTime.timeIntervalSince(lastCalculation)
+            
+            let elapsedRecordDouble: Double = Double(elapsedRecordTimeInterval)
+            let elapsedCalculationDouble: Double = Double(elapsedCalculationTimeInterval)
+            
+            if ((motionManager.accelerometerData.total < currentAccelerationRecord) && elapsedRecordDouble < 0.75*averageLastStrideTime) { // If we're setting a record and it's been less that 3/4 of a stride time since the previous stride, so this is the current stride.
+                // We're setting a record.
+                currentAccelerationRecord = motionManager.accelerometerData.total
+                timeOfLastAccelerationRecord = Date()
             }
-        }
+                
+            if (elapsedRecordDouble > Double(0.75*averageLastStrideTime)) {
+                
+                // Old forthStride's data gets forgotten
+                //fourthLastStrideTime = thirdLastStrideTime
+                thirdLastStrideTime = secondLastStrideTime
+                secondLastStrideTime = lastStrideTime
+                lastStrideTime = min((1/(minTempo/60.0)), (max((1/(maxTempo/60.0)), elapsedCalculationDouble)))
+                
+                averageLastStrideTime = ((thirdLastStrideTime + secondLastStrideTime + lastStrideTime)/3.0)
+                tempo = 60.0/Float(averageLastStrideTime)
+                
+                audioPlayer.rate = tempo/fileTempo
+                timeOfLastTempoCalculation = Date()
+                
+                // Set a record since it's the next stride.
+                currentAccelerationRecord = motionManager.accelerometerData.total
+                timeOfLastAccelerationRecord = Date()
 
+            }
+                
+        }
     }
     
     func changeNote() {
