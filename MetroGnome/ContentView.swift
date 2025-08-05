@@ -13,9 +13,15 @@ struct ContentView: View {
     @StateObject private var motionManager = MotionManager()
     @StateObject private var audioPlayer = VariableSpeedAudioPlayer()
 
+    @State private var timer = Timer.publish(every: 1.0 / 30.0, on: .main, in: .common).autoconnect()
+
     //@State private var sliderValue: Double = 1.0
 
-    private var fileTempo: Float = 180.0 // This needs to be manually changed when a new file is added.
+    private var numberOfSongs: Int = 2
+    @State private var selectedSongIndex: Double = 0
+    private var songNames: [String] = ["MetroGnomeTestAudio_256Measures", "MetroGnomeTestAudio_256Measures"]
+    private var fileTempos: [Float] = [180.0, 90.0] // This needs to be manually changed when a new file is added.
+    @State private var currentlyPlayingFileTempo: Float = 180.0
     
     //private let lowAccelermomerWaterMark: Double = 1.5
     //private let highAcceleromerWaterMark: Double = 3.0
@@ -56,7 +62,6 @@ struct ContentView: View {
             return Color(red: 0.0, green: 0.0, blue: 1.0) // Blue
         }
     }
-
     
     var body: some View {
         
@@ -66,12 +71,17 @@ struct ContentView: View {
                     if audioPlayer.isPlaying {
                         audioPlayer.stop()
                     } else {
-                        audioPlayer.loadAndPlay(filename: "MetroGnomeTestAudio_256Measures") // your .wav file name
+                        currentlyPlayingFileTempo = fileTempos[Int(selectedSongIndex)]
+                        audioPlayer.loadAndPlay(filename: songNames[Int(selectedSongIndex)]) // your .wav file name
                     }
                 }
                 .font(.system(size: 160))
                 .padding(.bottom, 30)
 
+                Text("Playing song number \(String(Int(selectedSongIndex + 1.0))).")
+                Slider(value: $selectedSongIndex, in: 0...Double(numberOfSongs - 1), step: 1)
+                    .padding(.horizontal)
+                
                 /*VStack {
                     Text("Playback Speed: \(String(format: "%.2f", audioPlayer.rate))x")
                     Slider(value: $sliderValue, in: 0.5...2.0, step: 0.05)
@@ -191,8 +201,8 @@ struct ContentView: View {
         .onDisappear {
             //motionManager.stopUpdates()
         }
-        .onChange(of: motionManager.accelerometerData.jerk) { //newValue in
-            // I want this script to run every frame. There might be some easy way to do this, not sure. There's definitely a "correct" way to do this that I'm not doing. Whatever, it's fine. I'll fix it later.
+        //.onChange(of: motionManager.accelerometerData.jerk) { //newValue in
+        .onReceive(timer) { _ in // This runs at 30 FPS. That can be changed in the timer variable declaration at the top.
             
             let lastRecord: Date = timeOfLastAccelerationRecord ?? Date() // I don't understand date-related variable types but I think this is converting timeOfLastAccelerationRecord which is a Date? into a Date or the current Date if there's an error so it doesn't crash.
             let lastCalculation: Date = timeOfLastTempoCalculation ?? Date()
@@ -224,7 +234,7 @@ struct ContentView: View {
                 averageLastStrideTime = ((thirdLastStrideTime + secondLastStrideTime + lastStrideTime)/3.0)
                 tempo = 60.0/Float(averageLastStrideTime)
                 
-                audioPlayer.rate = tempo/fileTempo
+                audioPlayer.rate = tempo / currentlyPlayingFileTempo
                 timeOfLastTempoCalculation = Date()
                 
                 // Set a record since it's the next stride.
@@ -235,7 +245,7 @@ struct ContentView: View {
                 
         }
     }
-    
+
     func changeNote() {
         // Make a noticable change in the pitch for the user.
         // Change the note
