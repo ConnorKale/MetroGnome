@@ -2,8 +2,11 @@ Hello world! If this pushes then GitHub is working.
 
 To-do: de-spaghettify, maybe change accelerometer update interval for battery reasons.
 
+FFmpeg terminal command: "ffmpeg -i inputFileName.extension outputFileName.wav", you need to be in the file directory that has the input file.
+
 Remember to change version number!
 
+0.7.3 I added another audio file. This is a version of Pachelbel's Canon I got off of Wikipedia. Someone named Kevin MacLeod apparently created the file and wants credit for it, so I'm putting his name in the Notes file and commit message (which are identical). I then learned it has to be a .wav file and used FFmpeg from https://evermeet.cx/ffmpeg/ to convert it. Putting FFmpeg in the MetroGnome to support other file types might be a future project.
 0.7.2 I drew a bad app icon. I'll probably draw a better one tomorrow.
 0.7.1 The app now can support having multiple songs. It doesn't yet support users uploading their own songs or storing data in between app launches. I also haven't upload multiple song files, so it plays the same test audio file at normal and double tempo. I also fixed the code that runs the algorithm every frame, so it actually does it on 30 FPS and not when the MotionManager thing updates. I might upload actual songs sometime.
 0.7.0 I'm over starting again with the record-based algorithm from 0.6.0. Now I'm using 3/4 of a stride before I declare there was a record instead of 1/2. I'm also going to start over with an error correction algorithm, since the previous attempt turned into a mess and I'm now aware of how the tempo changing doesn't happen on a beat. I'm also making the MotionManager update every 0.02 seconds instead of 0.008 for battery reasons since I don't think it will matter noticeably.

@@ -17,10 +17,11 @@ struct ContentView: View {
 
     //@State private var sliderValue: Double = 1.0
 
-    private var numberOfSongs: Int = 2
+    private var numberOfSongs: Int = 4
     @State private var selectedSongIndex: Double = 0
-    private var songNames: [String] = ["MetroGnomeTestAudio_256Measures", "MetroGnomeTestAudio_256Measures"]
-    private var fileTempos: [Float] = [180.0, 90.0] // This needs to be manually changed when a new file is added.
+    private var songNames: [String] = ["MetroGnomeTestAudio_256Measures", "MetroGnomeTestAudio_256Measures", "WikipediaCanon160BPM", "WikipediaCanon160BPM"]
+    private var fileTempos: [Float] = [180.0, 90.0, 80.0, 160.0] // This needs to be manually changed when a new file is added.
+    // THIS ONLY TAKES WAV FILES!!! Dad thinks imbedding FFmpeg inside the MetroGnome might be doable and might be a good idea for file-size reasons.
     @State private var currentlyPlayingFileTempo: Float = 180.0
     
     //private let lowAccelermomerWaterMark: Double = 1.5
@@ -78,7 +79,7 @@ struct ContentView: View {
                 .font(.system(size: 160))
                 .padding(.bottom, 30)
 
-                Text("Playing song number \(String(Int(selectedSongIndex + 1.0))).")
+                Text("Will play song number \(String(Int(selectedSongIndex + 1.0))).")
                 Slider(value: $selectedSongIndex, in: 0...Double(numberOfSongs - 1), step: 1)
                     .padding(.horizontal)
                 
