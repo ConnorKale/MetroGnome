@@ -9,7 +9,7 @@ import CoreMotion
 
 class MotionManager: ObservableObject { // To do: Clean this up after I understand SwiftUI better. Check if updateInterval is too high
     private let motionManager = CMMotionManager()
-    private let updateInterval = 0.02 //In seconds // This might be too high and make it crash...
+    private let updateInterval = (1.0/30.0) //In seconds // This might be too high and make it crash...
     
     @Published var accelerometerData: (x: Double, y: Double, z: Double, total: Double, jerk: Double) = (0, 0, 0, 0, 0)
 

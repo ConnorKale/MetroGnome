@@ -16,6 +16,10 @@ class VariableSpeedAudioPlayer: ObservableObject {
     private var timePitch = AVAudioUnitTimePitch()
     private var audioFile: AVAudioFile?
 
+    private var playbackStartTime: TimeInterval = 0
+    private var pausedTime: TimeInterval = 0
+    private var timer: Timer?
+
     @Published var isPlaying = false
     @Published var rate: Float = 1.0 {
         didSet {

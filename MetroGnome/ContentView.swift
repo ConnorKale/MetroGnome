@@ -77,12 +77,25 @@ struct ContentView: View {
                     }
                 }
                 .font(.system(size: 160))
-                .padding(.bottom, 30)
+                //.padding(.bottom, 30)
 
-                Text("Will play song number \(String(Int(selectedSongIndex + 1.0))).")
+                HStack {
+                    Button("Prev")
+                    {
+                        selectedSongIndex -= 1
+                    }
+                    .font(.system(size: 24))
+
+                    Text("Will play song number \(String(Int(selectedSongIndex + 1.0))).")
+                    Button("Next")
+                    {
+                        selectedSongIndex += 1
+                    }
+                    .font(.system(size: 24))
+
+                }
                 Slider(value: $selectedSongIndex, in: 0...Double(numberOfSongs - 1), step: 1)
-                    .padding(.horizontal)
-                
+                        .padding(.horizontal)
                 /*VStack {
                     Text("Playback Speed: \(String(format: "%.2f", audioPlayer.rate))x")
                     Slider(value: $sliderValue, in: 0.5...2.0, step: 0.05)
@@ -129,10 +142,10 @@ struct ContentView: View {
                 VStack { // minTempo Stuffs
                     Text("Min's \(Int(minTempo))")
                     
-                    Button("Min 100") {
+                    /*Button("Min 100") {
                         minTempo = 100
                     }
-                    .font(.system(size: 40))
+                    .font(.system(size: 40)) */
 
                     Button("Min 120") {
                         minTempo = 120
@@ -178,10 +191,10 @@ struct ContentView: View {
                     }
                     .font(.system(size: 40))
 
-                    Button("Max 240") {
+                    /*Button("Max 240") {
                         maxTempo = 240
                     }
-                    .font(.system(size: 40))
+                    .font(.system(size: 40))*/
 
                 }
                 .padding(.horizontal, 17)
@@ -194,6 +207,7 @@ struct ContentView: View {
                 .foregroundStyle(.tint)
              */
         }
+        .padding(.bottom, 40)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(backgroundColor) // Set background color based on accelerometer data
         .onAppear {
