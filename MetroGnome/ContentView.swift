@@ -48,10 +48,12 @@ struct ContentView: View {
     @State private var averageLastStrideTime: Double = (1.0/3.0) // In seconds
     @State private var tempo: Float = 180.0 // In seconds
 
-    @State private var maxTempo: Double = 190.0 // Maybe change this back to 240? Or not, 210 is a really fast pace to run at but in theory it's possible.
+    @State private var maxTempo: Double = 190.0
     @State private var minTempo: Double = 120
-    //@State private var minTempoIs120: Bool = true
-    //@State private var maxTempoIs210: Bool = false
+    @State private var lowestMinTempo: Double = 120.0
+    @State private var highestMinTempo: Double = 190.0
+    @State private var lowestMaxTempo: Double = 150.0
+    @State private var highestMaxTempo: Double = 220.0
 
     private var backgroundColor: Color {
         switch motionManager.accelerometerData.jerk {
@@ -82,14 +84,13 @@ struct ContentView: View {
                 HStack {
                     Button("Prev")
                     {
-                        selectedSongIndex -= 1
+                        selectedSongIndex = max(selectedSongIndex - 1, 0)
                     }
                     .font(.system(size: 24))
-
                     Text("Will play song number \(String(Int(selectedSongIndex + 1.0))).")
                     Button("Next")
                     {
-                        selectedSongIndex += 1
+                        selectedSongIndex = min(selectedSongIndex + 1, Double(numberOfSongs - 1))
                     }
                     .font(.system(size: 24))
 
@@ -107,99 +108,42 @@ struct ContentView: View {
             Text("\(tempo, specifier: "%.2f")")
                 .font(.system(size: 80))
                 .padding(.bottom, 30)
-
-            HStack{
-                /*Button(minTempoIs120 ? "Min's 120" : "Min's 150") {
-                    if minTempoIs120 {
-                        minTempo = 150
-                        minTempoIs120 = false
-                    } else {
-                        minTempo = 120
-                        minTempoIs120 = true
-                    }
+            
+            HStack {
+                Button("-10")
+                {
+                    minTempo = max(minTempo - 10, lowestMinTempo)
                 }
                 .font(.system(size: 40))
-
-                Text("Test text \(lastStrideTime)")
-                Button("Test String") {
-                    minTempo = 200
-                    // Some code runs
+                Text("minTempo is \(String(Int(minTempo))).")
+                Button("+10")
+                {
+                    minTempo = min(minTempo + 10, highestMinTempo)
                 }
                 .font(.system(size: 40))
-
-                
-                
-                Button(maxTempoIs210 ? "Max's 210" : "Max's 190") {
-                    if maxTempoIs210 {
-                        maxTempo = 190
-                        maxTempoIs210 = false
-                    } else {
-                        maxTempo = 210
-                        maxTempoIs210 = true
-                    }
-                }
-                .font(.system(size: 40))*/
-                VStack { // minTempo Stuffs
-                    Text("Min's \(Int(minTempo))")
-                    
-                    /*Button("Min 100") {
-                        minTempo = 100
-                    }
-                    .font(.system(size: 40)) */
-
-                    Button("Min 120") {
-                        minTempo = 120
-                    }
-                    .font(.system(size: 40))
-
-                    Button("Min 140") {
-                        minTempo = 140
-                    }
-                    .font(.system(size: 40))
-
-                    Button("Min 160") {
-                        minTempo = 160
-                    }
-                    .font(.system(size: 40))
-
-                    Button("Min 180") {
-                        minTempo = 180
-                    }
-                    .font(.system(size: 40))
-
-                }
-                .padding(.horizontal, 20)
-                VStack { // maxTempo Stuffs
-                    Text("Max's \(Int(maxTempo))")
-
-                    Button("Max 150") {
-                        maxTempo = 150
-                    }
-                    .font(.system(size: 40))
-
-                    Button("Max 170") {
-                        maxTempo = 170
-                    }
-                    .font(.system(size: 40))
-
-                    Button("Max 190") {
-                        maxTempo = 190
-                    }
-                    .font(.system(size: 40))
-                    Button("Max 210") {
-                        maxTempo = 210
-                    }
-                    .font(.system(size: 40))
-
-                    /*Button("Max 240") {
-                        maxTempo = 240
-                    }
-                    .font(.system(size: 40))*/
-
-                }
-                .padding(.horizontal, 17)
-
             }
+            Slider(value: $minTempo, in: lowestMinTempo...highestMinTempo, step: 10)
+                .padding(.horizontal)
+                .padding(.bottom, 30)
+                
+                
+            HStack {
+                Button("-10")
+                {
+                    maxTempo = max(maxTempo - 10, lowestMaxTempo)
+                }
+                .font(.system(size: 40))
+
+                Text("maxTempo is \(String(Int(maxTempo))).")
+                Button("+10")
+                {
+                    maxTempo = min(maxTempo + 10, highestMaxTempo)
+                }
+                .font(.system(size: 40))
+            }
+            Slider(value: $maxTempo, in: lowestMaxTempo...highestMaxTempo, step: 10)
+                    .padding(.horizontal)
+
             
 
             /*Image(systemName: "waveform")
@@ -222,7 +166,7 @@ struct ContentView: View {
             let lastRecord: Date = timeOfLastAccelerationRecord ?? Date() // I don't understand date-related variable types but I think this is converting timeOfLastAccelerationRecord which is a Date? into a Date or the current Date if there's an error so it doesn't crash.
             let lastCalculation: Date = timeOfLastTempoCalculation ?? Date()
             
-            // Lot's of date stuff involves weird question markes. Maybe a metaphor for me bing confused about it. lol
+            // Lot's of date stuff involves weird question markes. Maybe a metaphor for me being confused about it. lol
             
             let currentTime = Date()
             
