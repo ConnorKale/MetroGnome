@@ -6,6 +6,8 @@ FFmpeg terminal command: "ffmpeg -i inputFileName.extension outputFileName.wav",
 
 Remember to change version number!
 
+Now I'm updating Xcode and will download an updated version at school also. I'm pushing the updated project to GitHub so I can pull down an updated one at school.
+
 0.7.5 I changed the UI so the minTempo and maxTempo are sliders instead of a bunch of buttons. This saves real estate on the screen. I also fixed a bug where the user could use the prev/next song buttons to queue a nonexistant song and make the app crash. Next I'll try to implement an auto-pacing with a goal tempo, which should be a lot easier than getting a GPS.
 0.7.4 I changed the buttons to make the 180 minTempo button visible and deleted the 100 minTempo and 240 maxTempo since I never use them. I also made a button to change the currently selected song since the slider is kind of hard to use. I also added padding to the bottom of the ContentView UI so it's more centered. Tonight or tommorrow or sometime I'm going to mess with the AudioPlayer to add a progress bar slider and support a pause button.
 0.7.3 I added another audio file. This is a version of Pachelbel's Canon I got off of Wikipedia. Someone named Kevin MacLeod apparently created the file and wants credit for it, so I'm putting his name in the Notes file and commit message (which are identical). I then learned it has to be a .wav file and used FFmpeg from https://evermeet.cx/ffmpeg/ to convert it. Putting FFmpeg in the MetroGnome to support other file types might be a future project.
@@ -30,7 +32,7 @@ I created three test audio .wav files and added them to this Swift file. One pla
 0.4.0 plays a Concert A3 major/minor scale with sometimes A2 chords. The minor chords sound kind of wrong and out of tune, but it's fine since this isn't the final audio it will play. It also makes some clicky sounds sometimes but it isn't crashing..? It's a feature, not a bug. You get some percussion!
 
 0.3.4 no longer has a TonePlayer that plays multiple pitches since that was causing runtime problems/crashes. I also made a new Xcode app called MetroGnome. Will push to Git.
-0.3.3 has a TonePlayer that plays multiple pitches, up to 7 since thatÍs how many IÍll need for the scale.
+0.3.3 has a TonePlayer that plays multiple pitches, up to 7 since that's how many I'll need for the scale.
 0.3.2 tries to fix the bug where it hiccups extra strides in a stride. Code is getting spaghettified.
 0.3.2 tries to calculate tempo. It doesnÍt work. I donÍt have time to write a good commit message.
 0.3.1 changes the watermarks to -5.0 and 5.0. I also fixed a bug caused by trying to made it only toggle every other stride.
@@ -47,72 +49,3 @@ I created three test audio .wav files and added them to this Swift file. One pla
 0.1.0 was 128 * g's Hz.
 
 Hello world!
-
-This could run every frame if I don't want to use .onChangeOf. {
-class FrameUpdater: ObservableObject {
-    private var displayLink: CADisplayLink?
-    var onFrame: (() -> Void)?
-
-    init() {
-        displayLink = CADisplayLink(target: self, selector: #selector(frame))
-        displayLink?.add(to: .main, forMode: .default)
-    }
-
-    @objc func frame() {
-        onFrame?()
-    }
-
-    deinit {
-        displayLink?.invalidate()
-    }
-}
-}
-
-
-Old MotionManager {
-//
-//  MotionManager.swift
-//  Gnome
-//
-//  Created by Connor Kale on 4/24/25.
-//
-
-import CoreMotion
-
-class MotionManager: ObservableObject {
-    private let motionManager = CMMotionManager()
-    private let updateInterval = 0.0002 // This might be too low and make it crash...
-
-    @Published var accelerometerData: (x: Double, y: Double, z: Double, total: Double) = (0, 0, 0, 0)
-
-    init() {
-        startAccelerometerUpdates()
-    }
-
-    private func startAccelerometerUpdates() {
-        guard motionManager.isAccelerometerAvailable else {
-            print("Accelerometer is not available.")
-            return
-        }
-
-        motionManager.accelerometerUpdateInterval = updateInterval
-        motionManager.startAccelerometerUpdates(to: .main) { [weak self] data, error in
-            guard let data = data else {
-                if let error = error {
-                    print("Accelerometer error: \(error.localizedDescription)")
-                }
-                return
-            }
-
-            let x = data.acceleration.x
-            let y = data.acceleration.y
-            let z = data.acceleration.z
-            let total = sqrt(x * x + y * y + z * z)
-            self?.accelerometerData = (x, y, z, total)
-        }
-    }
-    deinit {
-        motionManager.stopAccelerometerUpdates()
-    }
-}
-}
