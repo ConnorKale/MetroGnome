@@ -4,6 +4,8 @@ To-do: de-spaghettify, maybe change accelerometer update interval for battery re
 
 FFmpeg terminal command: "ffmpeg -i inputFileName.extension outputFileName.wav", you need to be in the file directory that has the input file.
 
+GitHub student thing is https://education.github.com/pack
+
 Remember to change version number!
 
 Now I'm updating Xcode and will download an updated version at school also. I'm pushing the updated project to GitHub so I can pull down an updated one at school.
@@ -34,7 +36,7 @@ I created three test audio .wav files and added them to this Swift file. One pla
 0.3.4 no longer has a TonePlayer that plays multiple pitches since that was causing runtime problems/crashes. I also made a new Xcode app called MetroGnome. Will push to Git.
 0.3.3 has a TonePlayer that plays multiple pitches, up to 7 since that's how many I'll need for the scale.
 0.3.2 tries to fix the bug where it hiccups extra strides in a stride. Code is getting spaghettified.
-0.3.2 tries to calculate tempo. It doesnÕt work. I donÕt have time to write a good commit message.
+0.3.2 tries to calculate tempo. It doesn√çt work. I don√çt have time to write a good commit message.
 0.3.1 changes the watermarks to -5.0 and 5.0. I also fixed a bug caused by trying to made it only toggle every other stride.
 0.3.0 toggles the chord and makes it go up and down an octave with stride. Watermarks are 5.0 and 15.0.
 
