@@ -8,8 +8,9 @@ GitHub student thing is https://education.github.com/pack
 
 Remember to change version number!
 
-Hello world from school! I've been able to get Xcode updated on the PPS computers so I'm using one repo and doing a test push from school.
+0.8.0 I opened and pushed from a school computer. I'm upping the version number since I haven't done any coding for a while, and I updated Xcode and Swift, so this feels like a good time to up it. I also changed the slider implementation in the UI so it keeps being "quantized" in the new Swift version.
 
+Hello world from school! I've been able to get Xcode updated on the PPS computers so I'm using one repo and doing a test push from school.
 Now I'm updating Xcode and will download an updated version at school also. I'm pushing the updated project to GitHub so I can pull down an updated one at school.
 
 0.7.5 I changed the UI so the minTempo and maxTempo are sliders instead of a bunch of buttons. This saves real estate on the screen. I also fixed a bug where the user could use the prev/next song buttons to queue a nonexistant song and make the app crash. Next I'll try to implement an auto-pacing with a goal tempo, which should be a lot easier than getting a GPS.

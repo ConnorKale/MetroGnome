@@ -18,7 +18,7 @@ struct ContentView: View {
     //@State private var sliderValue: Double = 1.0
 
     private var numberOfSongs: Int = 4
-    @State private var selectedSongIndex: Double = 0
+    @State private var selectedSongIndex: Int = 0
     private var songNames: [String] = ["MetroGnomeTestAudio_256Measures", "MetroGnomeTestAudio_256Measures", "WikipediaCanon160BPM", "WikipediaCanon160BPM"]
     private var fileTempos: [Float] = [180.0, 90.0, 80.0, 160.0] // This needs to be manually changed when a new file is added.
     // THIS ONLY TAKES WAV FILES!!! Dad thinks imbedding FFmpeg inside the MetroGnome might be doable and might be a good idea for file-size reasons.
@@ -87,15 +87,23 @@ struct ContentView: View {
                         selectedSongIndex = max(selectedSongIndex - 1, 0)
                     }
                     .font(.system(size: 24))
-                    Text("Will play song number \(String(Int(selectedSongIndex + 1.0))).")
+                    Text("Will play song number \(String(selectedSongIndex + 1)).")
+                    //Text("Will play song number \(String(Int(selectedSongIndex + 1.0))).")
                     Button("Next")
                     {
-                        selectedSongIndex = min(selectedSongIndex + 1, Double(numberOfSongs - 1))
+                        selectedSongIndex = min((selectedSongIndex + 1), (numberOfSongs - 1))
                     }
                     .font(.system(size: 24))
 
                 }
-                Slider(value: $selectedSongIndex, in: 0...Double(numberOfSongs - 1), step: 1)
+                Slider(
+                    value: Binding(
+                        get: { Double(selectedSongIndex) },
+                        set: { selectedSongIndex = Int($0) }
+                    ),
+                    in: 0...Double(numberOfSongs - 1),
+                    step: 1
+                )
                         .padding(.horizontal)
                 /*VStack {
                     Text("Playback Speed: \(String(format: "%.2f", audioPlayer.rate))x")
@@ -123,6 +131,9 @@ struct ContentView: View {
                 .font(.system(size: 40))
             }
             Slider(value: $minTempo, in: lowestMinTempo...highestMinTempo, step: 10)
+                .onChange(of: minTempo) { newValue in
+                    minTempo = round(newValue / 10) * 10
+                }
                 .padding(.horizontal)
                 .padding(.bottom, 30)
                 
@@ -142,7 +153,11 @@ struct ContentView: View {
                 .font(.system(size: 40))
             }
             Slider(value: $maxTempo, in: lowestMaxTempo...highestMaxTempo, step: 10)
+                .onChange(of: maxTempo) { newValue in
+                    maxTempo = round(newValue / 10) * 10
+                }
                     .padding(.horizontal)
+            
 
             
 
