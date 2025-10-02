@@ -8,6 +8,8 @@ GitHub student thing is https://education.github.com/pack
 
 Remember to change version number!
 
+0.8.1 Apple Glass is terrible and they should change it back. I'm updating my various computers and making another app to play with the GPS. I also found a way to ask for GPS permissions so I'm adding that to the main MetroGnome.
+
 0.8.0 I opened and pushed from a school computer. I'm upping the version number since I haven't done any coding for a while, and I updated Xcode and Swift, so this feels like a good time to up it. I also changed the slider implementation in the UI so it keeps being "quantized" in the new Swift version.
 
 Hello world from school! I've been able to get Xcode updated on the PPS computers so I'm using one repo and doing a test push from school.
