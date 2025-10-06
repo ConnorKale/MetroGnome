@@ -8,13 +8,12 @@
 import Combine
 import SwiftUI
 
-
 struct ContentView: View {
     @StateObject private var motionManager = MotionManager()
     @StateObject private var audioPlayer = VariableSpeedAudioPlayer()
     @StateObject private var GPS = LocationManager()
 
-    private let framerate: Double = (1.0/30.0)
+    private let framerate: Double = (1.0/30.0) // Remember to change this and the timer!!!
     @State private var timer = Timer.publish(every: 1.0 / 30.0, on: .main, in: .common).autoconnect()
 
     //@State private var sliderValue: Double = 1.0
@@ -40,6 +39,7 @@ struct ContentView: View {
     
     @State private var rawDistanceIntegral: Double = 0.0
     @State private var smoothedDistanceIntegral: Double = 0.0
+    
     private let velocity3: Double = 10.43841336 // This is about Usain Bolt pace, in meters per second
     @State private var usedVelocity: Int = 1 // This is what velocity algorithm you're using and should be an ∈ of {1, 2, 3}.
     @State private var goalPace: Double = 8.0 // This is in minutes per mile
@@ -236,10 +236,11 @@ struct ContentView: View {
             rawDistanceIntegral += GPS.rawVelocity * framerate
             smoothedDistanceIntegral += GPS.smoothedVelocity * framerate
             
-            if ((usedVelocity == 1 && GPS.rawVelocity <= goalVelocity) || (usedVelocity == 2 && GPS.smoothedVelocity <= goalVelocity)) { // or if false // you're going to slow
+            if ((usedVelocity == 1 && GPS.rawVelocity <= goalVelocity) || (usedVelocity == 2 && GPS.smoothedVelocity <= goalVelocity)) { // or if you've turned it off and then you're automaticially going fast enough// you're going to slow
                 //go faster
                 matchingGoalPace = false
             } else {
+                // You're going fast enough.
                 matchingGoalPace = true
             }
             
