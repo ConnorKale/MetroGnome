@@ -26,10 +26,9 @@ struct ContentView: View {
     
     //private let lowAccelermomerWaterMark: Double = 1.5
     //private let highAcceleromerWaterMark: Double = 3.0
-
-    @State private var lowJerkWaterMark: Double = -4.0
+    //@State private var lowJerkWaterMark: Double = -4.0
     //@State private var lowJerkWaterMarkIsNegative4: Bool = true
-    @State private var highJerkWaterMark: Double = 4.0
+    //@State private var highJerkWaterMark: Double = 4.0
     //@State private var highJerkWaterMarkIs4: Bool = true
     //@State private var lookingForAboveHigh: Bool = true
 
@@ -55,21 +54,9 @@ struct ContentView: View {
     @State private var lowestMaxTempo: Double = 150.0
     @State private var highestMaxTempo: Double = 220.0
 
-    /*private var backgroundColor: Color {
-        switch motionManager.accelerometerData.jerk {
-        case ..<lowJerkWaterMark:
-            return Color(red: 1.0, green: 0.0, blue: 0.0) // Red
-        case lowJerkWaterMark...highJerkWaterMark:
-            return Color(red: 0.0, green: 1.0, blue: 0.0) // Green
-        default:
-            return Color(red: 0.0, green: 0.0, blue: 1.0) // Blue
-        }
-    }*/
-
-        private var backgroundColor: Color = Color(red: (57.0/256.0), green: (15.0/256.0), blue: (87.0/256.0)) // Purple // No more epilepsy
+    private var backgroundColor: Color = Color(red: (57.0/256.0), green: (15.0/256.0), blue: (87.0/256.0)) // Purple // No more epilepsy
     
     var body: some View {
-        
         VStack {
             VStack(spacing: 20) {
                 Button(audioPlayer.isPlaying ? "Stop" : "Play") {
