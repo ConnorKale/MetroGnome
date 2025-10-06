@@ -55,7 +55,7 @@ struct ContentView: View {
     @State private var lowestMaxTempo: Double = 150.0
     @State private var highestMaxTempo: Double = 220.0
 
-    private var backgroundColor: Color {
+    /*private var backgroundColor: Color {
         switch motionManager.accelerometerData.jerk {
         case ..<lowJerkWaterMark:
             return Color(red: 1.0, green: 0.0, blue: 0.0) // Red
@@ -64,7 +64,9 @@ struct ContentView: View {
         default:
             return Color(red: 0.0, green: 0.0, blue: 1.0) // Blue
         }
-    }
+    }*/
+
+        private var backgroundColor: Color = Color(red: (57.0/256.0), green: (15.0/256.0), blue: (87.0/256.0)) // Purple // No more epilepsy
     
     var body: some View {
         
@@ -88,7 +90,6 @@ struct ContentView: View {
                     }
                     .font(.system(size: 24))
                     Text("Will play song number \(String(selectedSongIndex + 1)).")
-                    //Text("Will play song number \(String(Int(selectedSongIndex + 1.0))).")
                     Button("Next")
                     {
                         selectedSongIndex = min((selectedSongIndex + 1), (numberOfSongs - 1))
@@ -105,11 +106,6 @@ struct ContentView: View {
                     step: 1
                 )
                         .padding(.horizontal)
-                /*VStack {
-                    Text("Playback Speed: \(String(format: "%.2f", audioPlayer.rate))x")
-                    Slider(value: $sliderValue, in: 0.5...2.0, step: 0.05)
-                        .padding(.horizontal)
-                }*/
             }
             Text("Tempo:")
                 .font(.system(size: 20))
@@ -158,9 +154,6 @@ struct ContentView: View {
                 }
                     .padding(.horizontal)
             
-
-            
-
             /*Image(systemName: "waveform")
                 .font(.system(size: 50))
                 .foregroundStyle(.tint)
@@ -169,12 +162,6 @@ struct ContentView: View {
         .padding(.bottom, 40)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(backgroundColor) // Set background color based on accelerometer data
-        .onAppear {
-            //motionManager.startUpdates()
-        }
-        .onDisappear {
-            //motionManager.stopUpdates()
-        }
         //.onChange(of: motionManager.accelerometerData.jerk) { //newValue in
         .onReceive(timer) { _ in // This runs at 30 FPS. That can be changed in the timer variable declaration at the top.
             
@@ -216,14 +203,7 @@ struct ContentView: View {
                 timeOfLastAccelerationRecord = Date()
 
             }
-                
         }
-    }
-
-    func changeNote() {
-        // Make a noticable change in the pitch for the user.
-        // Change the note
-                
     }
 }
 
