@@ -12,7 +12,9 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var motionManager = MotionManager()
     @StateObject private var audioPlayer = VariableSpeedAudioPlayer()
+    @StateObject private var GPS = LocationManager()
 
+    private let framerate: Double = (1.0/30.0)
     @State private var timer = Timer.publish(every: 1.0 / 30.0, on: .main, in: .common).autoconnect()
 
     //@State private var sliderValue: Double = 1.0
@@ -35,6 +37,16 @@ struct ContentView: View {
     //@State private var startTime: Date?
     //@State private var endTime: Date?
     //@State private var elapsedTime: TimeInterval?
+    
+    @State private var rawDistanceIntegral: Double = 0.0
+    @State private var smoothedDistanceIntegral: Double = 0.0
+    private let velocity3: Double = 10.43841336 // This is about Usain Bolt pace, in meters per second
+    @State private var usedVelocity: Int = 1 // This is what velocity algorithm you're using and should be an ∈ of {1, 2, 3}.
+    @State private var goalPace: Double = 8.0 // This is in minutes per mile
+    @State private var goalVelocity: Double = 3.333333338 // replace with 26.6666667/8
+    @State private var lowestGoalPace: Double = 3.0
+    @State private var highestGoalPace: Double = 15.0
+    @State private var matchingGoalPace: Bool = true
     
     @State private var currentAccelerationRecord: Double = 0.0
     @State private var timeOfLastAccelerationRecord: Date? = Date()
@@ -67,8 +79,8 @@ struct ContentView: View {
                         audioPlayer.loadAndPlay(filename: songNames[Int(selectedSongIndex)]) // your .wav file name
                     }
                 }
-                .font(.system(size: 160))
-                //.padding(.bottom, 30)
+                .font(.system(size: 100))
+                .padding(.bottom, -30)
 
                 HStack {
                     Button("Prev")
@@ -92,13 +104,79 @@ struct ContentView: View {
                     in: 0...Double(numberOfSongs - 1),
                     step: 1
                 )
-                        .padding(.horizontal)
+                .padding(.horizontal)
+                .padding(.bottom, -20)
+
             }
             Text("Tempo:")
                 .font(.system(size: 20))
             Text("\(tempo, specifier: "%.2f")")
                 .font(.system(size: 80))
+                .padding(.bottom, -20)
+            
+            HStack { // Which Velocity
+                Text("Using  \(String(Int(usedVelocity)))")
+                Button("Use 1")
+                {
+                    usedVelocity = 1
+                }
+                Button("Use 2")
+                {
+                    usedVelocity = 2
+                }
+                Button("Off")
+                {
+                    usedVelocity = 3
+                }
+            }
+            HStack {
+                VStack { // Integrals
+                    Text("∫ (mi):")
+                        .font(.system(size: 20))
+                    HStack {
+                        Text("\(rawDistanceIntegral/1600, specifier: "%.2f")")
+                            .font(.system(size: 50))
+                        Text("\(smoothedDistanceIntegral/1600, specifier: "%.2f")")
+                            .font(.system(size: 50))
+
+                    }
+                }
+
+                VStack { // Pace
+                    Text("Pace (mi):")
+                        .font(.system(size: 20))
+                    HStack {
+                        Text("\(26.6666667/GPS.rawVelocity, specifier: "%.2f")")
+                            .font(.system(size: 50))
+                        Text("\(26.6666667/GPS.smoothedVelocity, specifier: "%.2f")")
+                            .font(.system(size: 50))
+                    }
+                }
+            }
+
+            
+            HStack {
+                Button("-10s")
+                {
+                    goalPace = max(goalPace - (1.0/6.0), lowestGoalPace)
+                }
+                .font(.system(size: 40))
+                Text("Goal pace is \(String(goalPace)).")
+                Button("+10s")
+                {
+                    goalPace = min(goalPace + (1.0/6.0), highestGoalPace)
+                }
+                .font(.system(size: 40))
+            }
+            Slider(value: $goalPace, in: lowestGoalPace...highestGoalPace, step: (1.0/6.0))
+                .onChange(of: goalPace) { newValue in
+                    goalPace = round(newValue*6.0) / 6.0
+                    goalVelocity = 26.6666667 / goalPace
+                }
+                .padding(.horizontal)
                 .padding(.bottom, 30)
+
+            
             
             HStack {
                 Button("-10")
@@ -106,7 +184,7 @@ struct ContentView: View {
                     minTempo = max(minTempo - 10, lowestMinTempo)
                 }
                 .font(.system(size: 40))
-                Text("minTempo is \(String(Int(minTempo))).")
+                Text("Min \(String(Int(minTempo))), max \(String(Int(maxTempo)))")
                 Button("+10")
                 {
                     minTempo = min(minTempo + 10, highestMinTempo)
@@ -116,12 +194,14 @@ struct ContentView: View {
             Slider(value: $minTempo, in: lowestMinTempo...highestMinTempo, step: 10)
                 .onChange(of: minTempo) { newValue in
                     minTempo = round(newValue / 10) * 10
+                    maxTempo = minTempo + 40.0
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 30)
                 
                 
-            HStack {
+            /*
+             HStack { // MaxTempo
                 Button("-10")
                 {
                     maxTempo = max(maxTempo - 10, lowestMaxTempo)
@@ -140,6 +220,7 @@ struct ContentView: View {
                     maxTempo = round(newValue / 10) * 10
                 }
                     .padding(.horizontal)
+             */
             
             /*Image(systemName: "waveform")
                 .font(.system(size: 50))
@@ -151,6 +232,16 @@ struct ContentView: View {
         .background(backgroundColor) // Set background color based on accelerometer data
         //.onChange(of: motionManager.accelerometerData.jerk) { //newValue in
         .onReceive(timer) { _ in // This runs at 30 FPS. That can be changed in the timer variable declaration at the top.
+            
+            rawDistanceIntegral += GPS.rawVelocity * framerate
+            smoothedDistanceIntegral += GPS.smoothedVelocity * framerate
+            
+            if ((usedVelocity == 1 && GPS.rawVelocity <= goalVelocity) || (usedVelocity == 2 && GPS.smoothedVelocity <= goalVelocity)) { // or if false // you're going to slow
+                //go faster
+                matchingGoalPace = false
+            } else {
+                matchingGoalPace = true
+            }
             
             let lastRecord: Date = timeOfLastAccelerationRecord ?? Date() // I don't understand date-related variable types but I think this is converting timeOfLastAccelerationRecord which is a Date? into a Date or the current Date if there's an error so it doesn't crash.
             let lastCalculation: Date = timeOfLastTempoCalculation ?? Date()
@@ -182,7 +273,11 @@ struct ContentView: View {
                 averageLastStrideTime = ((thirdLastStrideTime + secondLastStrideTime + lastStrideTime)/3.0)
                 tempo = 60.0/Float(averageLastStrideTime)
                 
-                audioPlayer.rate = tempo / currentlyPlayingFileTempo
+                if (matchingGoalPace) {
+                    audioPlayer.rate = tempo / currentlyPlayingFileTempo
+                } else {
+                    audioPlayer.rate = (2 * tempo) / currentlyPlayingFileTempo
+                }
                 timeOfLastTempoCalculation = Date()
                 
                 // Set a record since it's the next stride.
