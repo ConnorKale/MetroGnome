@@ -8,6 +8,9 @@ GitHub student thing is https://education.github.com/pack
 
 Remember to change version number!
 
+1.0.0 IT LIVES!!!!!! I made it pace you with the GPS. It askes the OS for the velocity and prints it on the screen, and doubles the music tempo if you're not going fast enough. It doesn't try to make the beats keep lining up so I will have to make it do that sometime. I will test it later.
+
+
 0.8.1 Apple Glass is terrible and they should change it back. I'm updating my various computers and making another app to play with the GPS. I also found a way to ask for GPS permissions so I'm adding that to the main MetroGnome.
 
 0.8.0 I opened and pushed from a school computer. I'm upping the version number since I haven't done any coding for a while, and I updated Xcode and Swift, so this feels like a good time to up it. I also changed the slider implementation in the UI so it keeps being "quantized" in the new Swift version.
