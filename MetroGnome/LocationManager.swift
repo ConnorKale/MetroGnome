@@ -27,7 +27,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         guard let lastLocation = locations.last else { return }
         rawVelocity = max(0, lastLocation.speed) // speed can be -1 if invalid
         if (startedSmoothedVelocity) {
-            smoothedVelocity = (smoothedVelocity * 0.8) + (rawVelocity * 0.2)
+            smoothedVelocity = (smoothedVelocity * 0.7) + (rawVelocity * 0.3)
         } else {
             smoothedVelocity = rawVelocity
             startedSmoothedVelocity = true

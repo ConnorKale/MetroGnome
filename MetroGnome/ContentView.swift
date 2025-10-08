@@ -11,6 +11,7 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var motionManager = MotionManager()
     @StateObject private var audioPlayer = VariableSpeedAudioPlayer()
+    @StateObject private var shepardAudioPlayer = VariableSpeedAudioPlayer()
     @StateObject private var GPS = LocationManager()
 
     private let framerate: Double = (1.0/30.0) // Remember to change this and the timer!!!
@@ -18,10 +19,10 @@ struct ContentView: View {
 
     //@State private var sliderValue: Double = 1.0
 
-    private var numberOfSongs: Int = 4
+    private var numberOfSongs: Int = 6
     @State private var selectedSongIndex: Int = 0
-    private var songNames: [String] = ["MetroGnomeTestAudio_256Measures", "MetroGnomeTestAudio_256Measures", "WikipediaCanon160BPM", "WikipediaCanon160BPM"]
-    private var fileTempos: [Float] = [180.0, 90.0, 80.0, 160.0] // This needs to be manually changed when a new file is added.
+    private var songNames: [String] = ["MetroGnomeTestAudio_256Measures", "MetroGnomeTestAudio_256Measures", "MetroGnomeShepard'sTone", "MetroGnomeHalfstepShepard'sTone", "WikipediaCanon160BPM", "WikipediaCanon160BPM"]
+    private var fileTempos: [Float] = [180.0, 90.0, 180.0, 180.0, 80.0, 160.0] // This needs to be manually changed when a new file is added.
     // THIS ONLY TAKES WAV FILES!!! Dad thinks imbedding FFmpeg inside the MetroGnome might be doable and might be a good idea for file-size reasons.
     @State private var currentlyPlayingFileTempo: Float = 180.0
     
@@ -41,7 +42,8 @@ struct ContentView: View {
     @State private var smoothedDistanceIntegral: Double = 0.0
     
     private let velocity3: Double = 10.43841336 // This is about Usain Bolt pace, in meters per second
-    @State private var usedVelocity: Int = 1 // This is what velocity algorithm you're using and should be an ∈ of {1, 2, 3}.
+    @State private var usedVelocity: Int = 3 // This is what velocity algorithm you're using and should be an ∈ of {1, 2, 3}.
+    @State private var usedPacingMethod: Int = 2 // 1 is doubling tempo, 2 is playing a beautiful shepards tone, 3 is extra beautiful shepards tone, 4 is stopping.
     @State private var goalPace: Double = 8.0 // This is in minutes per mile
     @State private var goalVelocity: Double = 3.333333338 // replace with 26.6666667/8
     @State private var lowestGoalPace: Double = 3.0
@@ -59,8 +61,8 @@ struct ContentView: View {
     @State private var averageLastStrideTime: Double = (1.0/3.0) // In seconds
     @State private var tempo: Float = 180.0 // In seconds
 
-    @State private var maxTempo: Double = 190.0
-    @State private var minTempo: Double = 120
+    @State private var maxTempo: Double = 200.0
+    @State private var minTempo: Double = 160
     @State private var lowestMinTempo: Double = 120.0
     @State private var highestMinTempo: Double = 190.0
     @State private var lowestMaxTempo: Double = 150.0
@@ -74,6 +76,7 @@ struct ContentView: View {
                 Button(audioPlayer.isPlaying ? "Stop" : "Play") {
                     if audioPlayer.isPlaying {
                         audioPlayer.stop()
+                        shepardAudioPlayer.stop()
                     } else {
                         currentlyPlayingFileTempo = fileTempos[Int(selectedSongIndex)]
                         audioPlayer.loadAndPlay(filename: songNames[Int(selectedSongIndex)]) // your .wav file name
@@ -108,6 +111,28 @@ struct ContentView: View {
                 .padding(.bottom, -20)
 
             }
+            
+            HStack { // Which Pacing method
+                Text("Pacing  \(String(Int(usedPacingMethod)))")
+                Button("Double")
+                {
+                    usedPacingMethod = 1
+                }
+                Button("Shepard")
+                {
+                    usedPacingMethod = 2
+                }
+                Button("Halfstep")
+                {
+                    usedPacingMethod = 3
+                }
+                Button("Off")
+                {
+                    usedPacingMethod = 4
+                }
+
+            }
+
             Text("Tempo:")
                 .font(.system(size: 20))
             Text("\(tempo, specifier: "%.2f")")
@@ -115,7 +140,7 @@ struct ContentView: View {
                 .padding(.bottom, -20)
             
             HStack { // Which Velocity
-                Text("Using  \(String(Int(usedVelocity)))")
+                Text("GPS \(String(Int(usedVelocity)))")
                 Button("Use 1")
                 {
                     usedVelocity = 1
@@ -274,10 +299,33 @@ struct ContentView: View {
                 averageLastStrideTime = ((thirdLastStrideTime + secondLastStrideTime + lastStrideTime)/3.0)
                 tempo = 60.0/Float(averageLastStrideTime)
                 
-                if (matchingGoalPace) {
-                    audioPlayer.rate = tempo / currentlyPlayingFileTempo
-                } else {
-                    audioPlayer.rate = (2 * tempo) / currentlyPlayingFileTempo
+                if (audioPlayer.isPlaying) {
+                    if (matchingGoalPace || (usedPacingMethod == 4)) { // If you are matching the goal pace, or if you aren't getting paced
+                        audioPlayer.rate = tempo / currentlyPlayingFileTempo
+                    } else { // If you're not, we need to tell you somehow.
+                        if (usedPacingMethod == 1)
+                        {
+                            audioPlayer.rate = (2 * tempo) / currentlyPlayingFileTempo
+                        } else if (usedPacingMethod == 2) {
+                            audioPlayer.rate = tempo / currentlyPlayingFileTempo
+                            if (!shepardAudioPlayer.isPlaying)
+                            {
+                                shepardAudioPlayer.loadAndPlay(filename: "MetroGnomeShepard'sTone") // your .wav file name
+                            }
+                            shepardAudioPlayer.rate = tempo / 180.0
+                        } else if (usedPacingMethod == 3) {
+                            audioPlayer.rate = tempo / currentlyPlayingFileTempo
+                            if (!shepardAudioPlayer.isPlaying)
+                            {
+                                shepardAudioPlayer.loadAndPlay(filename: "MetroGnomeHalfstepShepard'sTone") // your .wav file name
+                            }
+                            shepardAudioPlayer.rate = tempo / 180.0
+                        }
+                    }
+                }
+                
+                if (matchingGoalPace || !audioPlayer.isPlaying || !(usedPacingMethod == 2 || usedPacingMethod == 3)) {
+                    shepardAudioPlayer.stop()
                 }
                 timeOfLastTempoCalculation = Date()
                 

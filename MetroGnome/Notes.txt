@@ -8,6 +8,8 @@ GitHub student thing is https://education.github.com/pack
 
 Remember to change version number!
 
+
+1.0.1 I made the "smoothed" pace smooth slightly less. I also added a shepard's tone for fun :). You can listen to it if you wanted to for some reason. It can also play if the GPS thinks you're going below the goal pace.
 1.0.0 IT LIVES!!!!!! I made it pace you with the GPS. It askes the OS for the velocity and prints it on the screen, and doubles the music tempo if you're not going fast enough. It doesn't try to make the beats keep lining up so I will have to make it do that sometime. I will test it later.
 
 
