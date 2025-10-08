@@ -21,8 +21,8 @@ struct ContentView: View {
 
     private var numberOfSongs: Int = 6
     @State private var selectedSongIndex: Int = 0
-    private var songNames: [String] = ["MetroGnomeTestAudio_256Measures", "MetroGnomeTestAudio_256Measures", "MetroGnomeShepard'sTone", "MetroGnomeHalfstepShepard'sTone", "WikipediaCanon160BPM", "WikipediaCanon160BPM"]
-    private var fileTempos: [Float] = [180.0, 90.0, 180.0, 180.0, 80.0, 160.0] // This needs to be manually changed when a new file is added.
+    private var songNames: [String] = ["MetroGnomeTestAudio_256Measures", "MetroGnomeTestAudio_256Measures", "MetroGnomeShepard'sTone", "MetroGnomeHalfstepShepard'sTone", "WikipediaCanon160BPM", "WikipediaCanon160BPM", "PianoKorobeiniki", "PianoKorobeiniki"]
+    private var fileTempos: [Float] = [180.0, 90.0, 180.0, 180.0, 80.0, 160.0, 75.0, 150.0] // This needs to be manually changed when a new file is added.
     // THIS ONLY TAKES WAV FILES!!! Dad thinks imbedding FFmpeg inside the MetroGnome might be doable and might be a good idea for file-size reasons.
     @State private var currentlyPlayingFileTempo: Float = 180.0
     
