@@ -1,0 +1,21 @@
+1 is TestAudioFile.wav, my creation with Garage Band. The file is an endless scale at 180 BPM. I place it in the public domain. If you listen to it and get really annoyed, you’ve been warned and please don’t sue me
+
+2 is TestAudioFile.wav at double tempo.
+
+3 is a shepherd’s tone I made in Garage Band. I’ll also put it in the public domain.
+
+4 is a shepherd's tone at extra annoying halfsteps, which I also will put in public domain.
+
+5 is a piano version of Korobeiniki, played by someone named Gregor Quendel and from https://www.classicals.de/music-licenses/p/tetris-piano?rq=korobeiniki. The file is at 150 PBM, although there's a slightly slower part in the middle. They wanted to be attributed as Music: “Tetris Theme - Korobeiniki - Rearranged - Arr. for Piano” by Gregor Quendel / Classicals.de Source: https://www.classicals.de.
+
+6 is double tempo piano Korobeiniki, same file and author as 6.
+
+7 is a string version of Korobeiniki, also played by Gregor Quendel, from https://www.classicals.de/music-licenses/p/tetris-strings?rq=korobeiniki. The file is a little over 152 BPM. They want it attributed as Music: “Tetris Theme - Korobeiniki - Rearranged - Arr. for Strings” by Gregor Quendel / Classicals.de Source: https://www.classicals.de
+
+8 is double tempo String Korobeiniki, same file and author as 7.
+
+9 is music box a version of Pachelbel’s Canon, played by Gregor Quendel, from https://www.classicals.de/music-licenses/p/pachelbel-canon-in-d-musicbox. The file is at 120 BPM. They want it attributed as Music: “Pachelbel - Canon in D - P. 37 - Arranged for Music Box” by Gregor Quendel / Classicals.de Source: https://www.classicals.de
+
+10 is double-tempo version of #11.
+
+11 is Pachelbel’s Canon, recorded by Kevin MacLeod. The file is at 80 BPM, but I put 160 into my phone to get 1 halfnote per step. I got it from https://en.wikipedia.org/wiki/File:Kevin_MacLeod_-_Canon_in_D_Major.ogg.
