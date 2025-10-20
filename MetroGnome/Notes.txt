@@ -8,6 +8,7 @@ GitHub student thing is https://education.github.com/pack
 
 Remember to change version number!
 
+1.1.1 song #13 is The Veldt music from FFIV. It's a fun percussion/bassline. It's at 180 BPM. It's copyrighted so I'm not putting the file on GitHub. I also retyped all my changes to the AKConverter script because they got lost before from the Git shenanigans.1.1.0 it does .mp3 files now! I stole a script from someone named Ryan Francesconi, thanks to them for making it. I then spend an evening with Dad trying to hook up all the wires. File systems are really messy. Anyway, it works and I'm going to add .mp3's to the gitignore and then put copyrighted music in them.
 1.1.0 it does .mp3 files now! I stole a script from someone named Ryan Francesconi, thanks to them for making it. I then spend an evening with Dad trying to hook up all the wires. File systems are really messy. Anyway, it works and I'm going to add .mp3's to the gitignore and then put copyrighted music in them.
 
 1.0.2 I added more songs.

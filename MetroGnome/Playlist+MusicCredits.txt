@@ -19,3 +19,7 @@
 10 is double-tempo version of #11.
 
 11 is Pachelbel’s Canon, recorded by Kevin MacLeod. The file is at 80 BPM, but I put 160 into my phone to get 1 halfnote per step. I got it from https://en.wikipedia.org/wiki/File:Kevin_MacLeod_-_Canon_in_D_Major.ogg.
+
+12 is the wikipedia Kevin MacLeod file as an mp3. I added it to test out playing mp3s.
+
+13 is The Veldt music from FFIV. It's a fun percussion/bassline. It's at 180 BPM. It's copyrighted so I'm not putting the file on GitHub.

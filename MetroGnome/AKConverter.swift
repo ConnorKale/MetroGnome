@@ -50,6 +50,8 @@
  ```
  */
 
+import AVFoundation // I've added this to the original script to make the compiler happy. I've also replaced all the intances of AKLog("some debugger message") with print("same debugger message")
+
 open class AKConverter: NSObject {
     /**
      AKConverterCallback is the callback format for start()
@@ -173,7 +175,8 @@ open class AKConverter: NSObject {
 
         let outputFormat = options?.format ?? outputURL.pathExtension.lowercased()
 
-        AKLog("Converting Asset to \(outputFormat)")
+        //AKLog("Converting Asset to \(outputFormat)")
+        print("Converting Asset to \(outputFormat)")
 
         // verify outputFormat
         guard AKConverter.outputFormats.contains(outputFormat) else {
@@ -215,7 +218,8 @@ open class AKConverter: NSObject {
 
         if FileManager.default.fileExists(atPath: outputURL.path) {
             if options.eraseFile {
-                AKLog("Warning: removing existing file at \(outputURL.path)")
+                //AKLog("Warning: removing existing file at \(outputURL.path)")
+                print("Warning: removing existing file at \(outputURL.path)")
                 try? FileManager.default.removeItem(at: outputURL)
             } else {
                 let message = "The output file exists already. You need to choose a unique URL or delete the file."
@@ -242,7 +246,8 @@ open class AKConverter: NSObject {
             format = .wav
             formatKey = kAudioFormatLinearPCM
         default:
-            AKLog("Unsupported output format: \(outputFormat)")
+            //AKLog("Unsupported output format: \(outputFormat)")
+            print("Unsupported output format: \(outputFormat)")
             return
         }
 
@@ -308,7 +313,8 @@ open class AKConverter: NSObject {
         reader.add(readerOutput)
 
         if !writer.startWriting() {
-            AKLog("Failed to start writing. " + (writer.error?.localizedDescription ?? ""))
+            //AKLog("Failed to start writing. " + (writer.error?.localizedDescription ?? ""))
+            print("Failed to start writing. " + (writer.error?.localizedDescription ?? ""))
             completionHandler?(writer.error)
             return
         }
@@ -316,7 +322,8 @@ open class AKConverter: NSObject {
         writer.startSession(atSourceTime: CMTime.zero)
 
         if !reader.startReading() {
-            AKLog("Failed to start reading. " + (reader.error?.localizedDescription ?? ""))
+            //AKLog("Failed to start reading. " + (reader.error?.localizedDescription ?? ""))
+            print("Failed to start reading. " + (reader.error?.localizedDescription ?? ""))
             completionHandler?(reader.error)
             return
         }
@@ -337,11 +344,13 @@ open class AKConverter: NSObject {
 
                     switch reader.status {
                     case .failed:
-                        AKLog("Conversion failed with error" + (reader.error?.localizedDescription ?? "Unknown"))
+                        //AKLog("Conversion failed with error" + (reader.error?.localizedDescription ?? "Unknown"))
+                        print("Conversion failed with error" + (reader.error?.localizedDescription ?? "Unknown"))
                         writer.cancelWriting()
                         completionHandler?(reader.error)
                     case .cancelled:
-                        AKLog("Conversion cancelled")
+                        //AKLog("Conversion cancelled")
+                        print("Conversion cancelled")
                         completionHandler?(nil)
                     case .completed:
                         writer.finishWriting {
@@ -376,7 +385,9 @@ open class AKConverter: NSObject {
         let asset = AVURLAsset(url: inputURL)
         guard let session = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A) else { return }
 
-        AKLog("Converting to AVAssetExportPresetAppleM4A with default settings.")
+        //AKLog("Converting to AVAssetExportPresetAppleM4A with default settings.")
+        print("Converting to AVAssetExportPresetAppleM4A with default settings.")
+
 
         // session.progress could be sent out via a delegate for this session
         session.outputURL = outputURL
@@ -406,7 +417,9 @@ open class AKConverter: NSObject {
         let inputFormat = inputURL.pathExtension.lowercased()
         let outputFormat = options?.format ?? outputURL.pathExtension.lowercased()
 
-        AKLog("convertToPCM() to \(outputURL)")
+        //AKLog("convertToPCM() to \(outputURL)")
+        print("convertToPCM() to \(outputURL)")
+
 
         var format: AudioFileTypeID
         let formatKey: AudioFormatID = kAudioFormatLinearPCM
