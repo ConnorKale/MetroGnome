@@ -8,6 +8,8 @@ GitHub student thing is https://education.github.com/pack
 
 Remember to change version number!
 
+1.1.0 it does .mp3 files now! I stole a script from someone named Ryan Francesconi, thanks to them for making it. I then spend an evening with Dad trying to hook up all the wires. File systems are really messy. Anyway, it works and I'm going to add .mp3's to the gitignore and then put copyrighted music in them.
+
 1.0.2 I added more songs.
 1.0.1 I made the "smoothed" pace smooth slightly less. I also added a shepard's tone for fun :). You can listen to it if you wanted to for some reason. It can also play if the GPS thinks you're going below the goal pace.
 1.0.0 IT LIVES!!!!!! I made it pace you with the GPS. It askes the OS for the velocity and prints it on the screen, and doubles the music tempo if you're not going fast enough. It doesn't try to make the beats keep lining up so I will have to make it do that sometime. I will test it later.

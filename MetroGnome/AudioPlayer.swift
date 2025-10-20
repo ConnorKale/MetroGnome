@@ -51,14 +51,61 @@ class VariableSpeedAudioPlayer: ObservableObject {
         }
     }
 
-    func loadAndPlay(filename: String, fileExtension: String = "wav") {
-        guard let url = Bundle.main.url(forResource: filename, withExtension: fileExtension) else {
-            print("❌ Audio file not found.")
-            return
+    func decodeFile(inputFileName: String, inputFileExtension: String) -> URL {
+        let tempDirectoryURL = FileManager.default.temporaryDirectory
+        
+        let uniqueFilename = "TemporaryDecodedWaveFile.tmp"
+        let temporaryFileURL = tempDirectoryURL.appendingPathComponent(uniqueFilename)
+
+        
+        guard let oldUrl: URL = Bundle.main.url(forResource: inputFileName, withExtension: inputFileExtension) else {
+            print("❌ error")
+            return URL("Test")!
         }
+        
+        do {
+            var options = AKConverter.Options()
+            // any options left nil will assume the value of the input file
+            options.format = "wav"
+            options.sampleRate = 48000
+            options.bitDepth = 24
+
+            let converter = AKConverter(inputURL: oldUrl, outputURL: temporaryFileURL, options: options)
+            converter.start(completionHandler: { error in
+            // check to see if error isn't nil, otherwise you're good
+                print(oldUrl)
+                print(error)
+            })
+
+            //sleep(10)
+            
+            return temporaryFileURL
+        }
+    }
+    
+    func loadAndPlay(filename: String, fileExtension: String) {
+        let playedUrl: URL
+        
+        if (fileExtension != "wav") { // If I'm not inputing a wav file, decode it and write the decoded copy to TemporaryFile.wav
+            // It's not a wav file, convert it and then play the decoded copu
+            let DecodedUrl = self.decodeFile(inputFileName: filename, inputFileExtension: fileExtension)
+
+            playedUrl = DecodedUrl
+            print("\(DecodedUrl)")
+
+        } else {
+            // It is a wav file, just play the original copy
+            guard let url = Bundle.main.url(forResource: filename, withExtension: "wav") else {
+                print("❌ Audio file not found.")
+                return
+            }
+            playedUrl = url
+
+        }
+        
 
         do {
-            audioFile = try AVAudioFile(forReading: url)
+            audioFile = try AVAudioFile(forReading: playedUrl)
             if let file = audioFile {
                 playerNode.stop()
                 playerNode.scheduleFile(file, at: nil, completionHandler: nil)
@@ -71,7 +118,7 @@ class VariableSpeedAudioPlayer: ObservableObject {
                 isPlaying = true
             }
         } catch {
-            print("❌ Error loading audio file: \(error.localizedDescription)")
+            print("❌ Hello world Error loading audio file: \(error)")
         }
     }
 

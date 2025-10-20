@@ -19,10 +19,12 @@ struct ContentView: View {
 
     //@State private var sliderValue: Double = 1.0
 
-    private var numberOfSongs: Int = 11
+    private var numberOfSongs: Int = 12
     @State private var selectedSongIndex: Int = 0
-    private var songNames: [String] = ["MetroGnomeTestAudio_256Measures", "MetroGnomeTestAudio_256Measures", "MetroGnomeShepard'sTone", "MetroGnomeHalfstepShepard'sTone", "KorobeinikiPiano150", "KorobeinikiPiano150", "KorobeinikiString152+", "KorobeinikiString152+", "CanonMusicBox120", "WikipediaCanon160BPM", "WikipediaCanon160BPM"]
-    private var fileTempos: [Float] = [180.0, 90.0, 180.0, 180.0, 150.0, 75.0, 152.0, 76.0, 120.0, 80.0, 160.0] // This needs to be manually changed when a new file is added.
+    private var songNames: [String] = ["MetroGnomeTestAudio_256Measures", "MetroGnomeTestAudio_256Measures", "MetroGnomeShepard'sTone", "MetroGnomeHalfstepShepard'sTone", "KorobeinikiPiano150", "KorobeinikiPiano150", "KorobeinikiString152+", "KorobeinikiString152+", "CanonMusicBox120", "WikipediaCanon160BPM", "WikipediaCanon160BPM", "WikipediaCanon160BPMisMP3"]
+    private var fileTempos: [Float] = [180.0, 90.0, 180.0, 180.0, 150.0, 75.0, 152.0, 76.0, 120.0, 80.0, 160.0, 160.0] // This needs to be manually changed when a new file is added.
+    private var fileExtensions: [String] = ["wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "mp3"]
+    
     // THIS ONLY TAKES WAV FILES!!! Dad thinks imbedding FFmpeg inside the MetroGnome might be doable and might be a good idea for file-size reasons.
     @State private var currentlyPlayingFileTempo: Float = 180.0
     
@@ -79,7 +81,7 @@ struct ContentView: View {
                         shepardAudioPlayer.stop()
                     } else {
                         currentlyPlayingFileTempo = fileTempos[Int(selectedSongIndex)]
-                        audioPlayer.loadAndPlay(filename: songNames[Int(selectedSongIndex)]) // your .wav file name
+                        audioPlayer.loadAndPlay(filename: songNames[Int(selectedSongIndex)], fileExtension: fileExtensions[Int(selectedSongIndex)]) // your file name
                     }
                 }
                 .font(.system(size: 100))
@@ -310,14 +312,14 @@ struct ContentView: View {
                             audioPlayer.rate = tempo / currentlyPlayingFileTempo
                             if (!shepardAudioPlayer.isPlaying)
                             {
-                                shepardAudioPlayer.loadAndPlay(filename: "MetroGnomeShepard'sTone") // your .wav file name
+                                shepardAudioPlayer.loadAndPlay(filename: "MetroGnomeShepard'sTone", fileExtension: "wav") // your .wav file name
                             }
                             shepardAudioPlayer.rate = tempo / 180.0
                         } else if (usedPacingMethod == 3) {
                             audioPlayer.rate = tempo / currentlyPlayingFileTempo
                             if (!shepardAudioPlayer.isPlaying)
                             {
-                                shepardAudioPlayer.loadAndPlay(filename: "MetroGnomeHalfstepShepard'sTone") // your .wav file name
+                                shepardAudioPlayer.loadAndPlay(filename: "MetroGnomeHalfstepShepard'sTone", fileExtension: "wav") // your .wav file name
                             }
                             shepardAudioPlayer.rate = tempo / 180.0
                         }
