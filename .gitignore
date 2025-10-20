@@ -8,6 +8,10 @@ xcuserdata/
 ## Obj-C/Swift specific
 *.hmap
 
+## Ignore mp3's for copyright
+*.mp3
+*.MP3
+
 ## App packaging
 *.ipa
 *.dSYM.zip
