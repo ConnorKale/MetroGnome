@@ -452,7 +452,7 @@ open class AKConverter: NSObject {
         var thePropertySize = UInt32(MemoryLayout.stride(ofValue: srcFormat))
 
         guard let inputFile = sourceFile else {
-            completionHandler?(createError(message: "Unable to open the input file."))
+            completionHandler?(createError(message: "Unable to open the input file.")) // This is breaking for Wikpedia Canon for some reason. Not sure why.
             return
         }
 

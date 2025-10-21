@@ -47,19 +47,21 @@ class VariableSpeedAudioPlayer: ObservableObject {
         do {
             try engine.start()
         } catch {
-            print("❌ Engine failed to start: \(error.localizedDescription)")
+            print("❌ 1 Engine failed to start: \(error.localizedDescription)")
         }
     }
 
     func decodeFile(inputFileName: String, inputFileExtension: String) -> URL {
-        let tempDirectoryURL = FileManager.default.temporaryDirectory
+        print("8 Trying to decode \(inputFileName)")
+        
+        var tempDirectoryURL = FileManager.default.temporaryDirectory
         
         let uniqueFilename = "TemporaryDecodedWaveFile.tmp"
-        let temporaryFileURL = tempDirectoryURL.appendingPathComponent(uniqueFilename)
+        var temporaryFileURL = tempDirectoryURL.appendingPathComponent(uniqueFilename)
 
         
         guard let oldUrl: URL = Bundle.main.url(forResource: inputFileName, withExtension: inputFileExtension) else {
-            print("❌ error")
+            print("2 ❌ error")
             return URL("Test")!
         }
         
@@ -72,9 +74,10 @@ class VariableSpeedAudioPlayer: ObservableObject {
 
             let converter = AKConverter(inputURL: oldUrl, outputURL: temporaryFileURL, options: options)
             converter.start(completionHandler: { error in
-            // check to see if error isn't nil, otherwise you're good
-                print(oldUrl)
+                // check to see if error isn't nil, otherwise you're good
+                print("7 AKConverter tried to decode the following file: \(oldUrl)")
                 print(error)
+                print("3 AKConverter tried to run")
             })
 
             //sleep(10)
@@ -84,19 +87,19 @@ class VariableSpeedAudioPlayer: ObservableObject {
     }
     
     func loadAndPlay(filename: String, fileExtension: String) {
-        let playedUrl: URL
+        var playedUrl: URL
         
         if (fileExtension != "wav") { // If I'm not inputing a wav file, decode it and write the decoded copy to TemporaryFile.wav
             // It's not a wav file, convert it and then play the decoded copu
-            let DecodedUrl = self.decodeFile(inputFileName: filename, inputFileExtension: fileExtension)
+            var DecodedUrl = self.decodeFile(inputFileName: filename, inputFileExtension: fileExtension)
 
             playedUrl = DecodedUrl
-            print("\(DecodedUrl)")
+            print("4 Playing MP3 at DecodedUrl of \(DecodedUrl)")
 
         } else {
             // It is a wav file, just play the original copy
             guard let url = Bundle.main.url(forResource: filename, withExtension: "wav") else {
-                print("❌ Audio file not found.")
+                print("5 ❌ Audio file not found.")
                 return
             }
             playedUrl = url
@@ -118,7 +121,7 @@ class VariableSpeedAudioPlayer: ObservableObject {
                 isPlaying = true
             }
         } catch {
-            print("❌ Hello world Error loading audio file: \(error)")
+            print("6 ❌ Error loading audio file: \(error)")
         }
     }
 
