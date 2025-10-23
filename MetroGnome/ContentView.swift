@@ -19,11 +19,11 @@ struct ContentView: View {
 
     //@State private var sliderValue: Double = 1.0
 
-    private var numberOfSongs: Int = 13
+    private var numberOfSongs: Int = 14
     @State private var selectedSongIndex: Int = 0
-    private var songNames: [String] = ["MetroGnomeTestAudio_256Measures", "MetroGnomeTestAudio_256Measures", "MetroGnomeShepard'sTone", "MetroGnomeHalfstepShepard'sTone", "KorobeinikiPiano150", "KorobeinikiPiano150", "KorobeinikiString152+", "KorobeinikiString152+", "CanonMusicBox120", "WikipediaCanon160BPM", "WikipediaCanon160BPM", "MetroGnomeStringKorobeiniki152isMP3", "TheVeldt"]
-    private var fileTempos: [Float] = [180.0, 90.0, 180.0, 180.0, 150.0, 75.0, 152.0, 76.0, 120.0, 80.0, 160.0, 152.0, 180.0] // This needs to be manually changed when a new file is added.
-    private var fileExtensions: [String] = ["wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "mp3", "mp3"]
+    private var songNames: [String] = ["MetroGnomeTestAudio_256Measures", "MetroGnomeTestAudio_256Measures", "MetroGnomeShepard'sTone", "MetroGnomeHalfstepShepard'sTone", "KorobeinikiPiano150", "KorobeinikiPiano150", "KorobeinikiString152+", "KorobeinikiString152+", "CanonMusicBox120", "WikipediaCanon160BPM", "WikipediaCanon160BPM", "WikipediaCanon160BPMisMP3", "90s", "TheVeldt"]
+    private var fileTempos: [Float] = [180.0, 90.0, 180.0, 180.0, 150.0, 75.0, 152.0, 76.0, 120.0, 80.0, 160.0, 158.0, 160.0, 180.0] // This needs to be manually changed when a new file is added.
+    private var fileExtensions: [String] = ["wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "mp3", "mp3", "mp3"]
     
     // THIS ONLY TAKES WAV FILES!!! Dad thinks imbedding FFmpeg inside the MetroGnome might be doable and might be a good idea for file-size reasons.
     @State private var currentlyPlayingFileTempo: Float = 180.0
@@ -52,6 +52,8 @@ struct ContentView: View {
     @State private var highestGoalPace: Double = 15.0
     @State private var matchingGoalPace: Bool = true
     
+    @State private var offsetCorrectionMultiplier: Float = 1.0
+    
     @State private var currentAccelerationRecord: Double = 0.0
     @State private var timeOfLastAccelerationRecord: Date? = Date()
     @State private var timeOfLastTempoCalculation: Date? = Date()
@@ -74,6 +76,20 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
+            HStack {
+                Button("Fstr") {
+                    self.offsetCorrectionMultiplier = 1.1
+                }
+                Button("Slwr")
+                {
+                    self.offsetCorrectionMultiplier = 0.9
+                }
+                // Vowels are for poeple who aren't trying to conserve every possible pixel on the screen lol
+                // Also why is XCode trying to recompile every time I add comments..?
+            }
+            .font(.system(size: 100))
+            .padding(.bottom, -50)
+            
             VStack(spacing: 20) {
                 Button(audioPlayer.isPlaying ? "Stop" : "Play") {
                     if audioPlayer.isPlaying {
@@ -101,6 +117,8 @@ struct ContentView: View {
                     .font(.system(size: 24))
 
                 }
+                .padding(.bottom, -20)
+                
                 Slider(
                     value: Binding(
                         get: { Double(selectedSongIndex) },
@@ -111,7 +129,6 @@ struct ContentView: View {
                 )
                 .padding(.horizontal)
                 .padding(.bottom, -20)
-
             }
             
             HStack { // Which Pacing method
@@ -132,7 +149,6 @@ struct ContentView: View {
                 {
                     usedPacingMethod = 4
                 }
-
             }
 
             Text("Tempo:")
@@ -156,15 +172,16 @@ struct ContentView: View {
                     usedVelocity = 3
                 }
             }
+            
             HStack {
                 VStack { // Integrals
                     Text("∫ (mi):")
                         .font(.system(size: 20))
                     HStack {
                         Text("\(rawDistanceIntegral/1600, specifier: "%.2f")")
-                            .font(.system(size: 50))
+                            .font(.system(size: 30))
                         Text("\(smoothedDistanceIntegral/1600, specifier: "%.2f")")
-                            .font(.system(size: 50))
+                            .font(.system(size: 30))
 
                     }
                 }
@@ -174,15 +191,15 @@ struct ContentView: View {
                         .font(.system(size: 20))
                     HStack {
                         Text("\(26.6666667/GPS.rawVelocity, specifier: "%.2f")")
-                            .font(.system(size: 50))
+                            .font(.system(size: 30))
                         Text("\(26.6666667/GPS.smoothedVelocity, specifier: "%.2f")")
-                            .font(.system(size: 50))
+                            .font(.system(size: 30))
                     }
                 }
             }
 
             
-            HStack {
+            HStack { // Goal pace text
                 Button("-10s")
                 {
                     goalPace = max(goalPace - (1.0/6.0), lowestGoalPace)
@@ -195,18 +212,20 @@ struct ContentView: View {
                 }
                 .font(.system(size: 40))
             }
-            Slider(value: $goalPace, in: lowestGoalPace...highestGoalPace, step: (1.0/6.0))
+            .padding(.bottom, -10)
+
+            Slider(value: $goalPace, in: lowestGoalPace...highestGoalPace, step: (1.0/6.0)) // Goal pace slider
                 .onChange(of: goalPace) { newValue in
                     goalPace = round(newValue*6.0) / 6.0
                     goalVelocity = 26.6666667 / goalPace
                 }
                 .padding(.horizontal)
-                .padding(.bottom, 30)
+                .padding(.bottom, -00)
 
             
             
             HStack {
-                Button("-10")
+                Button("-10") // Min/max tempo text
                 {
                     minTempo = max(minTempo - 10, lowestMinTempo)
                 }
@@ -218,7 +237,9 @@ struct ContentView: View {
                 }
                 .font(.system(size: 40))
             }
-            Slider(value: $minTempo, in: lowestMinTempo...highestMinTempo, step: 10)
+            .padding(.bottom, -10)
+
+            Slider(value: $minTempo, in: lowestMinTempo...highestMinTempo, step: 10) // Min/max tempo slider
                 .onChange(of: minTempo) { newValue in
                     minTempo = round(newValue / 10) * 10
                     maxTempo = minTempo + 40.0
@@ -299,7 +320,8 @@ struct ContentView: View {
                 lastStrideTime = min((1/(minTempo/60.0)), (max((1/(maxTempo/60.0)), elapsedCalculationDouble)))
                 
                 averageLastStrideTime = ((thirdLastStrideTime + secondLastStrideTime + lastStrideTime)/3.0)
-                tempo = 60.0/Float(averageLastStrideTime)
+                tempo = (60.0 * self.offsetCorrectionMultiplier)/Float(averageLastStrideTime)
+                offsetCorrectionMultiplier = 1.0
                 
                 if (audioPlayer.isPlaying) {
                     if (matchingGoalPace || (usedPacingMethod == 4)) { // If you are matching the goal pace, or if you aren't getting paced

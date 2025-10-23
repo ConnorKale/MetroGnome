@@ -8,7 +8,7 @@ GitHub student thing is https://education.github.com/pack
 
 Remember to change version number!
 
-1.1.2 I did some debugging of the thing I made on Sunday. It works better now. The GitIgnore is still broken. I also made a private repo for MP3s.
+1.1.3 I hope I fixed my GitIgnore. It turns out XCode wasn't listening to it because it's a well-made Apple product so I have to add MP3 files in the filesystem. I have also added another song. I also added a button to go forward or backward a tenth of a beat.1.1.2 I did some debugging of the thing I made on Sunday. It works better now. The GitIgnore is still broken. I also made a private repo for MP3s.
 1.1.1 song #13 is The Veldt music from FFIV. It's a fun percussion/bassline. It's at 180 BPM. It's copyrighted so I'm not putting the file on GitHub. I also retyped all my changes to the AKConverter script because they got lost before from the Git shenanigans.1.1.0 it does .mp3 files now! I stole a script from someone named Ryan Francesconi, thanks to them for making it. I then spend an evening with Dad trying to hook up all the wires. File systems are really messy. Anyway, it works and I'm going to add .mp3's to the gitignore and then put copyrighted music in them.
 1.1.0 it does .mp3 files now! I stole a script from someone named Ryan Francesconi, thanks to them for making it. I then spend an evening with Dad trying to hook up all the wires. File systems are really messy. Anyway, it works and I'm going to add .mp3's to the gitignore and then put copyrighted music in them.
 
