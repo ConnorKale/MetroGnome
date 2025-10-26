@@ -26,4 +26,8 @@
 
 14 is Don't Fear The Reaper, from YouTube. Its tempos vary from 141.25 to 141.5 I think. Most websites on the internet (which use elements of en.wikipedia.org/wiki/Natural_number) say 142, some say 141. Might be a good test file for multitempo songs sometimes. I'm going to call it 141.5 for the app.
 
-15 is The Veldt music from FFIV. It's a fun percussion/bassline. It's at 180 BPM. It's copyrighted so I'm not putting the file on GitHub.
+15 is PartyUSA, added because of 16, at 96 BPM.
+
+16 is PartyCIA, at also 96, because it's funny.
+
+17 is The Veldt music from FFIV. It's a fun percussion/bassline. It's at 180 BPM. It's copyrighted so I'm not putting the file on GitHub.
