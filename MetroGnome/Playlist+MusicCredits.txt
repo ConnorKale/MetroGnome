@@ -8,7 +8,7 @@
 
 5 is a piano version of Korobeiniki, played by someone named Gregor Quendel and from https://www.classicals.de/music-licenses/p/tetris-piano?rq=korobeiniki. The file is at 150 PBM, although there's a slightly slower part in the middle. They wanted to be attributed as Music: “Tetris Theme - Korobeiniki - Rearranged - Arr. for Piano” by Gregor Quendel / Classicals.de Source: https://www.classicals.de.
 
-6 is double tempo piano Korobeiniki, same file and author as 6.
+6 is double tempo piano Korobeiniki, same file and author as 5.
 
 7 is a string version of Korobeiniki, also played by Gregor Quendel, from https://www.classicals.de/music-licenses/p/tetris-strings?rq=korobeiniki. The file is a little over 152 BPM. They want it attributed as Music: “Tetris Theme - Korobeiniki - Rearranged - Arr. for Strings” by Gregor Quendel / Classicals.de Source: https://www.classicals.de
 
@@ -16,9 +16,9 @@
 
 9 is music box a version of Pachelbel’s Canon, played by Gregor Quendel, from https://www.classicals.de/music-licenses/p/pachelbel-canon-in-d-musicbox. The file is at 120 BPM. They want it attributed as Music: “Pachelbel - Canon in D - P. 37 - Arranged for Music Box” by Gregor Quendel / Classicals.de Source: https://www.classicals.de
 
-10 is double-tempo version of #11.
+10 is Pachelbel’s Canon, recorded by Kevin MacLeod. The file is at 80 BPM, but I put 160 into my phone to get 1 halfnote per step. I got it from https://en.wikipedia.org/wiki/File:Kevin_MacLeod_-_Canon_in_D_Major.ogg.
 
-11 is Pachelbel’s Canon, recorded by Kevin MacLeod. The file is at 80 BPM, but I put 160 into my phone to get 1 halfnote per step. I got it from https://en.wikipedia.org/wiki/File:Kevin_MacLeod_-_Canon_in_D_Major.ogg.
+11 is double-tempo version of #10.
 
 12 is the wikipedia Kevin MacLeod file as an mp3. I added it to test out playing MP3s. It's broken for some reason but other MP3s are fine.
 
@@ -26,8 +26,14 @@
 
 14 is Don't Fear The Reaper, from YouTube. Its tempos vary from 141.25 to 141.5 I think. Most websites on the internet (which use elements of en.wikipedia.org/wiki/Natural_number) say 142, some say 141. Might be a good test file for multitempo songs sometimes. I'm going to call it 141.5 for the app.
 
-15 is PartyUSA, added because of 16, at 96 BPM.
+15 is Party in the USA, added because of 17, at cut time for running at (to be closer to the original song's speed), file at 96 BPM.
 
-16 is PartyCIA, at also 96, because it's funny.
+16 is Party in the USA, added because of 17, at normal time. It will go really fast if you play like this while running. File at 96 BPM.
+
+
+15 is Party in the CIA, at cut time for running at (to be closer to the original song's speed), file at 96 BPM.
+
+16 is Party in the CIA, at normal time. It will go really fast if you play like this while running. File at 96 BPM.
+
 
 17 is The Veldt music from FFIV. It's a fun percussion/bassline. It's at 180 BPM. It's copyrighted so I'm not putting the file on GitHub.
