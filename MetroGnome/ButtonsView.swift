@@ -13,20 +13,26 @@ struct ButtonsView: View {
     
     // I'm going to let the ButtonsView manage the audio that's playing unless that causes problems. I don't think it will..?
     // Update file names array, tempos array, extensions array, number of songs, proofread
-    public var numberOfSongs: Int = 19
+    public var numberOfSongs: Int = 26
     @State public var selectedSongIndex: Int = 0
-    public var songNames: [String] = ["MetroGnomeTestAudio_256Measures", "MetroGnomeTestAudio_256Measures", "MetroGnomeShepard'sTone", "MetroGnomeHalfstepShepard'sTone", "KorobeinikiPiano150", "KorobeinikiPiano150", "KorobeinikiString152+", "KorobeinikiString152+", "CanonMusicBox120", "WikipediaCanon160BPM", "WikipediaCanon160BPM", /* If in-line comments don't break the compiler this is the end of the wav files */ "WikipediaCanon160BPMisMP3", "90s", "DontFearTheReaper", "PartyUSA", "PartyUSA", "PartyCIA", "PartyCIA", "TheVeldt"]
-    public var fileTempos: [Float] = [180.0, 90.0, 180.0, 180.0, 150.0, 75.0, 152.0, 76.0, 120.0, 160.0, 80.0, /* End of wavs */ 160.0, 158.0, 141.5, 192.0, 96.0, 192.0, 96.0, 180.0]
-    public var fileExtensions: [String] = ["wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3"]
+    public var songNames: [String] = ["MetroGnomeTestAudio_256Measures", "MetroGnomeTestAudio_256Measures", "MetroGnomeShepard'sTone", "MetroGnomeHalfstepShepard'sTone", "KorobeinikiPiano150", "KorobeinikiPiano150", "KorobeinikiString152+", "KorobeinikiString152+", "CanonMusicBox120", "WikipediaCanon160BPM", "WikipediaCanon160BPM", /* If in-line comments don't break the compiler this is the end of the wav files */ "WikipediaCanon160BPMisMP3", "90s", "DontFearTheReaper", "PartyUSA", "PartyUSA", "PartyCIA", "PartyCIA", "UnnamedSong92.5", "MotorcycleDriver160", "500Miles130", "SuperTrouper115", "LayAllYourLoveOnMe133", "Moskau121", "Moskau121", "TheVeldt"]
+    public var fileTempos: [Float] = [180.0, 90.0, 180.0, 180.0, 150.0, 75.0, 152.0, 76.0, 120.0, 160.0, 80.0, /* End of wavs */ 160.0, 158.0, 141.5, 192.0, 96.0, 192.0, 96.0, 185, 160, 130, 115, 133, 242, 121, 180.0]
+    public var fileExtensions: [String] = ["wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3"]
     @Binding public var theCurrentlyPlayingFileTempo: Float // Maybe replace with something about the current song's index, so I can access it's other properties. Not now.
     
     @Binding var theUsedVelocity: Int // This is what velocity algorithm you're using and should be an ∈ of {1, 2, 3}.
     @Binding var theUsedPacingMethod: Int // 1 is doubling tempo, 2 is playing a beautiful shepards tone, 3 is extra beautiful shepards tone, 4 is stopping.
-    @Binding var theGoalPace: Double // This is in minutes per mile
-    @Binding var theGoalVelocity: Double // Equals with 26.6666667/theGoalPace
-    public var lowestGoalPace: Double = 3.0
-    public var highestGoalPace: Double = 15.0
     
+    @Binding var theGoalPaceKilometers: Double // This is in minutes per kilometer
+    public var lowestGoalPaceKilometers: Double = 2.0 // This is in minutes per kilometer
+    public var highestGoalPaceKilometers: Double = 10.0 // This is in minutes per kilometer
+
+    @Binding var theGoalPaceMiles: Double // This is in minutes per mile
+    public var lowestGoalPaceMiles: Double = 3.0
+    public var highestGoalPaceMiles: Double = 16.0
+
+    @Binding var theGoalVelocity: Double // Equals with 26.6666667/theGoalPace
+
     @Binding var theTempo: Float // In seconds
 
     @Binding var theMinTempo: Double
@@ -54,7 +60,7 @@ struct ButtonsView: View {
                         }
                     }
                     .font(.system(size: 100))
-                    .padding(.bottom, -30)
+                    //.padding(.bottom, -30)
 
                     HStack {
                         Button("Prev")
@@ -125,28 +131,60 @@ struct ButtonsView: View {
                         theUsedVelocity = 3
                     }
                 }
+                .padding(.bottom, 10)
 
-                HStack { // Goal pace text
+                
+                HStack { // Goal pace text kilometers
                     Button("-10s")
                     {
-                        theGoalPace = max(theGoalPace - (1.0/6.0), lowestGoalPace)
+                        theGoalPaceKilometers = max(theGoalPaceKilometers - (1.0/6.0), lowestGoalPaceKilometers)
+                        theGoalPaceMiles = theGoalPaceKilometers * 1.6
                     }
                     .font(.system(size: 40))
-                    Text("Goal pace is \(String(theGoalPace)).")
+                    Text("Goal pace is \(String(theGoalPaceKilometers)) min/km.")
                     Button("+10s")
                     {
-                        theGoalPace = min(theGoalPace + (1.0/6.0), highestGoalPace)
+                        theGoalPaceKilometers = min(theGoalPaceKilometers + (1.0/6.0), highestGoalPaceKilometers)
+                        theGoalPaceMiles = theGoalPaceKilometers * 1.6
                     }
                     .font(.system(size: 40))
                 }
-                .padding(.bottom, -10)
+                //.padding(.bottom, -10)
                 
-                Slider(value: $theGoalPace, in: lowestGoalPace...highestGoalPace, step: (1.0/6.0)) // Goal pace slider
-                    .onChange(of: theGoalPace) { newValue in
-                        theGoalPace = round(newValue*6.0) / 6.0
-                        theGoalVelocity = 26.6666667 / theGoalPace
+                Slider(value: $theGoalPaceKilometers, in: lowestGoalPaceKilometers...highestGoalPaceKilometers, step: (1.0/6.0)) // Goal pace slider
+                    .onChange(of: theGoalPaceKilometers) { newValue in
+                        theGoalPaceKilometers = round(newValue*6.0) / 6.0
+                        theGoalVelocity = 16.6666667 / theGoalPaceKilometers
+                        theGoalPaceMiles = theGoalPaceKilometers * 1.6
                     }
                     .padding(.horizontal)
+
+
+                HStack { // Goal pace text miles
+                    Button("-10s")
+                    {
+                        theGoalPaceMiles = max(theGoalPaceMiles - (1.0/6.0), lowestGoalPaceMiles)
+                        theGoalPaceKilometers = theGoalPaceMiles / 1.6
+                    }
+                    .font(.system(size: 40))
+                    Text("Goal pace is \(String(theGoalPaceMiles)) min/mi.")
+                    Button("+10s")
+                    {
+                        theGoalPaceMiles = min(theGoalPaceMiles + (1.0/6.0), highestGoalPaceMiles)
+                        theGoalPaceKilometers = theGoalPaceMiles / 1.6
+                    }
+                    .font(.system(size: 40))
+                }
+                //.padding(.bottom, -10)
+                
+                Slider(value: $theGoalPaceMiles, in: lowestGoalPaceMiles...highestGoalPaceMiles, step: (1.0/6.0)) // Goal pace slider
+                    .onChange(of: theGoalPaceMiles) { newValue in
+                        theGoalPaceMiles = round(newValue*6.0) / 6.0
+                        theGoalVelocity = 26.6666667 / theGoalPaceMiles
+                        theGoalPaceKilometers = theGoalPaceMiles / 1.6
+                    }
+                    .padding(.horizontal)
+
 
                 HStack {
                     Button("-10") // Min/max tempo text
@@ -154,7 +192,7 @@ struct ButtonsView: View {
                         theMinTempo = max(theMinTempo - 10, lowestMinTempo)
                     }
                     .font(.system(size: 40))
-                    Text("Min \(String(Int(theMinTempo))), max \(String(Int(theMaxTempo)))")
+                    Text("Min tempo \(String(Int(theMinTempo))), max \(String(Int(theMaxTempo)))")
                     Button("+10")
                     {
                         theMinTempo = min(theMinTempo + 10, highestMinTempo)
@@ -180,6 +218,6 @@ struct ButtonsView: View {
     }
 }
 
-/*#Preview {
-    ButtonsView()
-}*/
+#Preview {
+    TabBarController()
+}

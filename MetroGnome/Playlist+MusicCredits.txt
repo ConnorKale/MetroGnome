@@ -30,10 +30,22 @@
 
 16 is Party in the USA, added because of 17, at normal time. It will go really fast if you play like this while running. File at 96 BPM.
 
+17 is Party in the CIA, at cut time for running at (to be closer to the original song's speed), file at 96 BPM.
 
-15 is Party in the CIA, at cut time for running at (to be closer to the original song's speed), file at 96 BPM.
+18 is Party in the CIA, at normal time. It will go really fast if you play like this while running. File at 96 BPM.
 
-16 is Party in the CIA, at normal time. It will go really fast if you play like this while running. File at 96 BPM.
+19 Unnamed, cut time, file at 92.5, inputed at 185
 
+20 Motercycle driver, file at 160
 
-17 is The Veldt music from FFIV. It's a fun percussion/bassline. It's at 180 BPM. It's copyrighted so I'm not putting the file on GitHub.
+21 500 Miles, file at 130
+
+22 SuperTrouper, file at 115
+
+23 LayAllYourLoveOnMe, file at 133
+
+24 Moskau, file at 121, in cut time so inputted at 242
+
+25 Moskau, file at 121, normal time so inputted at 121.
+
+26 is The Veldt music from FFIV. It's a fun percussion/bassline. It's at 180 BPM. It's copyrighted so I'm not putting the file on GitHub.

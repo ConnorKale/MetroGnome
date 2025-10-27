@@ -23,7 +23,8 @@ struct TabBarController: View {
     private let velocity3: Double = 10.43841336 // This is about Usain Bolt pace, in meters per second
     @State private var usedVelocity: Int = 3 // This is what velocity algorithm you're using and should be an ∈ of {1, 2, 3}.
     @State private var usedPacingMethod: Int = 2 // 1 is doubling tempo, 2 is playing a beautiful shepards tone, 3 is extra beautiful shepards tone, 4 is stopping.
-    @State private var goalPace: Double = 8.0 // This is in minutes per mile
+    @State private var goalPaceMiles: Double = 8.0 // This is in minutes per mile
+    @State private var goalPaceKilometers: Double = 5.0 // This is in minutes per kilometer
     @State private var goalVelocity: Double = 3.333333338 // replace with 26.6666667/8
     @State private var lowestGoalPace: Double = 3.0
     @State private var highestGoalPace: Double = 15.0
@@ -55,7 +56,7 @@ struct TabBarController: View {
                     Label("Stats", systemImage: "waveform.path.ecg.text.clipboard")
                 }
 
-            ButtonsView(theAudioPlayer: audioPlayer, theShepardAudioPlayer: shepardAudioPlayer, theCurrentlyPlayingFileTempo: $currentPlayingFileTempo, theUsedVelocity: $usedVelocity, theUsedPacingMethod: $usedPacingMethod, theGoalPace: $goalPace, theGoalVelocity: $goalVelocity, theTempo: $tempo, theMinTempo: $minTempo, theMaxTempo: $maxTempo)
+            ButtonsView(theAudioPlayer: audioPlayer, theShepardAudioPlayer: shepardAudioPlayer, theCurrentlyPlayingFileTempo: $currentPlayingFileTempo, theUsedVelocity: $usedVelocity, theUsedPacingMethod: $usedPacingMethod, theGoalPaceKilometers: $goalPaceKilometers, theGoalPaceMiles: $goalPaceMiles, theGoalVelocity: $goalVelocity, theTempo: $tempo, theMinTempo: $minTempo, theMaxTempo: $maxTempo)
                 .tabItem {
                     Label("Buttons", systemImage: "gearshape.2")
                 }
