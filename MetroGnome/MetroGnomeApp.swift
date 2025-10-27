@@ -11,13 +11,14 @@ import SwiftUI
 struct MetroGnomeApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            //ContentView()
+            TabBarController()
         }
     }
 }
 
 /*
 #Preview {
-    ContentView()
+ TabBarController()
 }
 */

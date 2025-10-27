@@ -276,6 +276,7 @@ struct ContentView: View {
                 .foregroundStyle(.tint)
              */
         }
+        // this is after the VStack I think.
         .padding(.bottom, 40)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .preferredColorScheme(.dark)

@@ -12,7 +12,7 @@ Remember to change version number!
 
 For revoked certificates   /System/Library/CoreServices/Applications   or   go to finder > computer name >hard drive >  system > library > Coreervices > Applications, don't run passwords
 
-
+1.2.0 I added tabs! The UI looks a lot better. Hopefully no bugs. I'm also making a folder for archived stuff. You've served me well ContentView.
 
 1.1.5 Party songs, patched tempo. Also Apple is weird and tried to revoke my certificates but dad fixed it.
 1.1.4 Another song.
