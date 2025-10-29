@@ -15,7 +15,7 @@ struct ButtonsView: View {
     // Update file names array, tempos array, extensions array, number of songs, proofread
     public var numberOfSongs: Int = 26
     @State public var selectedSongIndex: Int = 0
-    public var songNames: [String] = ["MetroGnomeTestAudio_256Measures", "MetroGnomeTestAudio_256Measures", "MetroGnomeShepard'sTone", "MetroGnomeHalfstepShepard'sTone", "KorobeinikiPiano150", "KorobeinikiPiano150", "KorobeinikiString152+", "KorobeinikiString152+", "CanonMusicBox120", "WikipediaCanon160BPM", "WikipediaCanon160BPM", /* If in-line comments don't break the compiler this is the end of the wav files */ "WikipediaCanon160BPMisMP3", "90s", "DontFearTheReaper", "PartyUSA", "PartyUSA", "PartyCIA", "PartyCIA", "UnnamedSong92.5", "MotorcycleDriver160", "500Miles130", "SuperTrouper115", "LayAllYourLoveOnMe133", "Moskau121", "Moskau121", "TheVeldt"]
+    public var songNames: [String] = ["MetroGnomeTestAudio_256Measures", "MetroGnomeTestAudio_256Measures", "MetroGnomeShepard'sTone", "MetroGnomeHalfstepShepard'sTone", "KorobeinikiPiano150", "KorobeinikiPiano150", "KorobeinikiString152+", "KorobeinikiString152+", "CanonMusicBox120", "WikipediaCanon160BPM", "WikipediaCanon160BPM", /* If in-line comments don't break the compiler this is the end of the wav files */ "WikipediaCanon160BPMisMP3", "90s", "DontFearTheReaper", "PartyUSA", "PartyUSA", "PartyCIA", "PartyCIA", "CultOfPersonality92.5", "MotorcycleDriver160", "500Miles130", "SuperTrouper115", "LayAllYourLoveOnMe133", "Moskau121", "Moskau121", "TheVeldt"]
     public var fileTempos: [Float] = [180.0, 90.0, 180.0, 180.0, 150.0, 75.0, 152.0, 76.0, 120.0, 160.0, 80.0, /* End of wavs */ 160.0, 158.0, 141.5, 192.0, 96.0, 192.0, 96.0, 185, 160, 130, 115, 133, 242, 121, 180.0]
     public var fileExtensions: [String] = ["wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3"]
     @Binding public var theCurrentlyPlayingFileTempo: Float // Maybe replace with something about the current song's index, so I can access it's other properties. Not now.
@@ -131,9 +131,31 @@ struct ButtonsView: View {
                         theUsedVelocity = 3
                     }
                 }
-                .padding(.bottom, 10)
+                .padding(.bottom, 30)
 
-                
+                HStack {
+                    Button("-10") // Min/max tempo text
+                    {
+                        theMinTempo = max(theMinTempo - 10, lowestMinTempo)
+                    }
+                    .font(.system(size: 40))
+                    Text("Min tempo \(String(Int(theMinTempo))), max \(String(Int(theMaxTempo)))")
+                    Button("+10")
+                    {
+                        theMinTempo = min(theMinTempo + 10, highestMinTempo)
+                    }
+                    .font(.system(size: 40))
+                }
+                //.padding(.bottom, -10)
+
+                Slider(value: $theMinTempo, in: lowestMinTempo...highestMinTempo, step: 10) // Min/max tempo slider
+                    .onChange(of: theMinTempo) { newValue in
+                        theMinTempo = round(newValue / 10) * 10
+                        theMaxTempo = theMinTempo + 40.0
+                    }
+                    .padding(.horizontal)
+                    //.padding(.bottom, 30)
+
                 HStack { // Goal pace text kilometers
                     Button("-10s")
                     {
@@ -186,28 +208,6 @@ struct ButtonsView: View {
                     .padding(.horizontal)
 
 
-                HStack {
-                    Button("-10") // Min/max tempo text
-                    {
-                        theMinTempo = max(theMinTempo - 10, lowestMinTempo)
-                    }
-                    .font(.system(size: 40))
-                    Text("Min tempo \(String(Int(theMinTempo))), max \(String(Int(theMaxTempo)))")
-                    Button("+10")
-                    {
-                        theMinTempo = min(theMinTempo + 10, highestMinTempo)
-                    }
-                    .font(.system(size: 40))
-                }
-                .padding(.bottom, -10)
-
-                Slider(value: $theMinTempo, in: lowestMinTempo...highestMinTempo, step: 10) // Min/max tempo slider
-                    .onChange(of: theMinTempo) { newValue in
-                        theMinTempo = round(newValue / 10) * 10
-                        theMaxTempo = theMinTempo + 40.0
-                    }
-                    .padding(.horizontal)
-                    .padding(.bottom, 30)
 
 
             }

@@ -72,13 +72,16 @@ struct Playlist: View {
                 Text("16 is Party in the USA, added because of 17, at normal time. It will go really fast if you play like this while running. File at 96 BPM.")
                     .padding(.bottom, 20)
                 
-                Text("15 is Party in the CIA, at cut time for running at (to be closer to the original song's speed), file at 96 BPM.")
+                Text("17 is Party in the CIA, at cut time for running at (to be closer to the original song's speed), file at 96 BPM.")
                     .padding(.bottom, 20)
                 
-                Text("16 is Party in the CIA, at normal time. It will go really fast if you play like this while running. File at 96 BPM.")
+                Text("18 is Party in the CIA, at normal time. It will go really fast if you play like this while running. File at 96 BPM.")
+                    .padding(.bottom, 20)
+                                
+                Text("19-25 is CultOfPersonality92.5, MotorcycleDriver160, 500Miles130, SuperTrouper115, LayAllYourLoveOnMe133, slow Moskau121, fast Moskau121")
                     .padding(.bottom, 20)
                 
-                Text("17 is The Veldt music from FFIV. It's a fun percussion/bassline. The file's at 180 BPM.")
+                Text("26 is The Veldt music from FFIV. It's a fun percussion/bassline. The file's at 180 BPM.")
                     .padding(.bottom, 20)
                 
                 Text("Hello world!")
