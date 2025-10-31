@@ -81,7 +81,9 @@ struct Playlist: View {
                 Text("19-25 is CultOfPersonality92.5, MotorcycleDriver160, 500Miles130, SuperTrouper115, LayAllYourLoveOnMe133, slow Moskau121, fast Moskau121")
                     .padding(.bottom, 20)
                 
-                Text("26 is The Veldt music from FFIV. It's a fun percussion/bassline. The file's at 180 BPM.")
+                Text("26-50 is DontStopTheMusic122.5, DangerZone158, FinalCountdown118Less which is actuallly slightly slower than that someone got 107, WilliamTellOvertureFinale147, Bolero68or76")
+                
+                Text("31 is The Veldt music from FFIV. It's a fun percussion/bassline. The file's at 180 BPM.")
                     .padding(.bottom, 20)
                 
                 Text("Hello world!")
