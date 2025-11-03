@@ -11,85 +11,150 @@ struct Playlist: View {
     var body: some View {
         ScrollView {
             VStack {
-                
-                Text("Hello world!")
-                    .padding(.bottom, 20)
+                Text("The Song upload request form is at https://forms.gle/AVgfr4h1kZKh9ndM9").
+                   font thing // To break the compiler, remember to add font thing
+                    .padding(.bottom, 40)
 
-                Text("1 is TestAudioFile.wav, my creation from Garage Band. It's an endless anoying scale:) I place it in the public domain.")
+                Text("1 is TestAudioFile.wav by me, file at 180.")
+                    .padding(.bottom, 5)
+                Text("My creation with Garage Band. It's an endless anoying scale:) I place it in the public domain.")
+                    .padding(.horizontal, 30)
                     .padding(.bottom, 20)
-                
+                                                
                 Text("2 is TestAudioFile.wav at double tempo. In case you want to listen to a really fast scale. In my opinion it's even more anoying :)")
                     .padding(.bottom, 20)
                 
-                Text("3 is a shepherd’s tone I made in Garage Band. I’ll also put it in the public domain.")
+                Text("2 is Double-tempo TestAudioFile.wav by me, file at 180.")
+                    .padding(.bottom, 5)
+                Text("In case you want double tempo for some reason. Entered as 90 BPM to make it speed up twice as fast.")
+                    .padding(.horizontal, 30)
+                    .padding(.bottom, 20)
+                                       
+                Text("3 is Shepards Tone by Connor, file at 180.")
+                    .padding(.bottom, 5)
+                Text("This is the same file that plays for the pacing. I also made it a playable song for fun even though it's a terrible song.")
+                    .padding(.horizontal, 30)
                     .padding(.bottom, 20)
                 
-                Text("4 is a shepherd's tone at extra annoying halfsteps, which I also will put in public domain.")
+                Text("4 is Halfstep Shepard's Tone by Connor, file at 180.")
+                    .padding(.bottom, 5)
+                Text("Also in the pacing algorithm, an even worse song than #3.")
+                    .padding(.horizontal, 30)
                     .padding(.bottom, 20)
                 
-                Text("5 is a piano version of Korobeiniki, played by someone named Gregor Quendel and from https://www.classicals.de/music-licenses/p/tetris-piano?rq=korobeiniki. The file is at 150 PBM, although there's a slightly slower part in the middle. They wanted to be attributed as this:")
+                Text("5 is Piano Korobienki by Gregor Quendel, file at 150")
+                    .padding(.bottom, 5)
+                Text("A piano version of the Tetris song. It's notably quieter than the string version. It's a fun song and is easy to hear the beats of. It's from https://www.classicals.de/music-licenses/p/tetris-piano?rq=korobeiniki. They want it to be attributed like this:")
+                    .padding(.horizontal, 30)
                     .padding(.bottom, 5)
                 Text("Music: “Tetris Theme - Korobeiniki - Rearranged - Arr. for Piano” by Gregor Quendel / Classicals.de Source: https://www.classicals.de.")
+                    .padding(.horizontal, 50)
+                    font small somehow
+                    .padding(.bottom, 20)
+
+                Text("6 is double tempo Piano Korobienki by Gregor Quendel, file at 150")
+                    .padding(.bottom, 5)
+                Text("Same file and stuff as #5. I entered it as 75 BPM to make it play at double speed.")
                     .padding(.horizontal, 30)
                     .padding(.bottom, 20)
                 
-                Text("6 is double tempo piano Korobeiniki, same file and author as 5.")
-                    .padding(.bottom, 20)
-                
-                Text("7 is a string version of Korobeiniki, also played by Gregor Quendel, from https://www.classicals.de/music-licenses/p/tetris-strings?rq=korobeiniki. The file is a little over 152 BPM. They want it attributed as this:")
+                Text("7 is String Korobienki by Gregor Quendel, file at 152.")
+                    .padding(.bottom, 5)
+                Text("A string version of the Tetris song. It's notably louder than the piano verson. Actually the tempo is a little over 152. It's from https://www.classicals.de/music-licenses/p/tetris-strings?rq=korobeiniki. They want it to be attributed like this:")
+                    .padding(.horizontal, 30)
                     .padding(.bottom, 5)
                 Text("Music: “Tetris Theme - Korobeiniki - Rearranged - Arr. for Strings” by Gregor Quendel / Classicals.de Source: https://www.classicals.de")
+                    .padding(.horizontal, 50)
+                    font small somehow
+                    .padding(.bottom, 20)
+                
+                Text("8 is double Tempo String Korobienki by Gregor Quendel, file at 152.")
+                    .padding(.bottom, 5)
+                Text("Same file and stuff as #7. I entered it as 76 BPM to make it play at double speed.")
                     .padding(.horizontal, 30)
                     .padding(.bottom, 20)
                 
-                Text("8 is double tempo String Korobeiniki, same file and author as 7.")
-                    .padding(.bottom, 20)
-                
-                Text("9 is music box a version of Pachelbel’s Canon, played by Gregor Quendel. In my opinion this is worse than the Kevin MacLeod version in #10 and #11 but Quendel's tetris verions are great! Quendel's Canon is from https://www.classicals.de/music-licenses/p/pachelbel-canon-in-d-musicbox. The file is at 120 BPM. They want it attributed as this:")
+                Text("9 is music box Pachelbel's Canon by Gregor Quendel, file at 120.")
+                    .padding(.bottom, 5)
+                Text("In my opinion this is a worse version of of Canon than the Kevin MacLeod version in #10 and #11. This is from https://www.classicals.de/music-licenses/p/pachelbel-canon-in-d-musicbox. They want it to be attributed like this:")
+                    .padding(.horizontal, 30)
                     .padding(.bottom, 5)
                 Text("Pachelbel - Canon in D - P. 37 - Arranged for Music Box” by Gregor Quendel / Classicals.de Source: https://www.classicals.de")
+                    .padding(.horizontal, 50)
+                    .padding(.bottom, 20)
+                
+                Text("10 is Pachelbel's Canon by Kevin MacLeod, file at 80")
+                    .padding(.bottom, 5)
+                Text("This is a great, serene violin/cello song. I entered it as 160 BPM to get one footstep per two beats instead of one footstep per beat, to play closer to it's actual tempo when you run. The file is from https://en.wikipedia.org/wiki/File:Kevin_MacLeod_-_Canon_in_D_Major.ogg")
                     .padding(.horizontal, 30)
                     .padding(.bottom, 20)
                 
-                Text("10 is Pachelbel’s Canon, recorded by Kevin MacLeod. The file is at 80 BPM, but I put 160 into my phone to get 1 halfnote per step. I got it from https://en.wikipedia.org/wiki/File:Kevin_MacLeod_-_Canon_in_D_Major.ogg.")
+                Text("11 is double Tempo Canon by Kevin MacLeod, file at 80")
+                    .padding(.bottom, 5)
+                Text("Same stuff as #10, this time at one footstep per beat. It will go really fast if you try to run with this speed, which is sometimes fun but usually not reccomended.")
+                    .padding(.horizontal, 30)
                     .padding(.bottom, 20)
                 
-                Text("11 is double-tempo version of #10.")
+                Text("12 is broken MP3 Pachelbel's Canon by Kevin Macleod, file at 80.")
+                    .padding(.bottom, 5)
+                Text("This is Canon as an MP3, to test the MP3 decoder. I think the file is broken somehow and won't decode correctly. However, the other MP3s work so it's fine I guess.")
+                    .padding(.horizontal, 30)
                     .padding(.bottom, 20)
                 
-                Text("12 is the Kevin MacLeod Canon as an mp3. It's broken for some reason and won't decode, so the app will play the last thing written to the scratchpad file. However, but other MP3s work. I think the file itself is buggy since all other MP3's work, so it's fine.")
+                Text("13 is Running in the 90's, file at 158ish")
+                    .padding(.bottom, 5)
+                Text("The first song I s̶t̶o̶l̶e̶ downloaded from YouTube. The file's around 158 BPM, a metronome was dragging a little bit and fell behind about a beat over the course of the song but was pretty accurate")
+                    .padding(.horizontal, 30)
                     .padding(.bottom, 20)
                 
-                Text("13 is Running in the 90's. I stole it from YouTube. The file's around 158 BPM, a metronome was dragging a little bit and fell behind about a beat over the course of the song but was pretty accurate.")
+                Text("14 is Don't Fear the Reaper by Blue Öyster Cult, file at 141.5.")
+                    .padding(.bottom, 5)
+                Text("Uploaded for Haloween! The file's tempos vary from 141.25 to 141.5 I think. Most websites on the internet (which use elements of ℕ) say 142, some say 141. Might be a good test file for multitempo songs sometimes. I entered it as 141.5."))
+                    .padding(.horizontal, 30)
                     .padding(.bottom, 20)
                 
-                Text("14 is Don't Fear The Reaper, from YouTube. The file's tempos vary from 141.25 to 141.5 I think. Most websites on the internet (which use elements of en.wikipedia.org/wiki/Natural_number) say 142, some say 141. Might be a good test file for multitempo songs sometimes. I'm going to call it 141.5 for the app.")
+                Text("15 is Party in the USA by Miley Cyrus, file at 96")
+                    .padding(.bottom, 5)
+                Text("Entered in cut time at 192, so it plays at closer to orignal speed when you run. Added because of #17.")
+                    .padding(.horizontal, 30)
                     .padding(.bottom, 20)
                 
-                Text("15 is Party in the USA, added because of 17, at cut time for running at (to be closer to the original song's speed), file at 96 BPM..")
+                Text("16 is double tempo Party USA by Miley Cyrus, file at 96")
+                    .padding(.bottom, 5)
+                Text("Entered at 1 beat per footstep. Will play really fast if you run to it.")
+                    .padding(.horizontal, 30)
                     .padding(.bottom, 20)
                 
-                Text("16 is Party in the USA, added because of 17, at normal time. It will go really fast if you play like this while running. File at 96 BPM.")
+                Text("17 is Party in the CIA by \"Weird Al\" Yankovic, file at 96") Need escape sequence, I think this works
+                    .padding(.bottom, 5)
+                Text("Entered in cut time at 192, so it plays at closer to orignal speed when you run.")
+                    .padding(.horizontal, 30)
                     .padding(.bottom, 20)
                 
-                Text("17 is Party in the CIA, at cut time for running at (to be closer to the original song's speed), file at 96 BPM.")
-                    .padding(.bottom, 20)
-                
-                Text("18 is Party in the CIA, at normal time. It will go really fast if you play like this while running. File at 96 BPM.")
+                Text("18 is double tempo Party CIA by \"Weird Al\" Yankovic, file at 96")
+                    .padding(.bottom, 5)
+                Text("Entered at 1 beat per footstep. Will play really fast if you run to it.")
+                    .padding(.horizontal, 30)
                     .padding(.bottom, 20)
                                 
                 Text("19-25 is CultOfPersonality92.5, MotorcycleDriver160, 500Miles130, SuperTrouper115, LayAllYourLoveOnMe133, slow Moskau121, fast Moskau121")
                     .padding(.bottom, 20)
                 
                 Text("26-50 is DontStopTheMusic122.5, DangerZone158, FinalCountdown118Less which is actuallly slightly slower than that someone got 107, WilliamTellOvertureFinale147, Bolero68or76")
-                
+                    .padding(.bottom, 20)
+
                 Text("31 is The Veldt music from FFIV. It's a fun percussion/bassline. The file's at 180 BPM.")
                     .padding(.bottom, 20)
+
+                // No bottom 5 padding if there's no description.
                 
-                Text("Hello world!")
+                Text("ω-1 is Template Song by Someone, file at __")
+                    .padding(.bottom, 5)
+                Text("Song description if there is one")
+                    .padding(.horizontal, 30)
                     .padding(.bottom, 20)
             }
-            .padding(20)
+            .padding(20) // This is for the edge margins
             .preferredColorScheme(.dark)
             .background(Color(red: (13/256.0), green: (67.0/256.0), blue: (67.0/256.0)))
         }
