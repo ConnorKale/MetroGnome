@@ -11,6 +11,11 @@ struct ButtonsView: View {
     @ObservedObject var theAudioPlayer: VariableSpeedAudioPlayer
     @ObservedObject var theShepardAudioPlayer: VariableSpeedAudioPlayer
     
+    
+    // Muffin has updated MP3's: true
+    // School has updated MP3's: true
+    
+    
     // I'm going to let the ButtonsView manage the audio that's playing unless that causes problems. I don't think it will..?
     // Update file names array, tempos array, extensions array, number of songs, proofread
     public var numberOfSongs: Int = 31
