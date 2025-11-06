@@ -8,11 +8,15 @@
 import SwiftUI
 import Combine // delete this later if it's not needed
 
+// Use Command Shif L to get list of iOS images
+
 struct TabBarController: View {
     @StateObject private var motionManager = MotionManager()
     @StateObject private var audioPlayer = VariableSpeedAudioPlayer()
     @StateObject private var shepardAudioPlayer = VariableSpeedAudioPlayer()
     @StateObject private var GPS = LocationManager()
+    
+    @State private var tonePlayer = TonePlayer() // I think this has to be @State to go in the binding thingy
 
     private let framerate: Double = (1.0/30.0) // Remember to change this and the timer!!!
     @State private var timer = Timer.publish(every: 1.0 / 30.0, on: .main, in: .common).autoconnect()
@@ -48,6 +52,9 @@ struct TabBarController: View {
     @State private var maxTempo: Double = 200.0
     @State private var minTempo: Double = 160
     
+    @State private var radius: Double = 0.5 // m
+    @State private var pitch: Double = 880 // Hz // 1 meter is A4, it plays at 440Hz/m. Max should be 880 Hz.
+    @State private var gyroTonePlaying: Bool = false
     
     var body: some View {
         TabView {
@@ -65,9 +72,22 @@ struct TabBarController: View {
                 .tabItem {
                     Label("Playlist", systemImage: "text.document")
                 }
+            
+            GyroScopeUI(theMotionManager: motionManager, radius: $radius, TonePlayerIsPlaying: $gyroTonePlaying, tonePlayer: $tonePlayer)
+                .tabItem {
+                    Label("Gyroscope", systemImage: "arrow.trianglehead.2.clockwise.rotate.90.page.on.clipboard")
+                }
         } // Ah my beautiful spagetti algorithm. I might fix it later.
         .onReceive(timer) { _ in // This runs at 30 FPS. That can be changed in the timer variable declaration at the top in the TabBarController.
             
+            radius = motionManager.accelerometerData.total / (motionManager.gyroscopeData.total * motionManager.gyroscopeData.total)
+            pitch = radius * 1760.0
+            if (pitch > 7040)
+            {
+                pitch = 110.0
+            }
+            tonePlayer.setFrequency(pitch)
+
             rawDistanceIntegral += GPS.rawVelocity * framerate
             smoothedDistanceIntegral += GPS.smoothedVelocity * framerate
             

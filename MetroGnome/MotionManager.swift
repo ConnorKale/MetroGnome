@@ -13,10 +13,30 @@ class MotionManager: ObservableObject { // To do: Clean this up after I understa
     
     @Published var accelerometerData: (x: Double, y: Double, z: Double, total: Double, jerk: Double) = (0, 0, 0, 0, 0)
 
-    private var oldTotal = 0.0
+    private var oldAccelerometerTotal = 0.0 // Some accelerometer thing
+    
+    private var rotationRate: CMRotationRate = CMRotationRate(x: 0, y: 0, z: 0)
+    
+    @Published var gyroscopeData: (x: Double, y: Double, z: Double, total: Double) = (0, 0, 0, 0)
     
     init() {
+        startGyroscope()
         startAccelerometerUpdates()
+    }
+    
+    func startGyroscope() {
+        if motionManager.isGyroAvailable {
+            motionManager.gyroUpdateInterval = updateInterval  // in Hz
+            motionManager.startGyroUpdates(to: .main) { [weak self] (data, error) in
+                if let data = data {
+                    DispatchQueue.main.async {
+                        self?.rotationRate = data.rotationRate
+                    }
+                }
+            }
+        } else {
+            print("Gyroscope not available.")
+        }
     }
     
     private func startAccelerometerUpdates() {
@@ -37,21 +57,27 @@ class MotionManager: ObservableObject { // To do: Clean this up after I understa
             }
             
             // Update non-jerk stuff, calculate dj's with old values and find dx, divide by updateInterval for dt, find non-rotational dx/dt, publish results, update old values to current ones for next frame's calculation.
-            let x = data.acceleration.x
-            let y = data.acceleration.y
-            let z = data.acceleration.z
-            let total = sqrt(x * x + y * y + z * z)
+            let aX = data.acceleration.x
+            let aY = data.acceleration.y
+            let aZ = data.acceleration.z
+            let aTotal = sqrt(aX * aX + aY * aY + aZ * aZ)
             
-            let da = total - self.oldTotal
+            let da = aTotal - self.oldAccelerometerTotal
             let dt = updateInterval //Might be problems if updateInterval is greater than the framerate?
             let jerkAbsolute = da/dt
             
-            self.accelerometerData = (x, y, z, total, jerkAbsolute)
+            self.accelerometerData = (aX, aY, aZ, aTotal, jerkAbsolute)
             
-            oldTotal = total // For next frame's calculation.
+            oldAccelerometerTotal = aTotal // For next frame's calculation.
+            
+            
+            let gyroTotal: Double = sqrt(rotationRate.x * rotationRate.x + rotationRate.y * rotationRate.y + rotationRate.z * rotationRate.z)
+            
+            gyroscopeData = (Double(rotationRate.x), Double(rotationRate.y), Double(rotationRate.z), gyroTotal)
         }
     }
     deinit {
         motionManager.stopAccelerometerUpdates()
+        motionManager.stopGyroUpdates()
     }
 }
