@@ -230,12 +230,13 @@ struct Playlist: View {
                     .padding(.horizontal, 30)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.bottom, 20)
-                
+
+
                 Text("19-25 is CultOfPersonality92.5, MotorcycleDriver160, 500Miles130, SuperTrouper115, LayAllYourLoveOnMe133, slow Moskau121, fast Moskau121")
                     .padding(.bottom, 20)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
-                
+
                 Text("26 is Don't Stop the Music by Yarbrough & Peoples, file at 122.5")
                     .padding(.bottom, 5)
                     .frame(maxWidth: .infinity, alignment: .leading)
