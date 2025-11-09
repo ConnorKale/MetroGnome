@@ -57,7 +57,6 @@ struct Playlist: View {
                 Text("Music: “Tetris Theme - Korobeiniki - Rearranged - Arr. for Piano” by Gregor Quendel / Classicals.de Source: https://www.classicals.de.")
                     .padding(.horizontal, 50)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(.headline)
                     .padding(.bottom, 20)
 
                 Text("6 is double tempo Piano Korobienki by Gregor Quendel, file at 150")
@@ -78,7 +77,6 @@ struct Playlist: View {
                 Text("Music: “Tetris Theme - Korobeiniki - Rearranged - Arr. for Strings” by Gregor Quendel / Classicals.de Source: https://www.classicals.de")
                     .padding(.horizontal, 50)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(.headline)
                     .padding(.bottom, 20)
                 
                 Text("8 is double Tempo String Korobienki by Gregor Quendel, file at 152.")
