@@ -13,8 +13,50 @@ struct Playlist: View {
             VStack {
                 Text("The Song upload request form is at https://forms.gle/AVgfr4h1kZKh9ndM9")
                     .font(.title2)
-                    .padding(.bottom, 40)
+                    .padding(.bottom, 100)
 
+                
+                Text("NaN is Template Song by Someone, file at ⊥ BPM")
+                    .padding(.bottom, 5)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Text("Song description if there is one")
+                    .padding(.horizontal, 30)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.bottom, 20)
+
+                
+                Text("Test with 5 padding")
+                    .padding(.bottom, 5)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Text("Song description if there is one")
+                    .padding(.horizontal, 30)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.bottom, 20)
+
+                Text("Test with 0 padding")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Text("Song description if there is one")
+                    .padding(.horizontal, 30)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.bottom, 20)
+
+                Text("Test with -5 padding")
+                    .padding(.bottom, -5)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Text("Song description if there is one")
+                    .padding(.horizontal, 30)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.bottom, 20)
+
+                Text("Test with -10 padding")
+                    .padding(.bottom, -10)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Text("Song description if there is one")
+                    .padding(.horizontal, 30)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.bottom, 20)
+
+                
                 Text("1 is TestAudioFile.wav by me, file at 180.")
                     .padding(.bottom, 5)
                     .frame(maxWidth: .infinity, alignment: .leading)
