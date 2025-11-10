@@ -12,6 +12,7 @@ Remember to change version number!
 
 For revoked certificates   /System/Library/CoreServices/Applications   or   go to finder > computer name >hard drive >  system > library > Coreervices > Applications, don't run passwords
 
+1.2.3 About to try to add data collection
 1.2.2 I'm playing with the gyroscope, as a possible way to correct the accelerometer
 1.2.1 UI Updates
 1.2.0 I added tabs! The UI looks a lot better. Hopefully no bugs. I'm also making a folder for archived stuff. You've served me well ContentView.

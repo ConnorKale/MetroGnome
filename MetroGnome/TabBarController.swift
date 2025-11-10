@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine // delete this later if it's not needed
 
-// Use Command Shif L to get list of iOS images
+// Use Command Shift L to get list of iOS images
 
 struct TabBarController: View {
     @StateObject private var motionManager = MotionManager()
@@ -73,20 +73,22 @@ struct TabBarController: View {
                     Label("Playlist", systemImage: "text.document")
                 }
             
-            GyroScopeUI(theMotionManager: motionManager, radius: $radius, TonePlayerIsPlaying: $gyroTonePlaying, tonePlayer: $tonePlayer)
+            /*GyroScopeUI(theMotionManager: motionManager, radius: $radius, TonePlayerIsPlaying: $gyroTonePlaying, tonePlayer: $tonePlayer)
                 .tabItem {
                     Label("Gyroscope", systemImage: "arrow.trianglehead.2.clockwise.rotate.90.page.on.clipboard")
-                }
+                }*/
         } // Ah my beautiful spagetti algorithm. I might fix it later.
         .onReceive(timer) { _ in // This runs at 30 FPS. That can be changed in the timer variable declaration at the top in the TabBarController.
             
-            radius = motionManager.accelerometerData.total / (motionManager.gyroscopeData.total * motionManager.gyroscopeData.total)
+            //This is the gyroscope stuff:
+            /* radius = motionManager.accelerometerData.total / (motionManager.gyroscopeData.total * motionManager.gyroscopeData.total)
             pitch = radius * 1760.0
             if (pitch > 7040)
             {
                 pitch = 110.0
             }
             tonePlayer.setFrequency(pitch)
+             */ // End of the gyroscope stuff
 
             rawDistanceIntegral += GPS.rawVelocity * framerate
             smoothedDistanceIntegral += GPS.smoothedVelocity * framerate
