@@ -10,10 +10,10 @@ import SwiftUI
 struct GPSDataCollection: View {
     var body: some View {
         TabView {
-            GPSDataDisplay()
-                .tabItem {
-                    Label("Collected Data", systemImage: "waveform.path.ecg.text.clipboard")
-                }
+            //GPSDataDisplay()
+                //.tabItem {
+                    //Label("Collected Data", systemImage: "waveform.path.ecg.text.clipboard")
+                //}
             
             GPSDataCollecter()
                 .tabItem {

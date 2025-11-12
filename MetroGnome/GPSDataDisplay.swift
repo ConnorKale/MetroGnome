@@ -29,5 +29,5 @@ struct GPSDataDisplay: View {
 }
 /*
 #Preview {
-    GPSDataDisplay()
+    //GPSDataDisplay()
 }*/
