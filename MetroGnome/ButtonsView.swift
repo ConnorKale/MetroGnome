@@ -12,18 +12,18 @@ struct ButtonsView: View {
     @ObservedObject var theShepardAudioPlayer: VariableSpeedAudioPlayer
     
     
-    // Muffin has updated MP3's: true
+    // Muffin has updated MP3's: false
     // School has updated MP3's: true
     
     
     // I'm going to let the ButtonsView manage the audio that's playing unless that causes problems. I don't think it will..?
     // Update file names array, tempos array, extensions array, number of songs, proofread
     // If uploaded twice, convention is slow, then fast; which means higher inputted tempo, then lower inputted tmepo
-    public var numberOfSongs: Int = 33
+    public var numberOfSongs: Int = 43
     @State public var selectedSongIndex: Int = 0
-    public var songNames: [String] = ["MetroGnomeTestAudio_256Measures", "MetroGnomeTestAudio_256Measures", "MetroGnomeShepard'sTone", "MetroGnomeHalfstepShepard'sTone", "KorobeinikiPiano150", "KorobeinikiPiano150", "KorobeinikiString152+", "KorobeinikiString152+", "CanonMusicBox120", "WikipediaCanon160BPM", "WikipediaCanon160BPM", /* If in-line comments don't break the compiler this is the end of the wav files */ "WikipediaCanon160BPMisMP3", "90s", "DontFearTheReaper", "PartyUSA", "PartyUSA", "PartyCIA", "PartyCIA", "CultOfPersonality92.5", "MotorcycleDriver160", "500Miles130", "SuperTrouper115", "LayAllYourLoveOnMe133", "Moskau121", "Moskau121", "DontStopTheMusic122.5", "DangerZone158", "FinalCountdown118Less", "WilliamTellOvertureFinale147", "Bolero68or76", "ForeverPiccolo120", "ForeverPiccolo120", "TheVeldt"]
-    public var fileTempos: [Float] = [180.0, 90.0, 180.0, 180.0, 150.0, 75.0, 152.0, 76.0, 120.0, 160.0, 80.0, /* End of wavs */ 160.0, 158.0, 141.5, 192.0, 96.0, 192.0, 96.0, 185, 160, 130, 115, 133, 242, 121, 122.5, 158, 118, 147, 144, 240.0, 120.0, 180.0]
-    public var fileExtensions: [String] = ["wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3"]
+    public var songNames: [String] = ["MetroGnomeTestAudio_256Measures", "MetroGnomeTestAudio_256Measures", "MetroGnomeShepard'sTone", "MetroGnomeHalfstepShepard'sTone", "KorobeinikiPiano150", "KorobeinikiPiano150", "KorobeinikiString152+", "KorobeinikiString152+", "CanonMusicBox120", "WikipediaCanon160BPM", "WikipediaCanon160BPM", /* If in-line comments don't break the compiler this is the end of the wav files */ "WikipediaCanon160BPMisMP3", "90s", "DontFearTheReaper", "PartyUSA", "PartyUSA", "PartyCIA", "PartyCIA", "CultOfPersonality92.5", "MotorcycleDriver160", "500Miles130", "SuperTrouper115", "LayAllYourLoveOnMe133", "Moskau121", "Moskau121", "DontStopTheMusic122.5", "DangerZone158", "FinalCountdown118Less", "WilliamTellOvertureFinale147", "Bolero68or76", "SmellsLikeCalculus120", "ForeverPiccolo120", "ForeverPiccolo120", "TheVeldt", "BrandenburgConcertoNo3Movement1at98", "SymphonyNo7inAMajorOp92Allegretto64", "TheSoundsOfSilence107", "TheSoundsOfSilence107", "DvorakSymphonyNo9at120", "DvorakSymphonyNo9at120", "MarsTheBringerOfWar150", "BananaBoat122", "BananaBoat122"]
+    public var fileTempos: [Float] = [180, 90, 180, 180, 150, 75, 152, 76, 120, 160, 80, /* End of wavs */ 160, 158, 141, 192, 96, 192, 96, 185, 160, 130, 115, 133, 242, 121, 122.5, 158, 118, 147, 144, 120, 240, 120, 180, 196, 192, 214, 107, 240, 120, 150, 244, 122]
+    public var fileExtensions: [String] = ["wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3"]
     @Binding public var theCurrentlyPlayingFileTempo: Float // Maybe replace with something about the current song's index, so I can access it's other properties. Not now.
     
     @Binding var theUsedVelocity: Int // This is what velocity algorithm you're using and should be an ∈ of {1, 2, 3}.
@@ -82,7 +82,7 @@ struct ButtonsView: View {
                         .font(.system(size: 24))
 
                     }
-                    .padding(.bottom, -20)
+                    .padding(.bottom, 20)
                     
                     Slider(
                         value: Binding(
@@ -93,7 +93,7 @@ struct ButtonsView: View {
                         step: 1
                     )
                     .padding(.horizontal)
-                    .padding(.bottom, -20)
+                    .padding(.bottom, 20)
                 }
                 
                 HStack { // Which Pacing method
@@ -120,7 +120,7 @@ struct ButtonsView: View {
                     .font(.system(size: 20))
                 Text("\(theTempo, specifier: "%.2f")")
                     .font(.system(size: 80))
-                    .padding(.bottom, -20)
+                    .padding(.bottom, 20)
 
                 HStack { // Which Velocity
                     Text("GPS \(String(Int(theUsedVelocity)))")

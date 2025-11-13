@@ -10,8 +10,11 @@ An awesome non-intiger metronome is https://eggfish.studio/bpm. This is like the
 
 Remember to change version number!
 
+https://xkcd.com/1296/
+
 For revoked certificates   /System/Library/CoreServices/Applications   or   go to finder > computer name >hard drive >  system > library > Coreervices > Applications, don't run passwords
 
+1.2.4 More songs
 1.2.3 About to try to add data collection
 1.2.2 I'm playing with the gyroscope, as a possible way to correct the accelerometer
 1.2.1 UI Updates
