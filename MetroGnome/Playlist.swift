@@ -177,44 +177,30 @@ struct Playlist: View {
                 
                     .padding(.bottom, 20)
 
-        
-                
-                Text("19 is Template Song by Someone, file at __")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Text("Song description if there is one")
-                    .padding(.horizontal, 30)
+                Text("19 is Cult of Personality by Living Color, file at 92.5")
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                     .padding(.bottom, 20)
                 
-                Text("20 is Template Song by Someone, file at __")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Text("Song description if there is one")
-                    .padding(.horizontal, 30)
+                Text("20 is Motorcycle Driver by Joe Satriani, file at 160")
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                     .padding(.bottom, 20)
                 
-                Text("21 is Template Song by Someone, file at __")
+                Text("21 is 500 Miles by The Proclaimers, file at 130")
                     .frame(maxWidth: .infinity, alignment: .leading)
-                Text("Song description if there is one")
+                Text("I would run 5 thousand meters and I would run 5 thousand more...")
                     .padding(.horizontal, 30)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                     .padding(.bottom, 20)
     
-                Text("22 is Template Song by Someone, file at __")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Text("Song description if there is one")
-                    .padding(.horizontal, 30)
+                Text("22 is Super Trouper by A𐤡BA, file at 115")
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                     .padding(.bottom, 20)
-                
+
                 Text("23 is Lay All Your Love On Me by A𐤡BA, file at 133") // I got a unicode 𐤡 charecter which is a slightly different font but matches how they write it.
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Text("Song description if there is one")
-                    .padding(.horizontal, 30)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                     .padding(.bottom, 20)
@@ -234,12 +220,6 @@ struct Playlist: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                     .padding(.bottom, 20)
-
-
-                Text("19-25 is CultOfPersonality92.5, MotorcycleDriver160, 500Miles130, SuperTrouper115, LayAllYourLoveOnMe133, slow Moskau121, fast Moskau121")
-                    .padding(.bottom, 20)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-
 
                 Text("26 is Don't Stop the Music by Yarbrough & Peoples, file at 122.5")
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -281,15 +261,24 @@ struct Playlist: View {
                 
                     .padding(.bottom, 20)
                 
-                Text("31 is Smells like Calculs by Luke Scholler, file at 120 BPM")
+                Text("31 is slow Smells like Calculs by Luke Scholler, file at 120 BPM")
                     .frame(maxWidth: .infinity, alignment: .leading)
-                Text("A fun parody of Smells like Teen Spirit by Nirvana. More math song parodies may be uploaded in the future. You forgot the +C!")
+                Text("A fun parody of Smells like Teen Spirit by Nirvana. More math song parodies may be uploaded in the future. You forgot that Final +C!")
                     .padding(.horizontal, 30)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                     .padding(.bottom, 20)
 
-                Text("32 is ForeverPiccolo by Someone, file at 120")
+                Text("32 is fast Smells like Calculs by Luke Scholler, file at 120 BPM")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Text("A fun parody of Smells like Teen Spirit by Nirvana. More math song parodies may be uploaded in the future. You forgot that Final +C!")
+                    .padding(.horizontal, 30)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                    .padding(.bottom, 20)
+
+                
+                Text("33 is ForeverPiccolo by Someone, file at 120")
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Text("Slower, entered as 240")
                     .padding(.horizontal, 30)
@@ -297,7 +286,7 @@ struct Playlist: View {
                 
                     .padding(.bottom, 20)
                 
-                Text("33 is ForeverPiccolo by Someone, file at 120")
+                Text("34 is ForeverPiccolo by Someone, file at 120")
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Text("Fast, entered as 240")
                     .padding(.horizontal, 30)
@@ -305,7 +294,7 @@ struct Playlist: View {
                 
                     .padding(.bottom, 20)
 
-                Text("34 is The Veldt from FFIV, file at 180")
+                Text("35 is The Veldt from FFIV, file at 180")
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Text("It's a fun cadence with percussion and bassline.")
                     .padding(.horizontal, 30)
@@ -313,7 +302,7 @@ struct Playlist: View {
                 
                     .padding(.bottom, 20)
 
-                Text("35 is Brandengurg Concerto No.3 Mvt 1 Allegro by Bach, file at 98 BPM")
+                Text("36 is Brandengurg Concerto No.3 Mvt 1 Allegro by Bach, file at 98 BPM")
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Text("Plus or minus 1 BPM")
                     .padding(.horizontal, 30)
@@ -321,12 +310,12 @@ struct Playlist: View {
                 
                     .padding(.bottom, 20)
                 
-                Text("36 is The Symphony No 7 in A Major Op.92 Allegretto by Beethoven, file at 64 BPM")
+                Text("37 is The Symphony No 7 in A Major Op.92 Allegretto by Beethoven, file at 64 BPM")
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                     .padding(.bottom, 20)
 
-                Text("37 is The Sounds of Silence by Simon and Garfunkel, file at 107 BPM")
+                Text("38 is The Sounds of Silence by Simon and Garfunkel, file at 107 BPM")
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Text("Entered at 214, so this plays slow")
                     .padding(.horizontal, 30)
@@ -334,7 +323,7 @@ struct Playlist: View {
                 
                     .padding(.bottom, 20)
 
-                Text("38 is The Sounds of Silence by Simon and Garfunkel, file at 107 BPM")
+                Text("39 is The Sounds of Silence by Simon and Garfunkel, file at 107 BPM")
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Text("Entered at 107, so this plays fast")
                     .padding(.horizontal, 30)
@@ -342,7 +331,7 @@ struct Playlist: View {
                 
                     .padding(.bottom, 20)
 
-                Text("39 is Symphony No.9 Mvt 4 Allegro con fuoco by Dvorak, file at 120ish BPM")
+                Text("40 is Symphony No.9 Mvt 4 Allegro con fuoco by Dvorak, file at 120ish BPM")
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Text("Not super constant tempo but close enough. The begining was stolen by Jaws. Enterd at 240 so this plays slow")
                     .padding(.horizontal, 30)
@@ -350,7 +339,7 @@ struct Playlist: View {
                 
                     .padding(.bottom, 20)
                 
-                Text("40 is Symphony No.9 Mvt 4 Allegro con fuoco by Dvorak, file at 120ish BPM")
+                Text("41 is Symphony No.9 Mvt 4 Allegro con fuoco by Dvorak, file at 120ish BPM")
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Text("Not super constant tempo but close enough. The begining was stolen by Jaws. Enterd at 120 so this plays fast")
                     .padding(.horizontal, 30)
@@ -358,11 +347,11 @@ struct Playlist: View {
                 
                     .padding(.bottom, 20)
 
-                Text("41 is Mars the Bringer of War by Gustav Holst, file at 150 BPM")
+                Text("42 is Mars the Bringer of War by Gustav Holst, file at 150 BPM")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.bottom, 20)
                 
-                Text("42 is Day O by Harry Belafonte, file at 122 BPM")
+                Text("43 is Day O by Harry Belafonte, file at 122 BPM")
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Text("Enterd at 244 so this plays slow")
                     .padding(.horizontal, 30)
@@ -370,7 +359,7 @@ struct Playlist: View {
                 
                     .padding(.bottom, 20)
                 
-                Text("43 is Day O by Harry Belafonte, file at 122 BPM")
+                Text("44 is Day O by Harry Belafonte, file at 122 BPM")
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Text("Enterd at 122 so this plays fast")
                     .padding(.horizontal, 30)
