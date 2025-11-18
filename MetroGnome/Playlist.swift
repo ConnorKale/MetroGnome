@@ -189,7 +189,7 @@ struct Playlist: View {
                 
                 Text("21 is 500 Miles by The Proclaimers, file at 130")
                     .frame(maxWidth: .infinity, alignment: .leading)
-                Text("I would run 5 thousand meters and I would run 5 thousand more...")
+                Text("But I would run 5 thousand meters And I would run 5 thousand more Just to be the one who walked 5 thousand Meters to fall down on the floor... [Insert picture of collapsing after a race]")
                     .padding(.horizontal, 30)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
