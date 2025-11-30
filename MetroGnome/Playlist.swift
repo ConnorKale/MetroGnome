@@ -366,6 +366,23 @@ struct Playlist: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                     .padding(.bottom, 20)
+                
+                Text("45 is Take A Chance On Me by A𐤡BA, file at 106 BPM")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Text("Enterd at 212")
+                    .padding(.horizontal, 30)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                    .padding(.bottom, 20)
+
+                Text("46 is Hyrule Circuit from Mario Kart, file at 187 BPM")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Text("This is a version of the classic Zelda theme song, from Mario Kart")
+                    .padding(.horizontal, 30)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                    .padding(.bottom, 20)
+
             }
             .padding(20) // This is for the edge margins
             .preferredColorScheme(.dark)
