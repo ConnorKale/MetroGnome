@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct GPSDataCollection: View {
-    @Binding public var startTone: Bool
-    @Binding public var stopTone: Bool
+    @Binding public var tonePlayerMode: Int
     //Variables go here
     
     @State public var isRecording: Bool = false
@@ -106,7 +105,7 @@ struct GPSDataCollection: View {
                     Label("Collected Data", systemImage: "waveform.path.ecg.text.clipboard")
                 }
             
-            GPSDataCollecter(isCollectingData: $isRecording, CollectionNeedsToStop: $CollectionNeedsToEndCurrentPoint)
+            GPSDataCollecter(isCollectingData: $isRecording, CollectionNeedsToStop: $CollectionNeedsToEndCurrentPoint, tonePlayerMode: $tonePlayerMode)
                 .tabItem {
                     Label("Take Point", systemImage: "figure.run")
                 }

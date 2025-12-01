@@ -11,6 +11,8 @@ struct GPSDataCollecter: View {
     
     @Binding var isCollectingData: Bool
     @Binding var CollectionNeedsToStop: Bool
+    
+    @Binding public var tonePlayerMode: Int
 
     private var backgroundColor: Color {
         switch isCollectingData {
@@ -27,9 +29,11 @@ struct GPSDataCollecter: View {
                 if isCollectingData {
                     // stop
                     CollectionNeedsToStop = true // This script asks the Collection to stop nicely but doesn't actually do anything
+                    tonePlayerMode = 5 // need to decend
                 } else {
                     // start
                     isCollectingData = true
+                    tonePlayerMode = 1 // need to ascend
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)

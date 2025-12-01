@@ -63,7 +63,7 @@ class TonePlayer {
             amplitude = 0
         } else {
             amplitude = 1
-            frequency = max(1.0, min(freq, 2000.0)) // Clamp to safe range. Max is like 15 gs, were probably not running that fast.
+            frequency = max(1.0, min(freq, 2000.0)) // Clamp to safe range. Max is like 15 gs, we're probably not running that fast.
         }
     }
 }

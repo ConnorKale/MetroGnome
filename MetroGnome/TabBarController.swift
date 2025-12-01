@@ -17,9 +17,10 @@ struct TabBarController: View {
     @StateObject private var GPS = LocationManager()
             
     @State private var tonePlayer = TonePlayer() // I think this has to be @State to go in the binding thingy
-    @State private var startedData: Bool = false
-    @State private var stoppedData: Bool = false
-    
+    @State private var tonePlayerMode: Int = 0 // 0 is not playing, 1 is needs to ascend, 2 is ascending and playing 440, 3 is ascending and playing 550, 4 is ascending and playing 660, 5 is needs to descend, 6 is descending and playing 660, 7 is descending and playing 550, 8 is descending and playing 440,
+    @State private var timeOfLastToneChange: Date? = Date()
+    @State private var elapsedToneChangeDouble: Double = 0.0
+
     private let framerate: Double = (1.0/30.0) // Remember to change this and the timer!!!
     @State private var timer = Timer.publish(every: 1.0 / 30.0, on: .main, in: .common).autoconnect()
 
@@ -80,7 +81,7 @@ struct TabBarController: View {
                 .tabItem {
                     Label("Playlist", systemImage: "text.document")
                 }
-            GPSDataCollection(startTone: $startedData, stopTone: $stoppedData, theGPS: GPS, theMotionManager: motionManager, theTempo: $tempo, StopAStride: $CollectionNeedsToCountAStride, LastStrideLength: $averageLastStrideTime, LowAccelerationRecord: $currentAccelerationRecord, HighAccelerationRecord: $CollectionHighAccelerationRecord)
+            GPSDataCollection(tonePlayerMode: $tonePlayerMode, theGPS: GPS, theMotionManager: motionManager, theTempo: $tempo, StopAStride: $CollectionNeedsToCountAStride, LastStrideLength: $averageLastStrideTime, LowAccelerationRecord: $currentAccelerationRecord, HighAccelerationRecord: $CollectionHighAccelerationRecord)
                 .tabItem {
                     Label("GPS Stuff", systemImage: "figure.run.square.stack")
                 }
@@ -140,6 +141,80 @@ struct TabBarController: View {
             {
                 CollectionHighAccelerationRecord = motionManager.accelerometerData.total
             }
+            
+            // Start of GPS Experiment
+            CollectionNeedsToCountAStride = true
+            CollectionHighAccelerationRecord = motionManager.accelerometerData.total
+            
+            elapsedToneChangeDouble = Double(currentTime.timeIntervalSince(timeOfLastToneChange ?? currentTime)) // In seconds I hope
+
+            
+            // Tones are 440, 550, 660
+            if (tonePlayerMode == 1)
+            {
+                tonePlayer.setFrequency(440)
+                tonePlayer.start()
+                timeOfLastToneChange = Date()
+                tonePlayerMode = 2
+                elapsedToneChangeDouble = Double(currentTime.timeIntervalSince(timeOfLastToneChange ?? currentTime)) // In seconds I hope
+            }
+            
+            if (tonePlayerMode == 2 && (elapsedToneChangeDouble > (averageLastStrideTime/2))) // AND TIME
+            {
+                tonePlayer.setFrequency(550)
+                timeOfLastToneChange = Date()
+                tonePlayerMode = 3
+                elapsedToneChangeDouble = Double(currentTime.timeIntervalSince(timeOfLastToneChange ?? currentTime)) // In seconds I hope
+            }
+            if (tonePlayerMode == 3 && (elapsedToneChangeDouble > (averageLastStrideTime/2))) // AND TIME
+            {
+                tonePlayer.setFrequency(660)
+                timeOfLastToneChange = Date()
+                tonePlayerMode = 4
+                elapsedToneChangeDouble = Double(currentTime.timeIntervalSince(timeOfLastToneChange ?? currentTime)) // In seconds I hope
+            }
+            if (tonePlayerMode == 4 && (elapsedToneChangeDouble > (averageLastStrideTime))) // AND TIME
+            {
+                tonePlayer.setFrequency(0)
+                // time doesn't matter
+                tonePlayerMode = 0
+            }
+            
+            
+            // Tones are 440, 550, 660
+            if (tonePlayerMode == 5)
+            {
+                tonePlayer.setFrequency(660)
+                tonePlayer.start()
+                timeOfLastToneChange = Date()
+                tonePlayerMode = 6
+                elapsedToneChangeDouble = Double(currentTime.timeIntervalSince(timeOfLastToneChange ?? currentTime)) // In seconds I hope
+            }
+            
+            if (tonePlayerMode == 6 && (elapsedToneChangeDouble > (averageLastStrideTime/2))) // AND TIME
+            {
+                tonePlayer.setFrequency(550)
+                timeOfLastToneChange = Date()
+                tonePlayerMode = 7
+                elapsedToneChangeDouble = Double(currentTime.timeIntervalSince(timeOfLastToneChange ?? currentTime)) // In seconds I hope
+            }
+            if (tonePlayerMode == 7 && (elapsedToneChangeDouble > (averageLastStrideTime/2))) // AND TIME
+            {
+                tonePlayer.setFrequency(440)
+                timeOfLastToneChange = Date()
+                tonePlayerMode = 8
+                elapsedToneChangeDouble = Double(currentTime.timeIntervalSince(timeOfLastToneChange ?? currentTime)) // In seconds I hope
+            }
+            if (tonePlayerMode == 8 && (elapsedToneChangeDouble > (averageLastStrideTime))) // AND TIME
+            {
+                tonePlayer.stop()
+                // time doesn't matter
+                tonePlayerMode = 0
+            }
+
+            
+            // End of GPS Experiment
+
                 
             if (elapsedRecordDouble > Double(0.75*averageLastStrideTime)) {
                 // Count a stride!
@@ -153,11 +228,6 @@ struct TabBarController: View {
                 averageLastStrideTime = ((thirdLastStrideTime + secondLastStrideTime + lastStrideTime)/3.0)
                 tempo = (60.0 * self.offsetCorrectionMultiplier)/Float(averageLastStrideTime)
                 offsetCorrectionMultiplier = 1.0
-                
-                
-                
-                CollectionNeedsToCountAStride = true // GPS Experiment, delete later
-                CollectionHighAccelerationRecord = motionManager.accelerometerData.total // GPS Experiment, delete later
                 
                 
                 
