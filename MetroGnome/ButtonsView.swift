@@ -12,13 +12,15 @@ struct ButtonsView: View {
     @ObservedObject var theShepardAudioPlayer: VariableSpeedAudioPlayer
     
     
-    // Muffin has updated MP3's: false
-    // School has updated MP3's: true
+    // Muffin has updated MP3's: true
+    // School has updated MP3's: false
     
     
     // I'm going to let the ButtonsView manage the audio that's playing unless that causes problems. I don't think it will..?
     // Update file names array, tempos array, extensions array, number of songs, proofread
     // If uploaded twice, the convention is slow, then fast; which means higher inputted tempo, then lower inputted tmepo
+    
+    // Be carefull with songs that are in 3 (or something else that's not a power of 2) or swingy
     public var numberOfSongs: Int = 46
     @State public var selectedSongIndex: Int = 0
     public var songNames: [String] = ["MetroGnomeTestAudio_256Measures", "MetroGnomeTestAudio_256Measures", "MetroGnomeShepard'sTone", "MetroGnomeHalfstepShepard'sTone", "KorobeinikiPiano150", "KorobeinikiPiano150", "KorobeinikiString152+", "KorobeinikiString152+", "CanonMusicBox120", "WikipediaCanon160BPM", "WikipediaCanon160BPM", /* This is the end of the wav files */ "WikipediaCanon160BPMisMP3", "90s", "DontFearTheReaper", "PartyUSA", "PartyUSA", "PartyCIA", "PartyCIA", "CultOfPersonality92.5", "MotorcycleDriver160", "500Miles130", "SuperTrouper115", "LayAllYourLoveOnMe133", "Moskau121", "Moskau121", "DontStopTheMusic122.5", "DangerZone158", "FinalCountdown118Less", "WilliamTellOvertureFinale147", "Bolero68or76", "SmellsLikeCalculus120", "SmellsLikeCalculus120", "ForeverPiccolo120", "ForeverPiccolo120", "TheVeldt", "BrandenburgConcertoNo3Movement1at98", "SymphonyNo7inAMajorOp92Allegretto64", "TheSoundsOfSilence107", "TheSoundsOfSilence107", "DvorakSymphonyNo9at120", "DvorakSymphonyNo9at120", "MarsTheBringerOfWar150", "BananaBoat122", "BananaBoat122", "TakeAChanceOnMe106", "ZeldaFromMarioKart187"]
@@ -219,7 +221,7 @@ struct ButtonsView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .preferredColorScheme(.dark)
-            .background(Color(red: (57.0/256.0), green: (15.0/256.0), blue: (87.0/256.0)))
+            .background(Color(red: (57.0/255.0), green: (15.0/255.0), blue: (87.0/255.0)))
         }
     }
 }

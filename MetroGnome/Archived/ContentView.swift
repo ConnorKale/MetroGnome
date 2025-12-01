@@ -73,7 +73,7 @@ struct ContentView: View {
     @State private var lowestMaxTempo: Double = 150.0
     @State private var highestMaxTempo: Double = 220.0
 
-    private var backgroundColor: Color = Color(red: (57.0/256.0), green: (15.0/256.0), blue: (87.0/256.0)) // Purple // No more epilepsy
+    private var backgroundColor: Color = Color(red: (57.0/256.0), green: (15.0/256.0), blue: (87.0/256.0)) // Purple // No more epilepsy // In your head as you read this average the red and blue values :) // FROM FUTURE 256!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     
     var body: some View {
         VStack {

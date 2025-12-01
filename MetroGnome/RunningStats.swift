@@ -62,7 +62,7 @@ struct RunningStats: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .preferredColorScheme(.dark)
-            .background(Color(red: (13/256.0), green: (67.0/256.0), blue: (67.0/256.0)))
+            .background(Color(red: (13/255.0), green: (67.0/255.0), blue: (67.0/255.0)))
         }
     }
 }

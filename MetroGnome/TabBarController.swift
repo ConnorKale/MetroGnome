@@ -15,9 +15,11 @@ struct TabBarController: View {
     @StateObject private var audioPlayer = VariableSpeedAudioPlayer()
     @StateObject private var shepardAudioPlayer = VariableSpeedAudioPlayer()
     @StateObject private var GPS = LocationManager()
-    
+            
     @State private var tonePlayer = TonePlayer() // I think this has to be @State to go in the binding thingy
-
+    @State private var startedData: Bool = false
+    @State private var stoppedData: Bool = false
+    
     private let framerate: Double = (1.0/30.0) // Remember to change this and the timer!!!
     @State private var timer = Timer.publish(every: 1.0 / 30.0, on: .main, in: .common).autoconnect()
 
@@ -41,6 +43,12 @@ struct TabBarController: View {
     @State private var currentAccelerationRecord: Double = 0.0
     @State private var timeOfLastAccelerationRecord: Date? = Date()
     @State private var timeOfLastTempoCalculation: Date? = Date()
+    
+    
+    // Need binding for bool to count a stride, AverageLastStrideTime, MaxA, MinA,
+    @State private var CollectionNeedsToCountAStride: Bool = false
+    @State private var CollectionHighAccelerationRecord: Double = 0.0
+
 
     @State private var lastStrideTime: Double = 0.0 // In seconds
     @State private var secondLastStrideTime: Double = (1.0/3.0) // In seconds
@@ -72,6 +80,10 @@ struct TabBarController: View {
                 .tabItem {
                     Label("Playlist", systemImage: "text.document")
                 }
+            GPSDataCollection(startTone: $startedData, stopTone: $stoppedData, theGPS: GPS, theMotionManager: motionManager, theTempo: $tempo, StopAStride: $CollectionNeedsToCountAStride, LastStrideLength: $averageLastStrideTime, LowAccelerationRecord: $currentAccelerationRecord, HighAccelerationRecord: $CollectionHighAccelerationRecord)
+                .tabItem {
+                    Label("GPS Stuff", systemImage: "figure.run.square.stack")
+                }
             
             /*GyroScopeUI(theMotionManager: motionManager, radius: $radius, TonePlayerIsPlaying: $gyroTonePlaying, tonePlayer: $tonePlayer)
                 .tabItem {
@@ -93,6 +105,8 @@ struct TabBarController: View {
             rawDistanceIntegral += GPS.rawVelocity * framerate
             smoothedDistanceIntegral += GPS.smoothedVelocity * framerate
             
+            
+            
             if ((usedVelocity == 1 && GPS.rawVelocity <= goalVelocity) || (usedVelocity == 2 && GPS.smoothedVelocity <= goalVelocity)) { // or if you've turned it off and then you're automaticially going fast enough// you're going to slow
                 //go faster
                 matchingGoalPace = false
@@ -100,6 +114,8 @@ struct TabBarController: View {
                 // You're going fast enough.
                 matchingGoalPace = true
             }
+            
+            
             
             let lastRecord: Date = timeOfLastAccelerationRecord ?? Date() // I don't understand date-related variable types but I think this is converting timeOfLastAccelerationRecord which is a Date? into a Date or the current Date if there's an error so it doesn't crash.
             let lastCalculation: Date = timeOfLastTempoCalculation ?? Date()
@@ -119,8 +135,14 @@ struct TabBarController: View {
                 currentAccelerationRecord = motionManager.accelerometerData.total
                 timeOfLastAccelerationRecord = Date()
             }
+            
+            if (motionManager.accelerometerData.total > CollectionHighAccelerationRecord) // This if statement in GPS experiment
+            {
+                CollectionHighAccelerationRecord = motionManager.accelerometerData.total
+            }
                 
             if (elapsedRecordDouble > Double(0.75*averageLastStrideTime)) {
+                // Count a stride!
                 
                 // Old forthStride's data gets forgotten
                 //fourthLastStrideTime = thirdLastStrideTime
@@ -131,6 +153,13 @@ struct TabBarController: View {
                 averageLastStrideTime = ((thirdLastStrideTime + secondLastStrideTime + lastStrideTime)/3.0)
                 tempo = (60.0 * self.offsetCorrectionMultiplier)/Float(averageLastStrideTime)
                 offsetCorrectionMultiplier = 1.0
+                
+                
+                
+                CollectionNeedsToCountAStride = true // GPS Experiment, delete later
+                CollectionHighAccelerationRecord = motionManager.accelerometerData.total // GPS Experiment, delete later
+                
+                
                 
                 if (audioPlayer.isPlaying) {
                     if (matchingGoalPace || (usedPacingMethod == 4)) { // If you are matching the goal pace, or if you aren't getting paced
@@ -143,14 +172,14 @@ struct TabBarController: View {
                             audioPlayer.rate = tempo / currentPlayingFileTempo
                             if (!shepardAudioPlayer.isPlaying)
                             {
-                                shepardAudioPlayer.loadAndPlay(filename: "MetroGnomeShepard'sTone", fileExtension: "wav") // your .wav file name
+                                shepardAudioPlayer.loadAndPlay(filename: "MetroGnomeShepard'sTone", fileExtension: "wav")
                             }
                             shepardAudioPlayer.rate = tempo / 180.0
                         } else if (usedPacingMethod == 3) {
                             audioPlayer.rate = tempo / currentPlayingFileTempo
                             if (!shepardAudioPlayer.isPlaying)
                             {
-                                shepardAudioPlayer.loadAndPlay(filename: "MetroGnomeHalfstepShepard'sTone", fileExtension: "wav") // your .wav file name
+                                shepardAudioPlayer.loadAndPlay(filename: "MetroGnomeHalfstepShepard'sTone", fileExtension: "wav")
                             }
                             shepardAudioPlayer.rate = tempo / 180.0
                         }

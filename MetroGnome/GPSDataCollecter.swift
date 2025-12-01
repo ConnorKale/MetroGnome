@@ -8,11 +8,33 @@
 import SwiftUI
 
 struct GPSDataCollecter: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+    
+    @Binding var isCollectingData: Bool
+    @Binding var CollectionNeedsToStop: Bool
 
-#Preview {
-    GPSDataCollecter()
+    private var backgroundColor: Color {
+        switch isCollectingData {
+        case false:
+            return Color(red: (67.0/255.0), green: (0.0/255.0), blue: (0.0/255.0))
+        default:
+            return Color(red: (255.0/255.0), green: (0.0/255.0), blue: (0.0/255.0))
+        }
+    }
+
+    var body: some View {
+        ScrollView {
+            Button(isCollectingData ? "Stop" : "Start") {
+                if isCollectingData {
+                    // stop
+                    CollectionNeedsToStop = true // This script asks the Collection to stop nicely but doesn't actually do anything
+                } else {
+                    // start
+                    isCollectingData = true
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .font(.system(size: 300))
+        }
+        .background(backgroundColor)
+    }
 }
