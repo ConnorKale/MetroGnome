@@ -13,7 +13,7 @@ struct ButtonsView: View {
     
     
     // Muffin has updated MP3's: true
-    // School has updated MP3's: false
+    // School has updated MP3's: truw
     
     
     // I'm going to let the ButtonsView manage the audio that's playing unless that causes problems. I don't think it will..?
