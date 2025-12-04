@@ -109,7 +109,10 @@ struct GPSDataCollection: View {
                 .tabItem {
                     Label("Take Point", systemImage: "figure.run")
                 }
-            
+            GPSDataDescription()
+                .tabItem {
+                    Label("Data Description", systemImage: "apple.book.pages")
+                }
         }
         .onReceive(timer) { _ in // This runs at 30 FPS. That can be changed in the timer variable declaration at the top in the TabBarController.
             // Data[1].AverageTempo += 12
@@ -151,7 +154,7 @@ struct GPSDataCollection: View {
                 CurrentDataPoint.AverageAbsoluteAccelerationIntegralPerStrideMinusG = CurrentDataPoint.AbsoluteAccelerationIntegralMinusG / CurrentDataPoint.NumberOfSteps
                 CurrentDataPoint.MaxAccelerationPerStride = CurrentDataPoint.MaxAccelerationPerStrideSum / CurrentDataPoint.NumberOfSteps
                 CurrentDataPoint.MinAccelerationPerStride = CurrentDataPoint.MinAccelerationPerStrideSum / CurrentDataPoint.NumberOfSteps
-                CurrentDataPoint.AverageTempo = CurrentDataPoint.NumberOfSteps / (CurrentDataPoint.FrameCount * (framerate / 60))// Number of steps over number of minutes
+                CurrentDataPoint.AverageTempo = CurrentDataPoint.NumberOfSteps / (CurrentDataPoint.FrameCount * (framerate / 60))// Number of steps over number of minutes //For some reason this is broken and returnes 1800 sometimes
                 CurrentDataPoint.AbsoluteJerkIntegralPerStride = CurrentDataPoint.AbsoluteJerkIntegral / CurrentDataPoint.NumberOfSteps
                 
                 CurrentDataPoint.AverageAbsoluteAccelerationIntegralPerStrideWeightedByLength = AbsoluteAccelerationIntegralPerStrideWeightedByLength / CurrentDataPoint.NumberOfSteps
@@ -173,6 +176,6 @@ struct GPSDataCollection: View {
     }
 }
 
-/*#Preview {
-    GPSDataCollection()
-}*/
+#Preview {
+    TabBarController()
+}
