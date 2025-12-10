@@ -143,8 +143,7 @@ struct TabBarController: View {
             }
             
             // Start of GPS Experiment
-            CollectionNeedsToCountAStride = true
-            CollectionHighAccelerationRecord = motionManager.accelerometerData.total
+            // I think this should not be here   CollectionHighAccelerationRecord = motionManager.accelerometerData.total
             
             elapsedToneChangeDouble = Double(currentTime.timeIntervalSince(timeOfLastToneChange ?? currentTime)) // In seconds I hope
 
@@ -205,8 +204,7 @@ struct TabBarController: View {
                 tonePlayerMode = 8
                 elapsedToneChangeDouble = Double(currentTime.timeIntervalSince(timeOfLastToneChange ?? currentTime)) // In seconds I hope
             }
-            if (tonePlayerMode == 8 && (elapsedToneChangeDouble > (averageLastStrideTime))) // AND TIME
-            {
+            if (tonePlayerMode == 8 && (elapsedToneChangeDouble > (averageLastStrideTime))) { // AND TIME
                 tonePlayer.stop()
                 // time doesn't matter
                 tonePlayerMode = 0
@@ -218,6 +216,12 @@ struct TabBarController: View {
                 
             if (elapsedRecordDouble > Double(0.75*averageLastStrideTime)) {
                 // Count a stride!
+                
+                
+                
+                CollectionNeedsToCountAStride = true // GPS
+                
+                
                 
                 // Old forthStride's data gets forgotten
                 //fourthLastStrideTime = thirdLastStrideTime

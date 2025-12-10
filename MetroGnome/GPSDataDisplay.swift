@@ -15,6 +15,7 @@ struct GPSDataDisplay: View {
     var body: some View {
         ScrollView {
             VStack {
+                Text("Version 2")
                 ForEach(DisplayData.indices, id: \.self) { indexNumber in
                     /*HStack{
                         //Text("Data point \(indexNumber): | \(SomeNumberVariableName, specifier: "%.2f") | \(SomeNumberVariableName, specifier: "%.2f") | \(SomeNumberVariableName, specifier: "%.2f") | \(SomeNumberVariableName, specifier: "%.2f") | \(SomeNumberVariableName, specifier: "%.2f") | ")
