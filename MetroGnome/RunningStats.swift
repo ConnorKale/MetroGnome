@@ -21,17 +21,17 @@ struct RunningStats: View {
                 Text("Hello, World!")
                 
                 VStack {
-                    Button("Ahead 0.1 beats") {
+                    Button("Ahead .1") {
                         offsetButtonMultiplier = 1.1
                     }
-                    .font(.system(size: 50))
-                    Button("Back 0.1 beats")
+                    .font(.system(size: 105))
+                    Button("Back .1")
                     {
                         offsetButtonMultiplier = 0.9
                     }
-                    .font(.system(size: 50))
+                    .font(.system(size: 100))
                 }
-                .font(.system(size: 100))
+                .font(.system(size: 120))
                 .padding(.bottom, 70)
                 
                 //    \(somevariablename, specifier: "%.2f")
