@@ -5,6 +5,8 @@
 //  Created by Connor Kale on 1/15/26.
 //
 
+/*
+
 struct Song: Codable, Equatable {
     let name: String
     let tempo: Float
@@ -160,3 +162,4 @@ let jsonString = String(data: jsonData, encoding: .utf8)
 
 let decoder = JSONDecoder()
 let decodedSongs = try decoder.decode([Song].self, from: jsonData)
+*/

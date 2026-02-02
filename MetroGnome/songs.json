@@ -1,0 +1,14 @@
+[
+  {
+    "id": "B8D2A6E0-1E36-4E2C-A5C7-10D7A6A5E001",
+    "name": "MetroGnomeTestAudio_256Measures",
+    "tempo": 180,
+    "fileExtension": "wav"
+  },
+  {
+    "id": "7A4F9E1C-4D91-44C8-9C61-2D3B8A01B002",
+    "name": "WikipediaCanon160BPM",
+    "tempo": 160,
+    "fileExtension": "wav"
+  }
+]

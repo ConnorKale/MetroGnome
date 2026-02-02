@@ -34,22 +34,23 @@ struct ButtonsView: View {
     @Binding var theGoalPaceKilometers: Double // This is in minutes per kilometer
     public var lowestGoalPaceKilometers: Double = 2.0 // This is in minutes per kilometer
     public var highestGoalPaceKilometers: Double = 10.0 // This is in minutes per kilometer
-
+    
     @Binding var theGoalPaceMiles: Double // This is in minutes per mile
     public var lowestGoalPaceMiles: Double = 3.0
     public var highestGoalPaceMiles: Double = 16.0
-
+    
     @Binding var theGoalVelocity: Double // Equals with 26.6666667/theGoalPace
-
+    
     @Binding var theTempo: Float // In seconds
-
+    
     @Binding var theMinTempo: Double
     @Binding var theMaxTempo: Double
     public var lowestMinTempo: Double = 120.0
     public var highestMinTempo: Double = 190.0
     // private var lowestMaxTempo: Double = 150.0
     // private var highestMaxTempo: Double = 220.0
-
+    
+    //@State private var songs: [Song] = loadSongs()
 
     
     var body: some View {
@@ -63,13 +64,14 @@ struct ButtonsView: View {
                             theAudioPlayer.stop()
                             theShepardAudioPlayer.stop()
                         } else {
+                            
                             theCurrentlyPlayingFileTempo = fileTempos[Int(selectedSongIndex)]
                             theAudioPlayer.loadAndPlay(filename: songNames[Int(selectedSongIndex)], fileExtension: fileExtensions[Int(selectedSongIndex)]) // your file name
                         }
                     }
                     .font(.system(size: 100))
                     //.padding(.bottom, -30)
-
+                    
                     HStack {
                         Button("Prev")
                         {
@@ -82,7 +84,7 @@ struct ButtonsView: View {
                             selectedSongIndex = min((selectedSongIndex + 1), (numberOfSongs - 1))
                         }
                         .font(.system(size: 24))
-
+                        
                     }
                     .padding(.bottom, 20)
                     
@@ -117,13 +119,13 @@ struct ButtonsView: View {
                         theUsedPacingMethod = 4
                     }
                 }
-
+                
                 Text("Tempo:")
                     .font(.system(size: 20))
                 Text("\(theTempo, specifier: "%.2f")")
                     .font(.system(size: 80))
                     .padding(.bottom, 20)
-
+                
                 HStack { // Which Velocity
                     Text("GPS \(String(Int(theUsedVelocity)))")
                     Button("Use 1")
@@ -140,7 +142,7 @@ struct ButtonsView: View {
                     }
                 }
                 .padding(.bottom, 30)
-
+                
                 HStack {
                     Button("-10") // Min/max tempo text
                     {
@@ -155,15 +157,15 @@ struct ButtonsView: View {
                     .font(.system(size: 40))
                 }
                 //.padding(.bottom, -10)
-
+                
                 Slider(value: $theMinTempo, in: lowestMinTempo...highestMinTempo, step: 10) // Min/max tempo slider
                     .onChange(of: theMinTempo) { newValue in
                         theMinTempo = round(newValue / 10) * 10
                         theMaxTempo = theMinTempo + 40.0
                     }
                     .padding(.horizontal)
-                    //.padding(.bottom, 30)
-
+                //.padding(.bottom, 30)
+                
                 HStack { // Goal pace text kilometers
                     Button("-10s")
                     {
@@ -188,8 +190,8 @@ struct ButtonsView: View {
                         theGoalPaceMiles = theGoalPaceKilometers * 1.6
                     }
                     .padding(.horizontal)
-
-
+                
+                
                 HStack { // Goal pace text miles
                     Button("-10s")
                     {
@@ -214,10 +216,10 @@ struct ButtonsView: View {
                         theGoalPaceKilometers = theGoalPaceMiles / 1.6
                     }
                     .padding(.horizontal)
-
-
-
-
+                
+                
+                
+                
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .preferredColorScheme(.dark)
@@ -225,7 +227,22 @@ struct ButtonsView: View {
         }
     }
 }
+    /*
+func loadSongs() -> [Song] {
+    guard let url = Bundle.main.url(forResource: "songs", withExtension: "json") else {
+        fatalError("songs.json not found")
+    }
+
+    do {
+        let data = try Data(contentsOf: url)
+        return try JSONDecoder().decode([Song].self, from: data)
+    } catch {
+        fatalError("Failed to load songs: \(error)")
+    }
+}
+*/
 
 #Preview {
     TabBarController()
 }
+
