@@ -1,14 +1,93 @@
+// Has not been proofread. Hopefully comments are allowed on JSON's lol
 [
-  {
-    "id": "B8D2A6E0-1E36-4E2C-A5C7-10D7A6A5E001",
-    "name": "MetroGnomeTestAudio_256Measures",
-    "tempo": 180,
-    "fileExtension": "wav"
-  },
-  {
-    "id": "7A4F9E1C-4D91-44C8-9C61-2D3B8A01B002",
-    "name": "WikipediaCanon160BPM",
-    "tempo": 160,
-    "fileExtension": "wav"
-  }
+    {
+        "name": "MetroGnomeTestAudio_256Measures",
+        "tempo": 180.0,
+        "extension": "wav"
+    },
+    {
+        "name": "MetroGnomeTestAudio_256Measures",
+        "tempo": 90.0,
+        "extension": "wav"
+    },
+    {
+        "name": "MetroGnomeShepard'sTone",
+        "tempo": 180.0,
+        "extension": "wav"
+    },
+    {
+        "name": "MetroGnomeHalfstepShepard'sTone",
+        "tempo": 180.0,
+        "extension": "wav"
+    },
+    {
+        "name": "KorobeinikiPiano150",
+        "tempo": 150.0,
+        "extension": "wav"
+    },
+    {
+        "name": "KorobeinikiPiano150",
+        "tempo": 75.0,
+        "extension": "wav"
+    },
+    {
+        "name": "KorobeinikiString152+",
+        "tempo": 152.0,
+        "extension": "wav"
+    },
+    {
+        "name": "KorobeinikiString152+",
+        "tempo": 76.0,
+        "extension": "wav"
+    },
+    {
+        "name": "CanonMusicBox120",
+        "tempo": 120.0,
+        "extension": "wav"
+    },
+    {
+        "name": "WikipediaCanon160BPM",
+        "tempo": 160.0,
+        "extension": "wav"
+    },
+    {
+        "name": "WikipediaCanon160BPMisMP3",
+        "tempo": 160.0,
+        "extension": "mp3"
+    },
+    {
+        "name": "90s",
+        "tempo": 158.0,
+        "extension": "mp3"
+    },
+    {
+        "name": "DontFearTheReaper",
+        "tempo": 141.5,
+        "extension": "mp3"
+    },
+    {
+        "name": "PartyUSA",
+        "tempo": 192.0,
+        "extension": "mp3"
+    },
+    {
+        "name": "PartyUSA",
+        "tempo": 96.0,
+        "extension": "mp3"
+    },
+    {
+        "name": "PartyCIA",
+        "tempo": 192.0,
+        "extension": "mp3"
+    },
+    {
+        "name": "PartyCIA",
+        "tempo": 96.0,
+        "extension": "mp3"
+    },
+    {
+        "name": "TheVeldt",
+        "tempo": 180.0,
+        "extension": "mp3"
+    }
 ]

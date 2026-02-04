@@ -227,7 +227,7 @@ struct ButtonsView: View {
         }
     }
 }
-    /*
+
 func loadSongs() -> [Song] {
     guard let url = Bundle.main.url(forResource: "songs", withExtension: "json") else {
         fatalError("songs.json not found")
@@ -240,7 +240,7 @@ func loadSongs() -> [Song] {
         fatalError("Failed to load songs: \(error)")
     }
 }
-*/
+
 
 #Preview {
     TabBarController()
