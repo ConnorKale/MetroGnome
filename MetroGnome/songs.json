@@ -1,93 +1,110 @@
-// Has not been proofread. Hopefully comments are allowed on JSON's lol
 [
     {
+        "id": 1,
         "name": "MetroGnomeTestAudio_256Measures",
         "tempo": 180.0,
-        "extension": "wav"
+        "fileExtension": "wav"
     },
     {
+        "id": 2,
         "name": "MetroGnomeTestAudio_256Measures",
         "tempo": 90.0,
-        "extension": "wav"
+        "fileExtension": "wav"
     },
     {
+        "id": 3,
         "name": "MetroGnomeShepard'sTone",
         "tempo": 180.0,
-        "extension": "wav"
+        "fileExtension": "wav"
     },
     {
+        "id": 4,
         "name": "MetroGnomeHalfstepShepard'sTone",
         "tempo": 180.0,
-        "extension": "wav"
+        "fileExtension": "wav"
     },
     {
+        "id": 5,
         "name": "KorobeinikiPiano150",
         "tempo": 150.0,
-        "extension": "wav"
+        "fileExtension": "wav"
     },
     {
+        "id": 6,
         "name": "KorobeinikiPiano150",
         "tempo": 75.0,
-        "extension": "wav"
+        "fileExtension": "wav"
     },
     {
+        "id": 7,
         "name": "KorobeinikiString152+",
         "tempo": 152.0,
-        "extension": "wav"
+        "fileExtension": "wav"
     },
     {
+        "id": 8,
         "name": "KorobeinikiString152+",
         "tempo": 76.0,
-        "extension": "wav"
+        "fileExtension": "wav"
     },
     {
+        "id": 9,
         "name": "CanonMusicBox120",
         "tempo": 120.0,
-        "extension": "wav"
+        "fileExtension": "wav"
     },
     {
+        "id": 10,
         "name": "WikipediaCanon160BPM",
         "tempo": 160.0,
-        "extension": "wav"
+        "fileExtension": "wav"
     },
     {
+        "id": 11,
         "name": "WikipediaCanon160BPMisMP3",
         "tempo": 160.0,
-        "extension": "mp3"
+        "fileExtension": "mp3"
     },
     {
+        "id": 12,
         "name": "90s",
         "tempo": 158.0,
-        "extension": "mp3"
+        "fileExtension": "mp3"
     },
     {
+        "id": 13,
         "name": "DontFearTheReaper",
         "tempo": 141.5,
-        "extension": "mp3"
+        "fileExtension": "mp3"
     },
     {
+        "id": 14,
         "name": "PartyUSA",
         "tempo": 192.0,
-        "extension": "mp3"
+        "fileExtension": "mp3"
     },
     {
+        "id": 15,
         "name": "PartyUSA",
         "tempo": 96.0,
-        "extension": "mp3"
+        "fileExtension": "mp3"
     },
     {
+        "id": 16,
         "name": "PartyCIA",
         "tempo": 192.0,
-        "extension": "mp3"
+        "fileExtension": "mp3"
     },
     {
+        "id": 17,
         "name": "PartyCIA",
         "tempo": 96.0,
-        "extension": "mp3"
+        "fileExtension": "mp3"
     },
     {
+        "id": 18,
         "name": "TheVeldt",
         "tempo": 180.0,
-        "extension": "mp3"
+        "fileExtension": "mp3"
     }
 ]

@@ -10,6 +10,9 @@ GitHub student thing is https://education.github.com/pack
 
 An awesome non-intiger metronome is https://eggfish.studio/bpm. This is like the only one on the internet that isn't restricted to intigers. I hope they never ever take it down.
 
+JSON notes: // Has not been proofread. Hopefully comments are allowed on JSON's lol. Also I might need to target membership
+(JSON didn't allow comments ): )
+
 
 https://xkcd.com/1296/
 

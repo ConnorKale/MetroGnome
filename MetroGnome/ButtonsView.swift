@@ -22,10 +22,15 @@ struct ButtonsView: View {
     
     // Be carefull with songs that are in 3 (or something else that's not a power of 2) or swingy
     public var numberOfSongs: Int = 46
-    @State public var selectedSongIndex: Int = 0
+    /*@State public var selectedSongIndex: Int = 0
     public var songNames: [String] = ["MetroGnomeTestAudio_256Measures", "MetroGnomeTestAudio_256Measures", "MetroGnomeShepard'sTone", "MetroGnomeHalfstepShepard'sTone", "KorobeinikiPiano150", "KorobeinikiPiano150", "KorobeinikiString152+", "KorobeinikiString152+", "CanonMusicBox120", "WikipediaCanon160BPM", "WikipediaCanon160BPM", /* This is the end of the wav files */ "WikipediaCanon160BPMisMP3", "90s", "DontFearTheReaper", "PartyUSA", "PartyUSA", "PartyCIA", "PartyCIA", "CultOfPersonality92.5", "MotorcycleDriver160", "500Miles130", "SuperTrouper115", "LayAllYourLoveOnMe133", "Moskau121", "Moskau121", "DontStopTheMusic122.5", "DangerZone158", "FinalCountdown118Less", "WilliamTellOvertureFinale147", "Bolero68or76", "SmellsLikeCalculus120", "SmellsLikeCalculus120", "ForeverPiccolo120", "ForeverPiccolo120", "TheVeldt", "BrandenburgConcertoNo3Movement1at98", "SymphonyNo7inAMajorOp92Allegretto64", "TheSoundsOfSilence107", "TheSoundsOfSilence107", "DvorakSymphonyNo9at120", "DvorakSymphonyNo9at120", "MarsTheBringerOfWar150", "BananaBoat122", "BananaBoat122", "TakeAChanceOnMe106", "ZeldaFromMarioKart187"]
     public var fileTempos: [Float] = [180, 90, 180, 180, 150, 75, 152, 76, 120, 160, 80 /* End of*/ , /* wavs */ 160, 158, 141, 192, 96, 192, 96, 185, 160, 130, 115, 133, 242, 121, 122.5, 158, 118, 147, 144, 240, 120, 240, 120, 180, 196, 192, 214, 107, 240, 120, 150, 244, 122, 212, 187]
     public var fileExtensions: [String] = ["wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "wav", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3", "mp3"]
+     */
+    
+    @State private var songs: [Song] = []
+    @State private var selectedSongIndex: Int = 0
+
     @Binding public var theCurrentlyPlayingFileTempo: Float // Maybe replace with something about the current song's index, so I can access it's other properties. Not now.
     
     @Binding var theUsedVelocity: Int // This is what velocity algorithm you're using and should be an ∈ of {1, 2, 3}.
@@ -64,9 +69,13 @@ struct ButtonsView: View {
                             theAudioPlayer.stop()
                             theShepardAudioPlayer.stop()
                         } else {
-                            
+                            let currentSong = songs[selectedSongIndex]
+                            theCurrentlyPlayingFileTempo = currentSong.tempo
+                            theAudioPlayer.loadAndPlay(filename: currentSong.name, fileExtension: currentSong.fileExtension)
+                            /*
                             theCurrentlyPlayingFileTempo = fileTempos[Int(selectedSongIndex)]
-                            theAudioPlayer.loadAndPlay(filename: songNames[Int(selectedSongIndex)], fileExtension: fileExtensions[Int(selectedSongIndex)]) // your file name
+                            theAudioPlayer.loadAndPlay(filename: songNames[Int(selectedSongIndex)], fileExtension: fileExtensions[Int(selectedSongIndex)]) // file name
+                             */
                         }
                     }
                     .font(.system(size: 100))
@@ -81,7 +90,7 @@ struct ButtonsView: View {
                         Text("Will play song number \(String(selectedSongIndex + 1)).")
                         Button("Next")
                         {
-                            selectedSongIndex = min((selectedSongIndex + 1), (numberOfSongs - 1))
+                            selectedSongIndex = min((selectedSongIndex + 1), (songs.count - 1))
                         }
                         .font(.system(size: 24))
                         
@@ -225,7 +234,11 @@ struct ButtonsView: View {
             .preferredColorScheme(.dark)
             .background(Color(red: (57.0/255.0), green: (15.0/255.0), blue: (87.0/255.0)))
         }
+        .onAppear {
+            songs = loadSongs()
+        }
     }
+    
 }
 
 func loadSongs() -> [Song] {
