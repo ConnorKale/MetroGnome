@@ -61,50 +61,218 @@
     },
     {
         "id": 11,
+        "name": "WikipediaCanon160BPM",
+        "tempo": 80.0,
+        "fileExtension": "wav"
+    },
+    {
+        "id": 12,
         "name": "WikipediaCanon160BPMisMP3",
         "tempo": 160.0,
         "fileExtension": "mp3"
     },
     {
-        "id": 12,
+        "id": 13,
         "name": "90s",
         "tempo": 158.0,
         "fileExtension": "mp3"
     },
     {
-        "id": 13,
-        "name": "DontFearTheReaper",
-        "tempo": 141.5,
-        "fileExtension": "mp3"
-    },
-    {
         "id": 14,
-        "name": "PartyUSA",
-        "tempo": 192.0,
+        "name": "DontFearTheReaper",
+        "tempo": 141.0,
         "fileExtension": "mp3"
     },
     {
         "id": 15,
         "name": "PartyUSA",
-        "tempo": 96.0,
+        "tempo": 192.0,
         "fileExtension": "mp3"
     },
     {
         "id": 16,
-        "name": "PartyCIA",
-        "tempo": 192.0,
+        "name": "PartyUSA",
+        "tempo": 96.0,
         "fileExtension": "mp3"
     },
     {
         "id": 17,
         "name": "PartyCIA",
-        "tempo": 96.0,
+        "tempo": 192.0,
         "fileExtension": "mp3"
     },
     {
         "id": 18,
+        "name": "PartyCIA",
+        "tempo": 96.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 19,
+        "name": "CultOfPersonality92.5mp3",
+        "tempo": 185.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 20,
+        "name": "MotorcycleDriver160",
+        "tempo": 160.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 21,
+        "name": "500Miles130",
+        "tempo": 130.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 22,
+        "name": "SuperTrouper115",
+        "tempo": 115.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 23,
+        "name": "LayAllYourLoveOnMe133",
+        "tempo": 133.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 24,
+        "name": "Moskau121",
+        "tempo": 242.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 25,
+        "name": "Moskau121",
+        "tempo": 121.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 26,
+        "name": "DontStopTheMusic122.5",
+        "tempo": 122.5,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 27,
+        "name": "DangerZone158",
+        "tempo": 158.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 28,
+        "name": "FinalCountdown118Less",
+        "tempo": 118.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 29,
+        "name": "WilliamTellOvertureFinale147",
+        "tempo": 147.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 30,
+        "name": "Bolero68or76",
+        "tempo": 144.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 31,
+        "name": "SmellsLikeCalculus120",
+        "tempo": 240.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 32,
+        "name": "SmellsLikeCalculus120",
+        "tempo": 120.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 33,
+        "name": "ForeverPiccolo120",
+        "tempo": 240.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 34,
+        "name": "ForeverPiccolo120",
+        "tempo": 120.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 35,
         "name": "TheVeldt",
         "tempo": 180.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 36,
+        "name": "BrandenburgConcertoNo3Movement1at98",
+        "tempo": 196.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 37,
+        "name": "SymphonyNo7inAMajorOp92Allegretto64",
+        "tempo": 192.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 38,
+        "name": "TheSoundsOfSilence107",
+        "tempo": 214.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 39,
+        "name": "TheSoundsOfSilence107",
+        "tempo": 107.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 40,
+        "name": "DvorakSymphonyNo9at120",
+        "tempo": 240.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 41,
+        "name": "DvorakSymphonyNo9at120",
+        "tempo": 120.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 42,
+        "name": "MarsTheBringerOfWar150",
+        "tempo": 150.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 43,
+        "name": "BananaBoat122",
+        "tempo": 244.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 44,
+        "name": "BananaBoat122",
+        "tempo": 122.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 45,
+        "name": "TakeAChanceOnMe106",
+        "tempo": 212.0,
+        "fileExtension": "mp3"
+    },
+    {
+        "id": 46,
+        "name": "ZeldaFromMarioKart187",
+        "tempo": 187.0,
         "fileExtension": "mp3"
     }
 ]
