@@ -1,278 +1,416 @@
 [
     {
         "id": 1,
-        "name": "MetroGnomeTestAudio_256Measures",
+        "fileName": "MetroGnomeTestAudio_256Measures",
+        "songName": "Slow TestAudioFile.wav",
         "tempo": 180.0,
-        "fileExtension": "wav"
+        "fileExtension": "wav",
+        "artist": "Connor",
+        "description": "My creation with Garage Band. It's an endless anoying scale to test the tempo. I wouldn't reccomend listening to it, it's pretty annoying"
     },
     {
         "id": 2,
-        "name": "MetroGnomeTestAudio_256Measures",
+        "fileName": "MetroGnomeTestAudio_256Measures",
+        "songName": "Fast TestAudioFile.wav",
         "tempo": 90.0,
-        "fileExtension": "wav"
+        "fileExtension": "wav",
+        "artist": "Connor",
+        "description": "Same song/file as #1, at double tempo"
     },
     {
         "id": 3,
-        "name": "MetroGnomeShepard'sTone",
+        "fileName": "MetroGnomeShepard'sTone",
+        "songName": "Shepard'sTone.wav",
         "tempo": 180.0,
-        "fileExtension": "wav"
+        "fileExtension": "wav",
+        "artist": "Connor",
+        "description": "This is a shepard's tone, the same file that plays for the pacing. I also made it a playable song for fun even though it's a terrible song."
     },
     {
         "id": 4,
-        "name": "MetroGnomeHalfstepShepard'sTone",
+        "fileName": "MetroGnomeHalfstepShepard'sTone",
+        "songName": "Halfstep Shepard'sTone.wav",
         "tempo": 180.0,
-        "fileExtension": "wav"
+        "fileExtension": "wav",
+        "artist": "Connor",
+        "description": "Same as #3 but it has another piano off by a halfstep"
     },
     {
         "id": 5,
-        "name": "KorobeinikiPiano150",
+        "fileName": "KorobeinikiPiano150",
+        "songName": "Slow Korobienki/Tetris Piano",
         "tempo": 150.0,
-        "fileExtension": "wav"
+        "fileExtension": "wav",
+        "artist": "A Russian folk song, arranged by Gregor Quendel",
+        "description": "A Russian folk song, used by Tetris. This is a piano version. It's quieter than the string version. It's a fun song and is easy to hear the beats of. It's from https://www.classicals.de/music-licenses/p/tetris-piano?rq=korobeiniki. They want it to be attributed like this:    Music: “Tetris Theme - Korobeiniki - Rearranged - Arr. for Piano” by Gregor Quendel / Classicals.de Source: https://www.classicals.de."
     },
     {
         "id": 6,
-        "name": "KorobeinikiPiano150",
+        "fileName": "KorobeinikiPiano150",
+        "songName": "Fast Korobienki/Tetris Piano",
         "tempo": 75.0,
-        "fileExtension": "wav"
+        "fileExtension": "wav",
+        "artist": "A Russian folk song, arranged by Gregor Quendel",
+        "description": "Same file and song stuff as #5, at double speed"
     },
     {
         "id": 7,
-        "name": "KorobeinikiString152+",
+        "fileName": "KorobeinikiString152+",
+        "songName": "Slow Korobienki/Tetris Strings",
         "tempo": 152.0,
-        "fileExtension": "wav"
+        "fileExtension": "wav",
+        "artist": "A Russian folk song, arranged by Gregor Quendel",
+        "description": "A Russian folk song, used by Tetris. This is a string version. It's louder than the string version. It's from https://www.classicals.de/music-licenses/p/tetris-strings?rq=korobeiniki. They want it to be attributed like this:     Music: “Tetris Theme - Korobeiniki - Rearranged - Arr. for Strings” by Gregor Quendel / Classicals.de Source: https://www.classicals.de"
     },
     {
         "id": 8,
-        "name": "KorobeinikiString152+",
+        "fileName": "KorobeinikiString152+",
+        "songName": "Fast Korobienki/Tetris Strings",
         "tempo": 76.0,
-        "fileExtension": "wav"
+        "fileExtension": "wav",
+        "artist": "A Russian folk song, arranged by Gregor Quendel",
+        "description": "Same file and song stuff as #5, at double speed"
     },
     {
         "id": 9,
-        "name": "CanonMusicBox120",
+        "fileName": "CanonMusicBox120",
+        "songName": "Music Box Pachelbel's Canon",
         "tempo": 120.0,
-        "fileExtension": "wav"
+        "fileExtension": "wav",
+        "artist": "Composed by Johann Pachelbel, arranged by Gregor Quendel",
+        "description": "A music box version of Pachelbel's Canon. This is from https://www.classicals.de/music-licenses/p/pachelbel-canon-in-d-musicbox. They want it to be attributed like this:     Pachelbel - Canon in D - P. 37 - Arranged for Music Box” by Gregor Quendel / Classicals.de Source: https://www.classicals.de"
     },
     {
         "id": 10,
-        "name": "WikipediaCanon160BPM",
+        "fileName": "WikipediaCanon160BPM",
+        "songName": "Slow Pachelbel's Canon String",
         "tempo": 160.0,
-        "fileExtension": "wav"
+        "fileExtension": "wav",
+        "artist": "Composed by Johann Pachelbel, arranged by Kevin MacLeod",
+        "description": "This is a great, serene violin/cello song. I entered it as 160 BPM to get one footstep per two beats instead of one footstep per beat, to play closer to it's actual tempo when you run. The file is from https://en.wikipedia.org/wiki/File:Kevin_MacLeod_-_Canon_in_D_Major.ogg"
     },
     {
         "id": 11,
-        "name": "WikipediaCanon160BPM",
+        "fileName": "WikipediaCanon160BPM",
+        "songName": "Fast Pachelbel's Canon String",
         "tempo": 80.0,
-        "fileExtension": "wav"
+        "fileExtension": "wav",
+        "artist": "Composed by Johann Pachelbel, arranged by Kevin MacLeod",
+        "description": "Same as #10 but at one footstep per beat. Will play really fast if you run with this."
     },
     {
         "id": 12,
-        "name": "WikipediaCanon160BPMisMP3",
+        "fileName": "WikipediaCanon160BPMisMP3",
+        "songName": "BROKEN Canon as MP3",
         "tempo": 160.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "Composed by Johann Pachelbel, arranged by Kevin MacLeod",
+        "description": "This is Canon as an MP3, to test the MP3 decoder. I think the file is broken somehow and won't decode correctly. If you play this, it will play the last MP3 you decoded as if it was at 160 BPM. However, the other MP3s work so it's fine I guess..?"
     },
     {
         "id": 13,
-        "name": "90s",
+        "fileName": "90s",
+        "songName": "Running in the 90's",
         "tempo": 158.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "Look this up",
+        "description": "The first song I s̶t̶o̶l̶e̶ downloaded. The file's around 158 BPM, a metronome was dragging a little bit and fell behind about a beat over the course of the song but was pretty accurate."
     },
     {
         "id": 14,
-        "name": "DontFearTheReaper",
+        "fileName": "DontFearTheReaper",
+        "songName": "",
         "tempo": 141.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 15,
-        "name": "PartyUSA",
+        "fileName": "PartyUSA",
+        "songName": "",
         "tempo": 192.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 16,
-        "name": "PartyUSA",
+        "fileName": "PartyUSA",
+        "songName": "",
         "tempo": 96.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 17,
-        "name": "PartyCIA",
+        "fileName": "PartyCIA",
+        "songName": "",
         "tempo": 192.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 18,
-        "name": "PartyCIA",
+        "fileName": "PartyCIA",
+        "songName": "",
         "tempo": 96.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 19,
-        "name": "CultOfPersonality92.5mp3",
+        "fileName": "CultOfPersonality92.5mp3",
+        "songName": "",
         "tempo": 185.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 20,
-        "name": "MotorcycleDriver160",
+        "fileName": "MotorcycleDriver160",
+        "songName": "",
         "tempo": 160.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 21,
-        "name": "500Miles130",
+        "fileName": "500Miles130",
+        "songName": "",
         "tempo": 130.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 22,
-        "name": "SuperTrouper115",
+        "fileName": "SuperTrouper115",
+        "songName": "",
         "tempo": 115.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 23,
-        "name": "LayAllYourLoveOnMe133",
+        "fileName": "LayAllYourLoveOnMe133",
+        "songName": "",
         "tempo": 133.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 24,
-        "name": "Moskau121",
+        "fileName": "Moskau121",
+        "songName": "",
         "tempo": 242.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 25,
-        "name": "Moskau121",
+        "fileName": "Moskau121",
+        "songName": "",
         "tempo": 121.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 26,
-        "name": "DontStopTheMusic122.5",
+        "fileName": "DontStopTheMusic122.5",
+        "songName": "",
         "tempo": 122.5,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 27,
-        "name": "DangerZone158",
+        "fileName": "DangerZone158",
+        "songName": "",
         "tempo": 158.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 28,
-        "name": "FinalCountdown118Less",
+        "fileName": "FinalCountdown118Less",
+        "songName": "",
         "tempo": 118.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 29,
-        "name": "WilliamTellOvertureFinale147",
+        "fileName": "WilliamTellOvertureFinale147",
+        "songName": "",
         "tempo": 147.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 30,
-        "name": "Bolero68or76",
+        "fileName": "Bolero68or76",
+        "songName": "",
         "tempo": 144.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 31,
-        "name": "SmellsLikeCalculus120",
+        "fileName": "SmellsLikeCalculus120",
+        "songName": "",
         "tempo": 240.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 32,
-        "name": "SmellsLikeCalculus120",
+        "fileName": "SmellsLikeCalculus120",
+        "songName": "",
         "tempo": 120.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 33,
-        "name": "ForeverPiccolo120",
+        "fileName": "ForeverPiccolo120",
+        "songName": "",
         "tempo": 240.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 34,
-        "name": "ForeverPiccolo120",
+        "fileName": "ForeverPiccolo120",
+        "songName": "",
         "tempo": 120.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 35,
-        "name": "TheVeldt",
+        "fileName": "TheVeldt",
+        "songName": "",
         "tempo": 180.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 36,
-        "name": "BrandenburgConcertoNo3Movement1at98",
+        "fileName": "BrandenburgConcertoNo3Movement1at98",
+        "songName": "",
         "tempo": 196.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 37,
-        "name": "SymphonyNo7inAMajorOp92Allegretto64",
+        "fileName": "SymphonyNo7inAMajorOp92Allegretto64",
+        "songName": "",
         "tempo": 192.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 38,
-        "name": "TheSoundsOfSilence107",
+        "fileName": "TheSoundsOfSilence107",
+        "songName": "",
         "tempo": 214.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 39,
-        "name": "TheSoundsOfSilence107",
+        "fileName": "TheSoundsOfSilence107",
+        "songName": "",
         "tempo": 107.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 40,
-        "name": "DvorakSymphonyNo9at120",
+        "fileName": "DvorakSymphonyNo9at120",
+        "songName": "",
         "tempo": 240.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 41,
-        "name": "DvorakSymphonyNo9at120",
+        "fileName": "DvorakSymphonyNo9at120",
+        "songName": "",
         "tempo": 120.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 42,
-        "name": "MarsTheBringerOfWar150",
+        "fileName": "MarsTheBringerOfWar150",
+        "songName": "",
         "tempo": 150.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 43,
-        "name": "BananaBoat122",
+        "fileName": "BananaBoat122",
+        "songName": "",
         "tempo": 244.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 44,
-        "name": "BananaBoat122",
+        "fileName": "BananaBoat122",
+        "songName": "",
         "tempo": 122.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 45,
-        "name": "TakeAChanceOnMe106",
+        "fileName": "TakeAChanceOnMe106",
+        "songName": "",
         "tempo": 212.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     },
     {
         "id": 46,
-        "name": "ZeldaFromMarioKart187",
+        "fileName": "ZeldaFromMarioKart187",
+        "songName": "",
         "tempo": 187.0,
-        "fileExtension": "mp3"
+        "fileExtension": "mp3",
+        "artist": "",
+        "description": ""
     }
 ]
