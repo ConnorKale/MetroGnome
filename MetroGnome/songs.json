@@ -119,298 +119,298 @@
     {
         "id": 14,
         "fileName": "DontFearTheReaper",
-        "songName": "",
+        "songName": "Don't Fear the Reaper",
         "tempo": 141.0,
         "fileExtension": "mp3",
-        "artist": "",
-        "description": ""
+        "artist": "Blue Öyster Cult",
+        "description": "Uploaded for Haloween! The file's tempos vary from 141.25 to 141.5 I think. Most websites on the internet (which only use elements of ℕ) say 142, some say 141. Might be a good test file for multitempo songs sometimes. I entered it as 141.5."
     },
     {
         "id": 15,
         "fileName": "PartyUSA",
-        "songName": "",
+        "songName": "slowish Party in the USA",
         "tempo": 192.0,
         "fileExtension": "mp3",
-        "artist": "",
-        "description": ""
+        "artist": "Miley Cyrus",
+        "description": "Entered in cut time at 192, so it plays at closer to orignal speed when you run."
     },
     {
         "id": 16,
         "fileName": "PartyUSA",
-        "songName": "",
+        "songName": "really fast Party in the USA",
         "tempo": 96.0,
         "fileExtension": "mp3",
-        "artist": "",
-        "description": ""
+        "artist": "Miley Cyrus",
+        "description": "Entered at 1 beat per footstep. Will play really fast if you run to it."
     },
     {
         "id": 17,
         "fileName": "PartyCIA",
-        "songName": "",
+        "songName": "slowish Party in the CIA",
         "tempo": 192.0,
         "fileExtension": "mp3",
-        "artist": "",
-        "description": ""
+        "artist": "\"Weird Al\" Yankovic, parodying Miley Cyrus",
+        "description": "Entered in cut time at 192, so it plays at closer to orignal speed when you run."
     },
     {
         "id": 18,
         "fileName": "PartyCIA",
-        "songName": "",
+        "songName": "really fast Party in the CIA",
         "tempo": 96.0,
         "fileExtension": "mp3",
-        "artist": "",
-        "description": ""
+        "artist": "\"Weird Al\" Yankovic, parodying Miley Cyrus",
+        "description": "Entered at 1 beat per footstep. Will play really fast if you run to it."
     },
     {
         "id": 19,
         "fileName": "CultOfPersonality92.5mp3",
-        "songName": "",
+        "songName": "Cult of Personality",
         "tempo": 185.0,
         "fileExtension": "mp3",
-        "artist": "",
+        "artist": "Living Color",
         "description": ""
     },
     {
         "id": 20,
         "fileName": "MotorcycleDriver160",
-        "songName": "",
+        "songName": "Motorcycle Driver",
         "tempo": 160.0,
         "fileExtension": "mp3",
-        "artist": "",
+        "artist": "Joe Satriani",
         "description": ""
     },
     {
         "id": 21,
         "fileName": "500Miles130",
-        "songName": "",
+        "songName": "500 Miles",
         "tempo": 130.0,
         "fileExtension": "mp3",
-        "artist": "",
-        "description": ""
+        "artist": "The Proclaimers",
+        "description": "But I would run 5 thousand meters And I would run 5 thousand more Just to be the one who runs 5 thousand Meters to fall down on the floor... [Insert picture of collapsing after a race]"
     },
     {
         "id": 22,
         "fileName": "SuperTrouper115",
-        "songName": "",
+        "songName": "Super Trouper",
         "tempo": 115.0,
         "fileExtension": "mp3",
-        "artist": "",
+        "artist": "A𐤡BA",
         "description": ""
     },
     {
         "id": 23,
         "fileName": "LayAllYourLoveOnMe133",
-        "songName": "",
+        "songName": "Lay All Your Love On Me",
         "tempo": 133.0,
         "fileExtension": "mp3",
-        "artist": "",
+        "artist": "A𐤡BA",
         "description": ""
     },
     {
         "id": 24,
         "fileName": "Moskau121",
-        "songName": "",
+        "songName": "slow Moskau",
         "tempo": 242.0,
         "fileExtension": "mp3",
-        "artist": "",
-        "description": ""
+        "artist": "Dschinghis Khan",
+        "description": "This is on the bubble of normal/cut time at 121 BPM, so it'll sound kinda weird. This is too slow, #25 is too fast."
     },
     {
         "id": 25,
         "fileName": "Moskau121",
-        "songName": "",
+        "songName": "fast Moskau",
         "tempo": 121.0,
         "fileExtension": "mp3",
-        "artist": "",
-        "description": ""
+        "artist": "Dschinghis Khan",
+        "description": "This is on the bubble of normal/cut time at 121 BPM, so it'll sound kinda weird. This is too fast, #24 is too slow."
     },
     {
         "id": 26,
         "fileName": "DontStopTheMusic122.5",
-        "songName": "",
+        "songName": "Don't Stop the Music",
         "tempo": 122.5,
         "fileExtension": "mp3",
-        "artist": "",
+        "artist": "Yarbrough & Peoples",
         "description": ""
     },
     {
         "id": 27,
         "fileName": "DangerZone158",
-        "songName": "",
+        "songName": "Danger Zone",
         "tempo": 158.0,
         "fileExtension": "mp3",
-        "artist": "",
+        "artist": "Kenny Loggins",
         "description": ""
     },
     {
         "id": 28,
         "fileName": "FinalCountdown118Less",
-        "songName": "",
+        "songName": "Final Countdown",
         "tempo": 118.0,
         "fileExtension": "mp3",
-        "artist": "",
+        "artist": "Europe",
         "description": ""
     },
     {
         "id": 29,
         "fileName": "WilliamTellOvertureFinale147",
-        "songName": "",
+        "songName": "William Tell Overture",
         "tempo": 147.0,
         "fileExtension": "mp3",
-        "artist": "",
-        "description": ""
+        "artist": "Gioachino Rossini",
+        "description": "The tempo varies slightly which will make it not follow you perfectly, but it's a fun song."
     },
     {
         "id": 30,
         "fileName": "Bolero68or76",
-        "songName": "",
+        "songName": "Bolero",
         "tempo": 144.0,
         "fileExtension": "mp3",
-        "artist": "",
-        "description": ""
+        "artist": "Maurice Ravel",
+        "description": "The tempo was detirmined to be between 68 and 76 BPM, so I averaged it to be 72. I also entered it at 144 so it plays closer to the original speed when you run with it."
     },
     {
         "id": 31,
         "fileName": "SmellsLikeCalculus120",
-        "songName": "",
+        "songName": "fast Smells like Calculs",
         "tempo": 240.0,
         "fileExtension": "mp3",
-        "artist": "",
-        "description": ""
+        "artist": "Luke Scholler, parody of Nirvana",
+        "description": "A fun parody of Smells like Teen Spirit by Nirvana. More math song parodies may be uploaded in the future. You forgot that, Final +C!"
     },
     {
         "id": 32,
         "fileName": "SmellsLikeCalculus120",
-        "songName": "",
+        "songName": "fast Smells like Calculs",
         "tempo": 120.0,
         "fileExtension": "mp3",
-        "artist": "",
-        "description": ""
+        "artist": "Luke Scholler, parody of Nirvana",
+        "description": "A fun parody of Smells like Teen Spirit by Nirvana. More math song parodies may be uploaded in the future. You forgot that, Final +C!"
     },
     {
         "id": 33,
         "fileName": "ForeverPiccolo120",
-        "songName": "",
+        "songName": "slow excerpt of Jingle Bells Forever",
         "tempo": 240.0,
         "fileExtension": "mp3",
-        "artist": "",
-        "description": ""
+        "artist": "Robert W. Smith",
+        "description": "This is from Jingle Bells Forever, an arangement of Stars and Stripes Forever and Jingle Bells. It's a fun piece. I transcribed the piccolo part I was playing, and uploaded it to learn it."
     },
     {
         "id": 34,
         "fileName": "ForeverPiccolo120",
-        "songName": "",
+        "songName": "fast excerpt of Jingle Bells Forever",
         "tempo": 120.0,
         "fileExtension": "mp3",
-        "artist": "",
-        "description": ""
+        "artist": "Robert W. Smith",
+        "description": "This is from Jingle Bells Forever, an arangement of Stars and Stripes Forever and Jingle Bells. It's a fun piece. I transcribed the piccolo part I was playing, and uploaded it to learn it."
     },
     {
         "id": 35,
         "fileName": "TheVeldt",
-        "songName": "",
+        "songName": "The Veldt from FFIV",
         "tempo": 180.0,
         "fileExtension": "mp3",
-        "artist": "",
-        "description": ""
+        "artist": "look it up",
+        "description": "It's a fun cadence with percussion and bassline."
     },
     {
         "id": 36,
         "fileName": "BrandenburgConcertoNo3Movement1at98",
-        "songName": "",
+        "songName": "Brandengurg Concerto No.3 Mvt 1 Allegro",
         "tempo": 196.0,
         "fileExtension": "mp3",
-        "artist": "",
-        "description": ""
+        "artist": "Bach",
+        "description": "Plus or minus 1 BPM"
     },
     {
         "id": 37,
         "fileName": "SymphonyNo7inAMajorOp92Allegretto64",
-        "songName": "",
+        "songName": "The Symphony No 7 in A Major Op.92 Allegretto",
         "tempo": 192.0,
         "fileExtension": "mp3",
-        "artist": "",
+        "artist": "Beethoven",
         "description": ""
     },
     {
         "id": 38,
         "fileName": "TheSoundsOfSilence107",
-        "songName": "",
+        "songName": "slow The Sounds of Silence",
         "tempo": 214.0,
         "fileExtension": "mp3",
-        "artist": "",
-        "description": ""
+        "artist": "Simon and Garfunkel",
+        "description": "Entered at 214, so this plays slow"
     },
     {
         "id": 39,
         "fileName": "TheSoundsOfSilence107",
-        "songName": "",
+        "songName": "fast The Sounds of Silence",
         "tempo": 107.0,
         "fileExtension": "mp3",
-        "artist": "",
-        "description": ""
+        "artist": "Simon and Garfunkel",
+        "description": "Entered at 107, so this plays fast"
     },
     {
         "id": 40,
         "fileName": "DvorakSymphonyNo9at120",
-        "songName": "",
+        "songName": "slow Symphony No.9 Mvt 4 Allegro con fuoco",
         "tempo": 240.0,
         "fileExtension": "mp3",
-        "artist": "",
-        "description": ""
+        "artist": "Dvorak",
+        "description": "Not super constant tempo but close enough. The begining was stolen by Jaws. Enterd at 240 so this plays slow"
     },
     {
         "id": 41,
         "fileName": "DvorakSymphonyNo9at120",
-        "songName": "",
+        "songName": "fast Symphony No.9 Mvt 4 Allegro con fuoco",
         "tempo": 120.0,
         "fileExtension": "mp3",
-        "artist": "",
-        "description": ""
+        "artist": "Dvorak",
+        "description": "Not super constant tempo but close enough. The begining was stolen by Jaws. Enterd at 120 so this plays fast"
     },
     {
         "id": 42,
         "fileName": "MarsTheBringerOfWar150",
-        "songName": "",
+        "songName": "Mars the Bringer of War",
         "tempo": 150.0,
         "fileExtension": "mp3",
-        "artist": "",
+        "artist": "Gustav Holst",
         "description": ""
     },
     {
         "id": 43,
         "fileName": "BananaBoat122",
-        "songName": "",
+        "songName": "Day O",
         "tempo": 244.0,
         "fileExtension": "mp3",
-        "artist": "",
-        "description": ""
+        "artist": "Harry Belafonte",
+        "description": "Enterd at 244 so this plays slow"
     },
     {
         "id": 44,
         "fileName": "BananaBoat122",
-        "songName": "",
+        "songName": "Day O",
         "tempo": 122.0,
         "fileExtension": "mp3",
-        "artist": "",
-        "description": ""
+        "artist": "Harry Belafonte",
+        "description": "Enterd at 122 so this plays fast"
     },
     {
         "id": 45,
         "fileName": "TakeAChanceOnMe106",
-        "songName": "",
+        "songName": "Take A Chance On Me",
         "tempo": 212.0,
         "fileExtension": "mp3",
-        "artist": "",
+        "artist": "A𐤡BA",
         "description": ""
     },
     {
         "id": 46,
         "fileName": "ZeldaFromMarioKart187",
-        "songName": "",
+        "songName": "Hyrule Circuit from Mario Kart",
         "tempo": 187.0,
         "fileExtension": "mp3",
-        "artist": "",
-        "description": ""
+        "artist": "Look it up",
+        "description": "This is a fun version of the classic Zelda theme song, from Mario Kart"
     }
 ]

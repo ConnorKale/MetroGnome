@@ -263,7 +263,7 @@ struct Playlist: View {
                 
                 Text("31 is slow Smells like Calculs by Luke Scholler, file at 120 BPM")
                     .frame(maxWidth: .infinity, alignment: .leading)
-                Text("A fun parody of Smells like Teen Spirit by Nirvana. More math song parodies may be uploaded in the future. You forgot that Final +C!")
+                Text("A fun parody of Smells like Teen Spirit by Nirvana. More math song parodies may be uploaded in the future. You forgot that, Final +C!")
                     .padding(.horizontal, 30)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 

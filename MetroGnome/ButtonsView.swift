@@ -71,7 +71,7 @@ struct ButtonsView: View {
                         } else {
                             let currentSong = songs[selectedSongIndex]
                             theCurrentlyPlayingFileTempo = currentSong.tempo
-                            theAudioPlayer.loadAndPlay(filename: currentSong.name, fileExtension: currentSong.fileExtension)
+                            theAudioPlayer.loadAndPlay(filename: currentSong.fileName, fileExtension: currentSong.fileExtension)
                             /*
                             theCurrentlyPlayingFileTempo = fileTempos[Int(selectedSongIndex)]
                             theAudioPlayer.loadAndPlay(filename: songNames[Int(selectedSongIndex)], fileExtension: fileExtensions[Int(selectedSongIndex)]) // file name
