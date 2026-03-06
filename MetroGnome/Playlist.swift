@@ -8,14 +8,36 @@
 import SwiftUI
 
 struct Playlist: View {
+    
+    @State private var songs: [Song] = []
+    private var testInt: Int = 30
+
     var body: some View {
         ScrollView {
             VStack {
+                
                 Text("The Song upload request form is at https://forms.gle/AVgfr4h1kZKh9ndM9")
                     .font(.title2)
-                    .padding(.bottom, 100)
-
+                    .padding(.bottom, 50)
                 
+                
+                ForEach(songs) { index in
+                    Text("\(index.id) is \(String(index.songName)) by \(String(index.artist))")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 20)
+                    if (index.description != "")
+                    {
+                        Text("\(index.description)")
+                            .padding(.horizontal, 30)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    //Text("\(index) is \(String(songs[index]))")
+                  //Text("Goal pace is \(String(theGoalPaceMiles)) min/mi.")
+                }
+                
+                
+
+                /*
                 Text("NaN is Template Song by Someone, file at ⊥ BPM")
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Text("Song description if there is one, add padding to above text if no descripion")
@@ -382,14 +404,19 @@ struct Playlist: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                     .padding(.bottom, 20)
+                 */
 
             }
             .padding(20) // This is for the edge margins
             .preferredColorScheme(.dark)
             .background(Color(red: (13/255.0), green: (67.0/255.0), blue: (67.0/255.0)))
         }
+        .onAppear {
+            songs = loadSongs()
+        }
     }
 }
+
 
 #Preview {
     TabBarController()
