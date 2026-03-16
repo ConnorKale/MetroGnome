@@ -82,7 +82,13 @@ struct ButtonsView: View {
                             selectedSongIndex = max(selectedSongIndex - 1, 0)
                         }
                         .font(.system(size: 24))
-                        Text("Will play song number \(String(selectedSongIndex + 1)).")
+                        if (songs.count != 0) {
+                            VStack {
+                                Text("Will play song number \(String(selectedSongIndex + 1)) which is:")
+                                Text("\(String(songs[selectedSongIndex].songName))")
+                            }
+
+                        }
                         Button("Next")
                         {
                             selectedSongIndex = min((selectedSongIndex + 1), (songs.count - 1))

@@ -1,7 +1,5 @@
 Hello world! If this pushes then GitHub is working.
 
-To-do: de-spaghettify, maybe change accelerometer update interval for battery reasons.
-
 FFmpeg terminal command: "ffmpeg -i inputFileName.extension outputFileName.wav", you need to be in the file directory that has the input file.
 
 GitHub student thing is https://education.github.com/pack
@@ -10,15 +8,17 @@ GitHub student thing is https://education.github.com/pack
 
 An awesome non-intiger metronome is https://eggfish.studio/bpm. This is like the only one on the internet that isn't restricted to intigers. I hope they never ever take it down.
 
-JSON notes: // Has not been proofread. Hopefully comments are allowed on JSON's lol. Also I might need to target membership
 (JSON didn't allow comments ): )
-
 
 https://xkcd.com/1296/
 
 For revoked certificates   /System/Library/CoreServices/Applications   or   go to finder > computer name >hard drive >  system > library > Coreervices > Applications, don't run passwords
 
+
+
       Remember to change version number!
+1.4.0 I've been forgetting to update the version number :( but I've collected some data and added a JSON to store song data
+
 1.3.1 Plays a tone, pushing again
 1.3.0 Start of GPS data collection. Need tone player. Hopefully no bugs. Also I fixed a bug where the fonts were out of 256 instead of 255. It compiles right now so I'm pushing.
       
