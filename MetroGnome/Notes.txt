@@ -14,6 +14,8 @@ https://xkcd.com/1296/
 
 For revoked certificates   /System/Library/CoreServices/Applications   or   go to finder > computer name >hard drive >  system > library > Coreervices > Applications, don't run passwords
 
+person.spatialaudio.fill waveform   person.spatialaudio.stereo.fill   apple.classical.pages.fill   sparkles   play.square   gearshape.2   text.document   repeat   speaker.wave.3   bell.fill   metronome   cat   hourglass   sum function graph.2d   iphone.homebutton.radiowaves.left.and.right.circle.fill   terminal.fill   shoe.front.lift   bell.and.waveform.fill   shoe.front.lift.fill
+
 
 
       Remember to change version number!

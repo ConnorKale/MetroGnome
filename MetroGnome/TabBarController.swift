@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
-import Combine // delete this later if it's not needed
+//import Combine // delete this later if it's not needed
 
 // Use Command Shift L to get list of iOS images
+
+// person.spatialaudio.fill waveform   person.spatialaudio.stereo.fill   apple.classical.pages.fill   sparkles   play.square   gearshape.2   text.document   repeat   speaker.wave.3   bell.fill   metronome   cat   hourglass   sum function graph.2d   iphone.homebutton.radiowaves.left.and.right.circle.fill   terminal.fill   shoe.front.lift   bell.and.waveform.fill   shoe.front.lift.fill
+
 
 struct TabBarController: View {
     @StateObject private var motionManager = MotionManager()
@@ -74,12 +77,12 @@ struct TabBarController: View {
 
             ButtonsView(theAudioPlayer: audioPlayer, theShepardAudioPlayer: shepardAudioPlayer, theCurrentlyPlayingFileTempo: $currentPlayingFileTempo, theUsedVelocity: $usedVelocity, theUsedPacingMethod: $usedPacingMethod, theGoalPaceKilometers: $goalPaceKilometers, theGoalPaceMiles: $goalPaceMiles, theGoalVelocity: $goalVelocity, theTempo: $tempo, theMinTempo: $minTempo, theMaxTempo: $maxTempo)
                 .tabItem {
-                    Label("Buttons", systemImage: "gearshape.2")
+                    Label("Buttons", systemImage: "play.circle")
                 }
 
             Playlist()
                 .tabItem {
-                    Label("Playlist", systemImage: "text.document")
+                    Label("Playlist", systemImage: "apple.classical.pages.fill")
                 }
             GPSDataCollection(tonePlayerMode: $tonePlayerMode, theGPS: GPS, theMotionManager: motionManager, theTempo: $tempo, StopAStride: $CollectionNeedsToCountAStride, LastStrideLength: $averageLastStrideTime, LowAccelerationRecord: $currentAccelerationRecord, HighAccelerationRecord: $CollectionHighAccelerationRecord)
                 .tabItem {
