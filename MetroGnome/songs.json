@@ -412,5 +412,32 @@
         "fileExtension": "mp3",
         "artist": "Look it up",
         "description": "This is a fun version of the classic Zelda theme song, from Mario Kart"
-    }
+    },
+    {
+        "id": 47,
+        "fileName": "Funkytown132",
+        "songName": "Slow Funkytown (pep band version)",
+        "tempo": 264.0,
+        "fileExtension": "mp3",
+        "artist": "Steve Greenberg (arr. Ralph Ford)",
+        "description": "This is the marching band song that all the band kids get to memorize :) so I uploaded for fun. This is the slow version, 2 steps per beat."
+    },
+    {
+        "id": 48,
+        "fileName": "Funkytown132",
+        "songName": "Fast (reccomended speed) Funkytown (pep band version)",
+        "tempo": 132.0,
+        "fileExtension": "mp3",
+        "artist": "Steve Greenberg (arr. Ralph Ford)",
+        "description": "This is the marching band song that all the band kids get to memorize :) so I uploaded for fun. This is the fast (and reccomended) version, 1 step per beat."
+    },
+    {
+        "id": 49,
+        "fileName": "Fearless160",
+        "songName": "Fearless",
+        "tempo": 160.0,
+        "fileExtension": "mp3",
+        "artist": "Carol Brittin Chambers",
+        "description": "This is a fun version of the classic Zelda theme song, from Mario Kart"
+    },
 ]
