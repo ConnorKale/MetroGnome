@@ -21,7 +21,7 @@ struct ButtonsView: View {
     // If uploaded twice, the convention is slow, then fast; which means higher inputted tempo, then lower inputted tmepo
     
     // Be carefull with songs that are in 3 (or something else that's not a power of 2) or swingy
-    public var numberOfSongs: Int = 46
+    //public var numberOfSongs: Int = 46
     
     @State private var songs: [Song] = []
     @State private var selectedSongIndex: Int = 0
@@ -98,16 +98,18 @@ struct ButtonsView: View {
                     }
                     .padding(.bottom, 20)
                     
-                    Slider(
-                        value: Binding(
-                            get: { Double(selectedSongIndex) },
-                            set: { selectedSongIndex = Int($0) }
-                        ),
-                        in: 0...Double(numberOfSongs - 1),
-                        step: 1
-                    )
-                    .padding(.horizontal)
-                    .padding(.bottom, 20)
+                    if (songs.count != 0) { // At the start (for the first frame I think) the JSON won't be loaded, and songs.count equals 0. If the slider tries to render with a range from 0 to -1, the whole app will crash :( The if statement is to stop that from happening, by not rendering the slider until songs.count isn't 0.
+                        Slider(
+                            value: Binding(
+                                get: { Double(selectedSongIndex) },
+                                set: { selectedSongIndex = Int($0) }
+                            ),
+                            in: 0...Double($songs.count - 1), //  I tried doing binding unwrappings on this line but I couldn't figure it out so I just put the whole slider in an if statement
+                            step: 1
+                        )
+                        .padding(.horizontal)
+                        .padding(.bottom, 20)
+                    }
                 }
                 
                 HStack { // Which Pacing method
