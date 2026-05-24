@@ -6,6 +6,8 @@ GitHub student thing is https://education.github.com/pack
 
 // Use Command Shift L to get list of iOS images
 
+https://regex101.com/r/bF6wE2/1/substitution is an online text editor with find and replace
+
 An awesome non-intiger metronome is https://eggfish.studio/bpm. This is like the only one on the internet that isn't restricted to intigers. I hope they never ever take it down.
 
 (JSON didn't allow comments ): )
