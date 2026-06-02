@@ -84,6 +84,10 @@ struct TabBarController: View {
                 .tabItem {
                     Label("Playlist", systemImage: "apple.classical.pages.fill")
                 }
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gear")
+                }
             GPSDataCollection(tonePlayerMode: $tonePlayerMode, theGPS: GPS, theMotionManager: motionManager, theTempo: $tempo, StopAStride: $CollectionNeedsToCountAStride, LastStrideLength: $averageLastStrideTime, LowAccelerationRecord: $currentAccelerationRecord, HighAccelerationRecord: $CollectionHighAccelerationRecord)
                 .tabItem {
                     Label("GPS Stuff", systemImage: "figure.run.square.stack")
