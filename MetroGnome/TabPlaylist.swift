@@ -7,10 +7,18 @@
 
 import SwiftUI
 
-struct Playlist: View {
+struct PlaylistTab: View {
     
     @State private var songs: [Song] = []
-    private var testInt: Int = 30
+    
+    @AppStorage("MainRed") private var MainRed = DefaultSettings.MainRed
+    @AppStorage("MainGreen") private var MainGreen = DefaultSettings.MainGreen
+    @AppStorage("MainBlue") private var MainBlue = DefaultSettings.MainBlue
+    
+    @AppStorage("AccentRed") private var AccentRed = DefaultSettings.AccentRed
+    @AppStorage("AccentGreen") private var AccentGreen = DefaultSettings.AccentGreen
+    @AppStorage("AccentBlue") private var AccentBlue = DefaultSettings.AccentBlue
+
 
     var body: some View {
         ScrollView {
@@ -20,7 +28,9 @@ struct Playlist: View {
                     .font(.title2)
                     .padding(.bottom, 50)
                 
-                
+                Text("Updated song file JSON stuff is coming")
+                    .padding(.bottom, 50)
+
                 ForEach(songs) { index in
                     Text("\(index.id) is \(String(index.songName)) by \(String(index.artist))")
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -409,8 +419,8 @@ struct Playlist: View {
             }
             .padding(20) // This is for the edge margins
             .preferredColorScheme(.dark)
-            .background(Color(red: (13/255.0), green: (67.0/255.0), blue: (67.0/255.0)))
         }
+        .background(Color(red: (MainRed/255.0), green: (MainGreen/255.0), blue: (MainBlue/255.0)))
         .onAppear {
             songs = loadSongs()
         }

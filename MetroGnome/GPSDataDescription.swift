@@ -253,7 +253,6 @@ struct GPSDataDescription: View {
             }
             .padding(20) // This is for the edge margins
             .preferredColorScheme(.dark)
-            .background(Color(red: (0.0/255.0), green: (100.0/255.0), blue: (100.0/255.0)))
         }
     }
 }

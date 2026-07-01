@@ -52,7 +52,6 @@ struct GPSDataDisplay: View {
             }
             .padding(.bottom, 677) // A prime number
             .preferredColorScheme(.dark)
-            .background(Color(red: (0.0/255.0), green: (100.0/255.0), blue: (100.0/255.0)))
         }
     }
 }

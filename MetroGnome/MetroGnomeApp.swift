@@ -17,8 +17,7 @@ struct MetroGnomeApp: App {
     }
 }
 
-/*
+
 #Preview {
  TabBarController()
 }
-*/
