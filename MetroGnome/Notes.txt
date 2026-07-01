@@ -18,7 +18,7 @@ For revoked certificates   /System/Library/CoreServices/Applications   or   go t
 
 person.spatialaudio.fill waveform   person.spatialaudio.stereo.fill   apple.classical.pages.fill   sparkles   play.square   gearshape.2   text.document   repeat   speaker.wave.3   bell.fill   metronome   cat   hourglass   sum function graph.2d   iphone.homebutton.radiowaves.left.and.right.circle.fill   terminal.fill   shoe.front.lift   bell.and.waveform.fill   shoe.front.lift.fill
 
-
+3.1.0 I re-added old code accelerometer toneplayer from sophomore year for fun :)
 3.0.0 I haven't been remembering to update this, but today I revamped all the UI, and tried to make it useable to someone who isn't me. Tomorrow I'll readd the GPS and push to GitHub again.
 
       Remember to change version number!

@@ -80,22 +80,31 @@ struct TabBarController: View {
                 .tabItem {
                     Label("Main", systemImage: "play.circle")
                 }
+            
             PlaylistTab()
                 .tabItem {
                     Label("Playlist", systemImage: "apple.classical.pages.fill")
                 }
+            
             DescriptionTab()
                 .tabItem {
                     Label("Description", systemImage: "nologoyet")
-                        }
+                }
+            
             SettingsTab()
                 .tabItem {
                     Label("Settings", systemImage: "gear")
+                }
+            
+            FunAccelerometerTone(tonePlayer: $tonePlayer, motionManager: motionManager)
+                .tabItem {
+                    Label("Accelerometer Tone", systemImage: "ghost")
+                }
 
-                    GPSDataCollection(tonePlayerMode: $tonePlayerMode, theGPS: GPS, theMotionManager: motionManager, theTempo: $tempo, StopAStride: $CollectionNeedsToCountAStride, LastStrideLength: $averageLastStrideTime, LowAccelerationRecord: $currentAccelerationRecord, HighAccelerationRecord: $CollectionHighAccelerationRecord)
-                        .tabItem {
-                            Label("Broken GPS", systemImage: "figure.run.square.stack")
-                        }
+            GPSDataCollection(tonePlayerMode: $tonePlayerMode, theGPS: GPS, theMotionManager: motionManager, theTempo: $tempo, StopAStride: $CollectionNeedsToCountAStride, LastStrideLength: $averageLastStrideTime, LowAccelerationRecord: $currentAccelerationRecord, HighAccelerationRecord: $CollectionHighAccelerationRecord)
+                .tabItem {
+                    Label("Broken GPS", systemImage: "figure.run.square.stack")
+                }
 
 
                     /*
@@ -307,7 +316,6 @@ struct TabBarController: View {
                 }
         }
 
-    }
 }
 
 
