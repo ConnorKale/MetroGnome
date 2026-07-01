@@ -17,6 +17,10 @@ xcuserdata/
 *.dSYM.zip
 *.dSYM
 
+# JSON's
+*.json
+*.JSON
+
 ## Playgrounds
 timeline.xctimeline
 playground.xcworkspace
