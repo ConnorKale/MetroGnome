@@ -20,6 +20,10 @@ struct SettingsTab: View {
     @AppStorage("ShowKilometers") private var ShowKilometers = DefaultSettings.ShowKilometers
     @AppStorage("ShowMiles") private var ShowMiles = DefaultSettings.ShowMiles
     @AppStorage("ShowMeters") private var ShowMeters = DefaultSettings.ShowMeters
+    @Binding var needToResetGPS: Bool
+    @State private var resetGPSFirstButton: Bool = false
+    
+    @AppStorage("ShowBigFontForTempo") private var ShowBigFontForTempo = DefaultSettings.ShowBigFontForTempo
     
     //@AppStorage("SongIndexMethod") private var SongIndexMethod = 1
     
@@ -132,6 +136,25 @@ struct SettingsTab: View {
                 Toggle("Show meters", isOn: $ShowMeters)
                     .font(.system(size: 32))
                     .padding(.bottom, 50)
+                
+                Toggle("Reset GPS?", isOn: $resetGPSFirstButton)
+                    .font(.system(size: 32))
+                if (resetGPSFirstButton) {
+                    Toggle("Are u sure or misclick?", isOn: $needToResetGPS)
+                        .font(.system(size: 32))
+                    Text("If you click yes, it won't say it did anything here, but it will reset")
+                    Button("No") {
+                        resetGPSFirstButton = false
+                    }
+                    .font(.system(size: 60))
+
+                }
+                
+                Toggle("Big font for tempo", isOn: $ShowBigFontForTempo)
+                    .font(.system(size: 32))
+                    .padding(.bottom, 50)
+                    .padding(.top, 50)
+
                 /*Menu {
                  Button("As uploaded", action: { SongIndexMethod = 1 })
                  Button("Sorted", action: { SongIndexMethod = 2 })
@@ -148,6 +171,41 @@ struct SettingsTab: View {
                     .font(.system(size: 32))
                     .padding(.bottom, 80)
                 
+                Button("Reset to defaults") {
+                    MinTempo = DefaultSettings.MinTempo // BPM
+                    TempoWindowSize = DefaultSettings.TempoWindowSize // BPM, max equals min plus this. Go up to 60?
+                    
+                    GoalPace = DefaultSettings.GoalPace // Meters per second
+                    WhichPacingNotificaion = DefaultSettings.WhichPacingNotificaion // 1 is double, 2 is shepard, 3 is halfstep shepard
+                    
+                    
+                    HelloWorldBool = DefaultSettings.HelloWorldBool
+                    
+                    ShowKilometers = DefaultSettings.ShowKilometers
+                    ShowMiles = DefaultSettings.ShowMiles
+                    ShowMeters = DefaultSettings.ShowMeters
+                    
+                    ShowBigFontForTempo = DefaultSettings.ShowBigFontForTempo
+                    
+                    //@AppStorage("SongIndexMethod") private var SongIndexMethod = 1
+                    
+                    SmoothGPS = DefaultSettings.SmoothGPS
+                    
+                    ShowPlusOrMinus = DefaultSettings.ShowPlusOrMinus
+                    
+                    
+                    MainRed = DefaultSettings.MainRed
+                    MainGreen = DefaultSettings.MainGreen
+                    MainBlue = DefaultSettings.MainBlue
+                    
+                    AccentRed = DefaultSettings.AccentRed
+                    AccentGreen = DefaultSettings.AccentGreen
+                    AccentBlue = DefaultSettings.AccentBlue
+
+                }
+                .font(.system(size: 32))
+                .padding(.bottom, 80)
+
                 if (ShowColorMenu) {
                     ZStack {
                         ButtonBackground(width: .constant(240), height: .constant(40), backgroundColor: .constant(Color(red: (MainRed/255.0), green: (MainGreen/255.0), blue: (MainBlue/255.0))))
@@ -163,7 +221,7 @@ struct SettingsTab: View {
                     }
                     
                     
-                    Text("More background stuff/color schemes coming up!")
+                    Text("More asthetics coming up!")
                     Button("Reset background")
                     {
                         MainRed = 2
@@ -255,6 +313,10 @@ enum DefaultSettings {
     static let ShowMiles = true
     static let ShowMeters = true
     
+    static let ShowBigFontForTempo = false
+    
+    // static let Framerate = 30.0 // FPS, I don't think this works with the timer initialization
+    
     //@AppStorage("SongIndexMethod") private var SongIndexMethod = 1
     
     static let SmoothGPS = true
@@ -273,7 +335,7 @@ enum DefaultSettings {
     static let AccentGreen = 0.0
     static let AccentBlue = 0.0
 }
-
+/*
 #Preview {
     TabView {
         SettingsTab()
@@ -289,4 +351,4 @@ enum DefaultSettings {
     //.background(Color(red: (Double(MainRed)/255.0), green: (Double(MainGreen)/255.0), blue: (Double(MainBlue)/255.0)))
     .background(Color(red: (DefaultSettings.MainRed/255.0), green: (DefaultSettings.MainGreen/255.0), blue: (DefaultSettings.MainBlue/255.0)))
 }
-
+*/

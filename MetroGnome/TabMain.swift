@@ -22,9 +22,14 @@ struct MainTab: View {
     //@Binding public var currentlyPlayingFileIndex: Int
     
     @Binding var tempoToDisplay: Float // BPM
+    @Binding var velocity: Double // m/s
     @Binding var distanceIntegral: Double // m
-    
-    
+    @AppStorage("ShowKilometers") private var ShowKilometers = DefaultSettings.ShowKilometers
+    @AppStorage("ShowMiles") private var ShowMiles = DefaultSettings.ShowMiles
+    @AppStorage("ShowMeters") private var ShowMeters = DefaultSettings.ShowMeters
+
+    @AppStorage("ShowBigFontForTempo") private var ShowBigFontForTempo = DefaultSettings.ShowBigFontForTempo
+
     @Binding var offsetButtonMultiplier: Float
     
     @State private var songs: [Song] = loadSongs()
@@ -114,11 +119,72 @@ struct MainTab: View {
             
             // Start of tempo^integrals info [
             VStack {
-                Text("Tempo:")
-                    .font(.system(size: 20))
-                Text("\(tempoToDisplay, specifier: "%.2f")")
-                    .font(.system(size: 80))
-                    .padding(.bottom, 20)
+                if (ShowBigFontForTempo) {
+                    Text("Tempo:")
+                        .font(.system(size: 20))
+                    Text("\(tempoToDisplay, specifier: "%.2f")")
+                        .font(.system(size: 100))
+                        .padding(.bottom, 20)
+                } else {
+                    Text("Tempo: \(tempoToDisplay, specifier: "%.2f")")
+                        .font(.system(size: 50))
+                        .padding(.bottom, 10)
+                }
+                Text("Distance run:")
+                    .font(.system(size: 40))
+                if (ShowKilometers) {
+                    Text("∫ (km): \(distanceIntegral/1000, specifier: "%.2f")")
+                        .font(.system(size: 30))
+                        //.padding(.bottom, 10)
+                }
+                if (ShowMiles) {
+                    Text("∫ (mi): \(distanceIntegral/1600, specifier: "%.2f")")
+                        .font(.system(size: 30))
+                        //.padding(.bottom, 10)
+                }
+                if (ShowMeters) {
+                    Text("∫ (m): \(distanceIntegral, specifier: "%.2f")")
+                        .font(.system(size: 30))
+                        //.padding(.bottom, 10)
+                }
+                Text("Velocity:")
+                    .font(.system(size: 40))
+                    .padding(.top, 1)
+                if (ShowKilometers) {
+                    Text("v (kph): \(velocity*3.6, specifier: "%.2f")")
+                        .font(.system(size: 30))
+                        //.padding(.bottom, 10)
+                }
+                if (ShowMiles) {
+                    Text("v (mph): \(velocity*2.25, specifier: "%.2f")")
+                        .font(.system(size: 30))
+                        //.padding(.bottom, 10)
+                }
+                if (ShowMeters) {
+                    Text("v (m/s): \(velocity, specifier: "%.2f")")
+                        .font(.system(size: 30))
+                        //.padding(.bottom, 10)
+                }
+                
+                Text("Pace:")
+                    .font(.system(size: 40))
+                    .padding(.top, 1)
+                if (ShowKilometers) {
+                    Text("P (min/km): \(16.6666667/velocity, specifier: "%.2f")")
+                        .font(.system(size: 30))
+                        //.padding(.bottom, 10)
+                }
+                if (ShowMiles) {
+                    Text("P (min/mi): \(26.6666667/velocity, specifier: "%.2f")")
+                        .font(.system(size: 30))
+                        //.padding(.bottom, 10)
+                }
+                if (ShowMeters) {
+                    Text("P (s/m): \(1/velocity, specifier: "%.2f")")
+                        .font(.system(size: 30))
+                        //.padding(.bottom, 10)
+                }
+
                 
             }
             // End of tempo^integrals info ]

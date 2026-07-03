@@ -68,5 +68,5 @@ struct RunningStats: View {
 }
 
 #Preview {
- TabBarController()
+ OldTabBarController()
 }

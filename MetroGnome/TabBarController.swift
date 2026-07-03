@@ -24,10 +24,14 @@ struct TabBarController: View {
     @State private var timeOfLastToneChange: Date? = Date()
     @State private var elapsedToneChangeDouble: Double = 0.0
 
-    private let framerate: Double = (1.0/30.0) // Remember to change this and the timer!!!
-    @State private var timer = Timer.publish(every: 1.0 / 30.0, on: .main, in: .common).autoconnect()
+    private let framerate: Double = (1.0/60.0) // Remember to change this and the timer!!!
+    @State private var timer = Timer.publish(every: 1.0 / 60.0, on: .main, in: .common).autoconnect()
 
-    @State private var distanceIntegral: Double = 0.0
+    @State private var usedVelocity: Double = 0.0 // m/s, this is the normal or smoothed GPS velocity depending on which setting is on
+    @State private var distanceIntegral: Double = 0.0 // m
+    @AppStorage("SmoothGPS") private var SmoothGPS = DefaultSettings.SmoothGPS
+    @State private var needToResetGPS: Bool = false
+
 
     /*
     All this is the pacing stuff, feel free to delete it if it's not usefull
@@ -66,8 +70,6 @@ struct TabBarController: View {
     @AppStorage("MinTempo") private var minTempo = DefaultSettings.MinTempo // BPM
     @AppStorage("TempoWindowSize") private var tempoWindowSize = DefaultSettings.TempoWindowSize // BPM, max equals min plus this. Go up to 60?
 
-    @AppStorage("SmoothGPS") private var SmoothGPS = DefaultSettings.SmoothGPS
-
     /*
     @State private var radius: Double = 0.5 // m
     @State private var pitch: Double = 880 // Hz // 1 meter is A4, it plays at 440Hz/m. Max should be 880 Hz.
@@ -76,7 +78,7 @@ struct TabBarController: View {
     
     var body: some View {
         TabView {
-            MainTab(theAudioPlayer: audioPlayer, theShepardAudioPlayer: shepardAudioPlayer, theCurrentlyPlayingFileTempo: $currentPlayingFileTempo, tempoToDisplay: $tempo, distanceIntegral: $distanceIntegral, offsetButtonMultiplier: $offsetCorrectionMultiplier)
+            MainTab(theAudioPlayer: audioPlayer, theShepardAudioPlayer: shepardAudioPlayer, theCurrentlyPlayingFileTempo: $currentPlayingFileTempo, tempoToDisplay: $tempo, velocity: $usedVelocity, distanceIntegral: $distanceIntegral, offsetButtonMultiplier: $offsetCorrectionMultiplier)
                 .tabItem {
                     Label("Main", systemImage: "play.circle")
                 }
@@ -91,7 +93,7 @@ struct TabBarController: View {
                     Label("Description", systemImage: "nologoyet")
                 }
             
-            SettingsTab()
+            SettingsTab(needToResetGPS: $needToResetGPS)
                 .tabItem {
                     Label("Settings", systemImage: "gear")
                 }
@@ -133,7 +135,7 @@ struct TabBarController: View {
                      }*/
                 }
             // Ah my beautiful spagetti algorithm. I might fix it later.
-                .onReceive(timer) { _ in // This runs at 30 FPS. That can be changed in the timer variable declaration at the top in the TabBarController.
+                .onReceive(timer) { _ in // This runs at 60 FPS. That can be changed in the timer variable declaration at the top in the TabBarController.
                     
                     //This is the gyroscope stuff:
                     /* radius = motionManager.accelerometerData.total / (motionManager.gyroscopeData.total * motionManager.gyroscopeData.total)
@@ -145,12 +147,17 @@ struct TabBarController: View {
                      tonePlayer.setFrequency(pitch)
                      */ // End of the gyroscope stuff
                     
-                    if (SmoothGPS) {
-                        distanceIntegral += GPS.smoothedVelocity * framerate
-                    } else {
-                        distanceIntegral += GPS.rawVelocity * framerate
+                    if (needToResetGPS) {
+                        distanceIntegral = 0.0
+                        needToResetGPS = false
                     }
                     
+                    if (SmoothGPS) {
+                        usedVelocity = GPS.smoothedVelocity
+                    } else {
+                        usedVelocity = GPS.rawVelocity
+                    }
+                    distanceIntegral += usedVelocity * framerate
                     /*
                      if ((usedVelocity == 1 && GPS.rawVelocity <= goalVelocity) || (usedVelocity == 2 && GPS.smoothedVelocity <= goalVelocity)) { // or if you've turned it off and then you're automaticially going fast enough// you're going to slow
                      //go faster
@@ -318,10 +325,6 @@ struct TabBarController: View {
 
 }
 
-
-/*
-#Preview {
-    MetroGnomeApp()
+ #Preview {
+    TabBarController()
 }
-
-*/

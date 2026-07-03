@@ -18,6 +18,7 @@ For revoked certificates   /System/Library/CoreServices/Applications   or   go t
 
 person.spatialaudio.fill waveform   person.spatialaudio.stereo.fill   apple.classical.pages.fill   sparkles   play.square   gearshape.2   text.document   repeat   speaker.wave.3   bell.fill   metronome   cat   hourglass   sum function graph.2d   iphone.homebutton.radiowaves.left.and.right.circle.fill   terminal.fill   shoe.front.lift   bell.and.waveform.fill   shoe.front.lift.fill
 
+3.2.0 I re-added the GPS stuff where it shows the distance you've ran on the screen. In 3.2.1 I'll re-add the pacing feature also. I also messed with the UI a little bit and added a "reset to default settings" button
 3.1.1 I know calculus now so I added more functions to the accelerometer toneplayer. Instead of just playing a base frequency*total acceleration, it now plays base frequency * f(total a). Not very useful but was fun to make and nostalgic
 3.1.0 I re-added old code accelerometer toneplayer from sophomore year for fun :)
 3.0.0 I haven't been remembering to update this, but today I revamped all the UI, and tried to make it useable to someone who isn't me. Tomorrow I'll readd the GPS and push to GitHub again.
