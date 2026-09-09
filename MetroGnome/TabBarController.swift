@@ -24,6 +24,8 @@ struct TabBarController: View {
     @State private var timeOfLastToneChange: Date? = Date()
     @State private var elapsedToneChangeDouble: Double = 0.0
 
+    @State public var timeUntilNextTenSecondBoundary: Double = 10.0
+    
     private let framerate: Double = (1.0/60.0) // Remember to change this and the timer!!!
     @State private var timer = Timer.publish(every: 1.0 / 60.0, on: .main, in: .common).autoconnect()
 
@@ -81,7 +83,7 @@ struct TabBarController: View {
     
     var body: some View {
         TabView {
-            MainTab(theAudioPlayer: audioPlayer, theShepardAudioPlayer: shepardAudioPlayer, theCurrentlyPlayingFileTempo: $currentPlayingFileTempo, tempoToDisplay: $tempo, velocity: $usedVelocity, distanceIntegral: $distanceIntegral, offsetButtonMultiplier: $offsetCorrectionMultiplier)
+            MainTab(theAudioPlayer: audioPlayer, theShepardAudioPlayer: shepardAudioPlayer, timeUntilNextTenSecondBoundary: $timeUntilNextTenSecondBoundary, theCurrentlyPlayingFileTempo: $currentPlayingFileTempo, tempoToDisplay: $tempo, velocity: $usedVelocity, distanceIntegral: $distanceIntegral, offsetButtonMultiplier: $offsetCorrectionMultiplier)
                 .tabItem {
                     Label("Main", systemImage: "play.circle")
                 }
@@ -149,6 +151,8 @@ struct TabBarController: View {
                      }
                      tonePlayer.setFrequency(pitch)
                      */ // End of the gyroscope stuff
+                    
+                    timeUntilNextTenSecondBoundary = findDelayUntilNextTenSecondBoundary()
                     
                     if (needToResetGPS) {
                         distanceIntegral = 0.0
@@ -332,6 +336,17 @@ struct TabBarController: View {
 
 }
 
+private func findDelayUntilNextTenSecondBoundary() -> TimeInterval {
+    let now = Date()
+    let currentTime = now.timeIntervalSince1970 // This is a double
+
+    // Find the next multiple of 10 seconds
+    let nextBoundary = ceil(currentTime / 10.0) * 10.0
+
+    return nextBoundary - currentTime // This is a double
+}
+
+
  #Preview {
-    TabBarController()
+     TabBarController()
 }

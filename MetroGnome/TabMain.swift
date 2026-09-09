@@ -10,6 +10,7 @@ struct MainTab: View {
     @ObservedObject var theAudioPlayer: VariableSpeedAudioPlayer
     @ObservedObject var theShepardAudioPlayer: VariableSpeedAudioPlayer
     
+    @Binding var timeUntilNextTenSecondBoundary: Double
     
     // Muffin has updated MP3's: true
     // School has updated MP3's: true
@@ -49,19 +50,24 @@ struct MainTab: View {
     var body: some View {
         ScrollView {
             //Start of play button [
-            Button(theAudioPlayer.isPlaying ? "Stop" : "Play") {
-                if theAudioPlayer.isPlaying {
-                    theAudioPlayer.stop()
-                    theShepardAudioPlayer.stop()
-                } else {
-                    let currentSong = songs[selectedSongIndex]
-                    theCurrentlyPlayingFileTempo = currentSong.tempo
-                    theAudioPlayer.loadAndPlay(filename: currentSong.fileName, fileExtension: currentSong.fileExtension, attemptSynchronization: AttemptSynchronization)
+            HStack {
+                Button(theAudioPlayer.isPlaying ? "Stop" : "Play") {
+                    if theAudioPlayer.isPlaying {
+                        theAudioPlayer.stop()
+                        theShepardAudioPlayer.stop()
+                    } else {
+                        let currentSong = songs[selectedSongIndex]
+                        theCurrentlyPlayingFileTempo = currentSong.tempo
+                        theAudioPlayer.loadAndPlay(filename: currentSong.fileName, fileExtension: currentSong.fileExtension, attemptSynchronization: AttemptSynchronization)
+                    }
+                }
+                .font(.system(size: 100))
+                if (AttemptSynchronization) {
+                    Text("\(ceil(timeUntilNextTenSecondBoundary), specifier: "%.0f")")
+                        .font(.system(size: 100))
                 }
             }
-            .font(.system(size: 100))
             // End of play button ]
-            
             
             // Start of song selecter [
             VStack {
@@ -243,7 +249,6 @@ func loadSongs() -> [Song] {
         fatalError("Failed to load songs: \(error)")
     }
 }
-
 
 #Preview {
     TabBarController()

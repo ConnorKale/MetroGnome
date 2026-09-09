@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C31E3DA03051FBB300EAD65C /* WatchMetroGnome_Watch_AppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31E3D9E3051FBB300EAD65C /* WatchMetroGnome_Watch_AppUITestsLaunchTests.swift */; };
 		C38CCD172EC527D500EDEC45 /* WatchMetroGnome Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = C38CCD162EC527D500EDEC45 /* WatchMetroGnome Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -66,6 +67,7 @@
 		B3F41A7C2E06219B00B9377A /* MetroGnome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetroGnome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3F41A892E06219C00B9377A /* MetroGnomeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MetroGnomeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3F41A932E06219C00B9377A /* MetroGnomeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MetroGnomeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C31E3D9E3051FBB300EAD65C /* WatchMetroGnome_Watch_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchMetroGnome_Watch_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C38CCD112EC527D500EDEC45 /* WatchMetroGnome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchMetroGnome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C38CCD162EC527D500EDEC45 /* WatchMetroGnome Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchMetroGnome Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C38CCD252EC527D700EDEC45 /* WatchMetroGnome Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WatchMetroGnome Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,6 +162,7 @@
 				C38CCD1A2EC527D500EDEC45 /* WatchMetroGnome Watch App */,
 				C38CCD282EC527D700EDEC45 /* WatchMetroGnome Watch AppTests */,
 				C38CCD322EC527D700EDEC45 /* WatchMetroGnome Watch AppUITests */,
+				C31E3D9E3051FBB300EAD65C /* WatchMetroGnome_Watch_AppUITestsLaunchTests.swift */,
 				B3F41A7D2E06219B00B9377A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C31E3DA03051FBB300EAD65C /* WatchMetroGnome_Watch_AppUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

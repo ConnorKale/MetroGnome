@@ -88,14 +88,14 @@ class VariableSpeedAudioPlayer: ObservableObject {
     
     private func delayUntilNextTenSecondBoundary() -> TimeInterval {
         let now = Date()
-        let currentTime = now.timeIntervalSince1970
+        let currentTime = now.timeIntervalSince1970 // This is a double
 
         // Find the next multiple of 10 seconds
         let nextBoundary = ceil(currentTime / 10.0) * 10.0
 
-        return nextBoundary - currentTime
+        return nextBoundary - currentTime // This is a double
     }
-    
+
     func loadAndPlay(filename: String, fileExtension: String, attemptSynchronization: Bool) {
         var playedUrl: URL
         
