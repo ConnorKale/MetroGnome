@@ -28,6 +28,9 @@ struct MainTab: View {
     @AppStorage("ShowMiles") private var ShowMiles = DefaultSettings.ShowMiles
     @AppStorage("ShowMeters") private var ShowMeters = DefaultSettings.ShowMeters
 
+    @AppStorage("TurnOffTempoMatching") private var TurnOffTempoMatching = DefaultSettings.TurnOffTempoMatching
+    @AppStorage("AttemptSynchronization") private var AttemptSynchronization = DefaultSettings.AttemptSynchronization
+
     @AppStorage("ShowBigFontForTempo") private var ShowBigFontForTempo = DefaultSettings.ShowBigFontForTempo
 
     @Binding var offsetButtonMultiplier: Float
@@ -53,7 +56,7 @@ struct MainTab: View {
                 } else {
                     let currentSong = songs[selectedSongIndex]
                     theCurrentlyPlayingFileTempo = currentSong.tempo
-                    theAudioPlayer.loadAndPlay(filename: currentSong.fileName, fileExtension: currentSong.fileExtension)
+                    theAudioPlayer.loadAndPlay(filename: currentSong.fileName, fileExtension: currentSong.fileExtension, attemptSynchronization: AttemptSynchronization)
                 }
             }
             .font(.system(size: 100))
@@ -119,16 +122,44 @@ struct MainTab: View {
             
             // Start of tempo^integrals info [
             VStack {
+                
+                // theCurrentlyPlayingFileTempo
                 if (ShowBigFontForTempo) {
-                    Text("Tempo:")
-                        .font(.system(size: 20))
-                    Text("\(tempoToDisplay, specifier: "%.2f")")
-                        .font(.system(size: 100))
-                        .padding(.bottom, 20)
+                    if (TurnOffTempoMatching) {
+                        Text("Song tempo:")
+                            .font(.system(size: 20))
+                        Text("\(theCurrentlyPlayingFileTempo, specifier: "%.2f")")
+                            .font(.system(size: 100))
+                            .padding(.bottom, 20)
+                        Text("Run tempo:")
+                            .font(.system(size: 20))
+                            .opacity(0.5)
+                        Text("\(tempoToDisplay, specifier: "%.2f")")
+                            .font(.system(size: 100))
+                            .padding(.bottom, 20)
+                            .opacity(0.5)
+
+                    } else {
+                        Text("Tempo:")
+                            .font(.system(size: 20))
+                        Text("\(tempoToDisplay, specifier: "%.2f")")
+                            .font(.system(size: 100))
+                            .padding(.bottom, 20)
+                    }
                 } else {
-                    Text("Tempo: \(tempoToDisplay, specifier: "%.2f")")
-                        .font(.system(size: 50))
-                        .padding(.bottom, 10)
+                    if (TurnOffTempoMatching) {
+                        Text("Song tempo: \(theCurrentlyPlayingFileTempo, specifier: "%.2f")")
+                            .font(.system(size: 50))
+                            .padding(.bottom, 10)
+                        Text("Run tempo: \(tempoToDisplay, specifier: "%.2f")")
+                            .font(.system(size: 50))
+                            .padding(.bottom, 10)
+                            .opacity(0.5)
+                    } else {
+                        Text("Tempo: \(tempoToDisplay, specifier: "%.2f")")
+                            .font(.system(size: 50))
+                            .padding(.bottom, 10)
+                    }
                 }
                 Text("Distance run:")
                     .font(.system(size: 40))

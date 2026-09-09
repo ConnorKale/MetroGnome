@@ -71,3 +71,8 @@ fastlane/test_output
 .DS_Store
 MetroGnome/TheVeldt.mp3
 MetroGnome/TheVeldt.mp3
+MetroGnome/songs.json
+MetroGnome/songs.json
+*.json
+*.json
+*.json

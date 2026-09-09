@@ -67,6 +67,9 @@ struct TabBarController: View {
     @State private var averageLastStrideTime: Double = (1.0/3.0) // In seconds
     @State private var tempo: Float = 180.0 // In seconds
 
+    @AppStorage("TurnOffTempoMatching") private var TurnOffTempoMatching = DefaultSettings.TurnOffTempoMatching
+
+    
     @AppStorage("MinTempo") private var minTempo = DefaultSettings.MinTempo // BPM
     @AppStorage("TempoWindowSize") private var tempoWindowSize = DefaultSettings.TempoWindowSize // BPM, max equals min plus this. Go up to 60?
 
@@ -288,7 +291,11 @@ struct TabBarController: View {
                         
                         if (audioPlayer.isPlaying) {
                             //if (matchingGoalPace || (usedPacingMethod == 4)) { // If you are matching the goal pace, or if you aren't getting paced
-                            audioPlayer.rate = tempo / currentPlayingFileTempo
+                            if (!TurnOffTempoMatching) {
+                                audioPlayer.rate = tempo / currentPlayingFileTempo
+                            } else {
+                                audioPlayer.rate = 1.0
+                            }
                             /*} else { // If you're not, we need to tell you somehow.
                              if (usedPacingMethod == 1)
                              {

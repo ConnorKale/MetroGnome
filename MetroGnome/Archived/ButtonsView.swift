@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct OldButtonsView: View {
-    @ObservedObject var theAudioPlayer: VariableSpeedAudioPlayer
-    @ObservedObject var theShepardAudioPlayer: VariableSpeedAudioPlayer
+    @ObservedObject var theAudioPlayer: VariableSpeedAudioPlayerPausing
+    @ObservedObject var theShepardAudioPlayer: VariableSpeedAudioPlayerPausing
     
     
     // Muffin has updated MP3's: true

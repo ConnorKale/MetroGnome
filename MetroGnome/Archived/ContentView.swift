@@ -10,8 +10,8 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var motionManager = MotionManager()
-    @StateObject private var audioPlayer = VariableSpeedAudioPlayer()
-    @StateObject private var shepardAudioPlayer = VariableSpeedAudioPlayer()
+    @StateObject private var audioPlayer = VariableSpeedAudioPlayerPausing()
+    @StateObject private var shepardAudioPlayer = VariableSpeedAudioPlayerPausing()
     @StateObject private var GPS = LocationManager()
 
     private let framerate: Double = (1.0/30.0) // Remember to change this and the timer!!!

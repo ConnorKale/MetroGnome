@@ -20,6 +20,10 @@ struct SettingsTab: View {
     @AppStorage("ShowKilometers") private var ShowKilometers = DefaultSettings.ShowKilometers
     @AppStorage("ShowMiles") private var ShowMiles = DefaultSettings.ShowMiles
     @AppStorage("ShowMeters") private var ShowMeters = DefaultSettings.ShowMeters
+    
+    @AppStorage("TurnOffTempoMatching") private var TurnOffTempoMatching = DefaultSettings.TurnOffTempoMatching
+    @AppStorage("AttemptSynchronization") private var AttemptSynchronization = DefaultSettings.AttemptSynchronization
+    
     @Binding var needToResetGPS: Bool
     @State private var resetGPSFirstButton: Bool = false
     
@@ -56,20 +60,20 @@ struct SettingsTab: View {
                         {
                             MinTempo = max(MinTempo - 10, 120)
                         }
-                        .font(.system(size: 32))
+                        .font(.system(size: 28))
                         .padding(.horizontal)
                     Text("Min tempo:")
-                        .font(.system(size: 32))
+                        .font(.system(size: 28))
                         .padding(.trailing, -100)
                     TextField("Min tempo", value: $MinTempo, format: .number)
                         .padding(.leading, 100)
                         .padding(.trailing, -20)
-                        .font(.system(size: 32))
+                        .font(.system(size: 28))
                     Button("+10")
                         {
                             MinTempo = min(MinTempo + 10, (240-TempoWindowSize))
                         }
-                        .font(.system(size: 32))
+                        .font(.system(size: 28))
                         .padding(.horizontal)
                 }
                 Slider(value: $MinTempo, in: 120...max(130,(240-TempoWindowSize)), step: 10) // Min tempo slider
@@ -79,27 +83,27 @@ struct SettingsTab: View {
                     .padding(.horizontal, 30)
 
                 Text("Max is \(String(Int(MinTempo + TempoWindowSize)))")
-                    .font(.system(size: 32))
+                    .font(.system(size: 28))
 
                 HStack {
                     Button("-10")
                         {
                             TempoWindowSize = max(TempoWindowSize - 10, 0)
                         }
-                        .font(.system(size: 32))
+                        .font(.system(size: 28))
                         .padding(.horizontal)
                     Text("Tempo window:")
-                        .font(.system(size: 32))
+                        .font(.system(size: 28))
                         .padding(.trailing, -100)
                     TextField("Tempo Window Size", value: $TempoWindowSize, format: .number)
                         .padding(.leading, 100)
                         .padding(.trailing, -20)
-                        .font(.system(size: 32))
+                        .font(.system(size: 28))
                     Button("+10")
                         {
                             TempoWindowSize = min(TempoWindowSize + 10, 60)
                         }
-                        .font(.system(size: 32))
+                        .font(.system(size: 28))
                 }
                 Slider(value: $TempoWindowSize, in: 0...60, step: 10) // Min/max tempo slider
                     .onSubmit() {
@@ -137,7 +141,22 @@ struct SettingsTab: View {
                     .font(.system(size: 32))
                     .padding(.bottom, 50)
                 
+                Toggle("Turn off tempo matching", isOn: $TurnOffTempoMatching)
+                    .font(.system(size: 32))
+                    .padding(.bottom, 10)
+                    .onChange(of: TurnOffTempoMatching) { value in
+                        if (TurnOffTempoMatching == false)
+                        {
+                            AttemptSynchronization = false
+                        }
+                    }
+                if (TurnOffTempoMatching) {
+                    Toggle("Schoolbus Party Mode :)", isOn: $AttemptSynchronization)
+                        .font(.system(size: 32))
+                }
+                
                 Toggle("Reset GPS?", isOn: $resetGPSFirstButton)
+                    .padding(.top, 50)
                     .font(.system(size: 32))
                 if (resetGPSFirstButton) {
                     Toggle("Are u sure or misclick?", isOn: $needToResetGPS)
@@ -184,6 +203,10 @@ struct SettingsTab: View {
                     ShowKilometers = DefaultSettings.ShowKilometers
                     ShowMiles = DefaultSettings.ShowMiles
                     ShowMeters = DefaultSettings.ShowMeters
+                    
+                    TurnOffTempoMatching = DefaultSettings.TurnOffTempoMatching
+                    AttemptSynchronization = DefaultSettings.AttemptSynchronization
+
                     
                     ShowBigFontForTempo = DefaultSettings.ShowBigFontForTempo
                     
@@ -312,6 +335,9 @@ enum DefaultSettings {
     static let ShowKilometers = true
     static let ShowMiles = true
     static let ShowMeters = true
+    
+    static let TurnOffTempoMatching = false
+    static let AttemptSynchronization = false
     
     static let ShowBigFontForTempo = false
     

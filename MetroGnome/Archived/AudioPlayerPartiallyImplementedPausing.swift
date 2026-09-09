@@ -10,7 +10,7 @@ import SwiftUI
 import Foundation
 import AVFoundation
 
-class VariableSpeedAudioPlayer: ObservableObject {
+class VariableSpeedAudioPlayerPausing: ObservableObject {
     private var engine = AVAudioEngine()
     private var playerNode = AVAudioPlayerNode()
     private var timePitch = AVAudioUnitTimePitch()
@@ -86,17 +86,7 @@ class VariableSpeedAudioPlayer: ObservableObject {
         }
     }
     
-    private func delayUntilNextTenSecondBoundary() -> TimeInterval {
-        let now = Date()
-        let currentTime = now.timeIntervalSince1970
-
-        // Find the next multiple of 10 seconds
-        let nextBoundary = ceil(currentTime / 10.0) * 10.0
-
-        return nextBoundary - currentTime
-    }
-    
-    func loadAndPlay(filename: String, fileExtension: String, attemptSynchronization: Bool) {
+    func loadAndPlay(filename: String, fileExtension: String) {
         var playedUrl: URL
         
         if (fileExtension != "wav") { // If I'm not inputing a wav file, decode it and write the decoded copy to TemporaryFile.wav
@@ -121,29 +111,14 @@ class VariableSpeedAudioPlayer: ObservableObject {
             audioFile = try AVAudioFile(forReading: playedUrl)
             if let file = audioFile {
                 playerNode.stop()
-                playerNode.scheduleFile(file, at: nil)
-                
+                playerNode.scheduleFile(file, at: nil, completionHandler: nil)
+
                 if !engine.isRunning {
                     try engine.start()
                 }
-                
-                if (attemptSynchronization) {
-                    let delay = delayUntilNextTenSecondBoundary()
-                    
-                    print("Waiting \(delay) seconds until next 10-second boundary")
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                        self.playerNode.play()
-                        self.isPlaying = true
-                        self.songGoing = true
-                        
-                        print("Playback started at \(Date())")
-                        
-                    }
-                } else {
-                    playerNode.play()
-                    isPlaying = true
-                }
+
+                playerNode.play()
+                isPlaying = true
             }
         } catch {
             print("6 ❌ Error loading audio file: \(error)")

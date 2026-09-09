@@ -15,8 +15,8 @@ import SwiftUI
 
 struct OldTabBarController: View {
     @StateObject private var motionManager = MotionManager()
-    @StateObject private var audioPlayer = VariableSpeedAudioPlayer()
-    @StateObject private var shepardAudioPlayer = VariableSpeedAudioPlayer()
+    @StateObject private var audioPlayer = VariableSpeedAudioPlayerPausing()
+    @StateObject private var shepardAudioPlayer = VariableSpeedAudioPlayerPausing()
     @StateObject private var GPS = LocationManager()
             
     @State private var tonePlayer = TonePlayer() // I think this has to be @State to go in the binding thingy
