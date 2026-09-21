@@ -347,7 +347,7 @@ enum DefaultSettings {
     
     static let SmoothGPS = true
     
-    static let ShowPlusOrMinus = true
+    static let ShowPlusOrMinus = false
     
     
     // Old was 13, 67, 67,
